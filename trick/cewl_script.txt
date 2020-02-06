@@ -1,0 +1,9 @@
+john --wordlist=cewl-list --rules --stdout > newdic.txt
+
+Add in john.conf
+# Add tree numbers to the end of each password 
+$[0-9]$[0-9]$[0-9]
+
+cewl http://192.168.130.154/personal -m 4 -d 3 -v -w cewl-list
+
+

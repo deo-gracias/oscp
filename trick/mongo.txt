@@ -1,0 +1,18 @@
+mongo --username mark --password 5AYRft73VtFpc84k --authenticationDatabase  myplace  --host localhost --port 27017
+mongo --username mark --password 5AYRft73VtFpc84k --authenticationDatabase  scheduler  --host localhost --port 27017
+
+or
+mongo -u mark -p 5AYRft73VtFpc84k --authenticationDatabase  scheduler  -h localhost --port 27017
+
+db;
+
+use scheduler;
+
+db.getCollectionInfos();
+
+db.tasks.insert({cmd: "ping -c 1 10.10.16.112"});
+
+db.tasks.insert({cmd: "/bin/bash /tmp/shell.sh"});
+
+db.tasks.find();
+

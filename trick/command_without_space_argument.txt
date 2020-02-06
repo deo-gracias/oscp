@@ -1,0 +1,6 @@
+cat${IFS}file.txt
+
+echo "type the command here" | sed "s/ /\${IFS}/g"
+
+#or
+IFS=:;a=cat:file.txt;$a

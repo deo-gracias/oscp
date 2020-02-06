@@ -1,0 +1,1 @@
+openssl passwd -1 -salt Etg2ExUZ redhat    => $1$Etg2ExUZ$F9NTP7omafhKIlqaBMqng1

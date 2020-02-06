@@ -1,0 +1,26 @@
+{
+    "architecture": "i686",
+    "creation_date": 1575651912,
+    "properties": {
+        "architecture": "i686",
+        "description": "alpine v3.10 (20191206_12:05)",
+        "name": "alpine-v3.10-20191206_12:05",
+        "os": "alpine",
+        "release": "v3.10",
+        "variant": "default"
+    },
+    "templates": {
+        "/etc/hostname": {
+            "template": "hostname.tpl",
+            "when": [
+                "create"
+            ]
+        },
+        "/etc/hosts": {
+            "template": "hosts.tpl",
+            "when": [
+                "create"
+            ]
+        }
+    }
+}

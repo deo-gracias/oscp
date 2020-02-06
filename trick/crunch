@@ -1,0 +1,1 @@
+for i in $(crunch 2 2 -f /usr/share/rainbowcrack/charset.txt mixalpha-numeric); do echo Th4C00lTheacha$i >> dic-pass.txt; done;

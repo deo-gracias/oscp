@@ -1,0 +1,24 @@
+#shadow
+/usr/sbin/unshadow /etc/passwd /etc/shadow > ~/passwords.txt
+/usr/sbin/john --wordlist=/usr/share/wordlists/rockyou.txt ~/passwords.txt
+
+#ssh keys 
+/usr/sbin/ssh2john ~/.ssh/id_rsa > id_rsa.hash
+/usr/share/john/ssh2john.py ~/.ssh/id_rsa > id_rsa.hash
+/usr/sbin/john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa.hash
+
+(ssh2john located in /usr/share/john/ssh2john.py)
+/usr/share/john/ssh2john.py ~/.ssh/id_rsa > id_rsa.hash
+
+#Keepass2 database
+apt-get install -y kpcli
+/usr/sbin/keepass2john newdb.kdb > newdb.kdb.hash
+/usr/sbin/john --wordlist=/usr/share/wordlists/rockyou.txt newdb.kdb.hash
+
+#Rar
+/usr/sbin/rar2john encrypted.rar > encrypted.rar.hash
+/usr/sbin/john --wordlist=/usr/share/wordlists/rockyou.txt encrypted.rar.hash
+
+#Zip file
+zip2john zipfile.zip > hash.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt

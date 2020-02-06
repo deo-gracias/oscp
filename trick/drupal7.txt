@@ -1,0 +1,5 @@
+Exploit 
+https://github.com/dreadlocked/Drupalgeddon2
+
+password file 
+sites/default/settings.php

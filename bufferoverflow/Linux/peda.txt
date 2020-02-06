@@ -1,0 +1,37 @@
+#install peda into gdb
+git clone https://github.com/longld/peda.git ~/peda
+echo "source ~/peda/peda.py" >> ~/.gdbinit
+
+#Dissasembl function
+pdisass function_name
+
+Ex: pdisass main, pdisass hello
+
+#list functions wroten in the program (called inside the program or not)
+info functions
+
+When ran at the beginning of the program, it lists defined function, the address may change after the programm starts running. 
+
+To know the address when running, you should do pdisass
+
+#create pattern 
+pattern create 2000 pattern create 2000 input
+
+#find offset
+pattern offset $pc
+
+pattern search
+
+#check if the stack is executable
+1-crash the program inside peda-gdb
+2-run vmmap
+3-check the right appearing on [stack]
+
+#find jump esp addr
+1st method (fast one)
+jmpcall
+jmpcall eax
+jmpcall esp libc
+
+#generate shellcode
+shellcode generate x86/linux exec

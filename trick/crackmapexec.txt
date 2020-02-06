@@ -1,0 +1,4 @@
+cme smb 10.10.10.100 -u usernames -p passwords  
+
+cme smb 10.10.10.100 -u usernames -p 'THEPASSWORD'  --continue-on-success (Only for one password)
+

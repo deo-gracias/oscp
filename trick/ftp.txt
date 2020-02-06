@@ -1,0 +1,1 @@
+curlftpfs -o allow_other ftp-user:ftp-pass@my-ftp-location.local /mnt/ftp/

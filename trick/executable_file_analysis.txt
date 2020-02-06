@@ -1,0 +1,7 @@
+file => to check which file it is 
+
+strings the file to look for possible related path code
+
+ldd the file to check shared 
+
+check buffer overflow
