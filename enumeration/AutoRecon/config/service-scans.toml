@@ -141,6 +141,12 @@ ignore-service-names = [
     ]
 
     [[http.manual]]
+    description = 'iis-scanner: to check short file name disclosure vulnerability'
+    commands = [
+        'java -jar /opt/IIS-ShortName-Scanner/iis_shortname_scanner.jar 2 20  {scheme}://{address}:{port}/ /opt/IIS-ShortName-Scanner/config.xml | tee "{scandir}/{protocol}_{port}_{scheme}_iis_scanner.txt" '
+    ]
+
+    [[http.manual]]
     description = '(dirb) Recursive directory/file enumeration for web servers using various wordlists (same as dirsearch above):'
     commands = [
         'dirb {scheme}://{address}:{port}/ /usr/share/seclists/Discovery/Web-Content/big.txt -l -r -S -X ",.txt,.html,.php,.asp,.aspx,.jsp" -o "{scandir}/{protocol}_{port}_{scheme}_dirb_big.txt"',

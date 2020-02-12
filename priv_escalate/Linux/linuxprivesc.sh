@@ -390,13 +390,15 @@ echo "/bin/fusermount
 /usr/bin/mlocate
 /usr/bin/bsd-write
 /usr/bin/ssh-agent
-/usr/bin/wall" > /tmp/common_suid
+/usr/bin/wall
+/usr/bin/dotlockfile" > /tmp/common_suid
 
 
 #find / -perm -4000 -type f 2>/dev/null > /tmp/uncommon_suid_file
 
-find / -perm /u=s,g=s -type f 2>/dev/null > /tmp/uncommon_suid_file
+find / -perm /u=s -type f 2>/dev/null > /tmp/uncommon_suid_file
 
+echo "SUID files"
 
 for i in  $(cat /tmp/uncommon_suid_file)
 do 
@@ -404,6 +406,18 @@ do
                 echo $i
         fi
 done
+
+echo "GUID files"
+
+find / -perm /g=s -type f 2>/dev/null > /tmp/uncommon_suid_file
+
+for i in  $(cat /tmp/uncommon_suid_file)
+do 
+        if ! $(grep -Fxq $i /tmp/common_suid) ; then
+                echo $i
+        fi
+done
+
 
 echo ""
 echo "Don't forget LDD of PRELOAD"

