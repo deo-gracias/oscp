@@ -1,0 +1,25 @@
+#Search in current directory and its subdir
+
+cmd /c where /R . user.txt
+
+cmd /c where /R C:\ user.txt
+
+cmd /c dir "*user*" /s
+
+cmd /c dir /s *.txt
+
+#Search string in file 
+findstr  "update" desktop\todo.txt
+
+#Search string in dir and subdir
+
+findstr /I "update" desktop\*
+
+#Exact match search
+
+findstr /C:"Apple Ball Cat" Book.txt
+
+#Search filename with specified content
+findstr /M /C:"update"  desktop/*.txt
+
+findstr /M /I "UPDATE"  desktop/*

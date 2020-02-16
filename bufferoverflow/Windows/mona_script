@@ -1,0 +1,11 @@
+/usr/share/metasploit-framework/tools/exploit/nasm_shell.rb
+JMP ESP 
+
+
+!mona modules 
+
+!mona find -s "\xff\xe4" -m modules_found
+
+copy the return address 
+
+search the return addr in immunity with blue button, check id it match with jmp esp code (ffe4) and set a break point with f2. Run again the progam and check if EIP was really rewritten

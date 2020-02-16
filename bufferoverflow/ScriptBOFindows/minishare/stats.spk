@@ -1,4 +1,0 @@
-s_readline();
-s_string("GET ");
-s_string_variable("0");
-

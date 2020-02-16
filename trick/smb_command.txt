@@ -1,0 +1,11 @@
+smbclient \\\\192.168.130.132\\share_folder -U user
+smbclient \\\\10.10.10.100\\NETLOGON -U active.htb\\SVC_TGS
+
+mount -t cifs -o user=svc_tgs //10.10.10.100/share /mnt/linky_share
+mount -t cifs //192.168.130.132/folder /mnt/vmware/
+
+smbmap -R ShareName -H 10.10.10.100
+
+smbmap -d active.htb -u svc_tgs -p thepassword -H 10.10.10.100
+
+

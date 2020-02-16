@@ -1,0 +1,3 @@
+default: _layouts/viewlsts
+
+gobuster dir -w /usr/share/seclists/Discovery/Web-Content/CMS/sharepoint.txt -u http://10.10.10.59 -o sharepoint_report.txt

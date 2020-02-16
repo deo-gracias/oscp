@@ -1,0 +1,7 @@
+0-impersonate
+1-Sherlock
+2-powerUp
+3-JawEnum
+4-windows-exploit-suggester
+5-process with ps
+6-user files checking

