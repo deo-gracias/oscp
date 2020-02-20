@@ -83,7 +83,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-find / -mmin -10 ! -path "/sys/*" ! -path "/run/*" ! -path "/dev/*" ! -path "/var/lib/*" -readable 2>/dev/null  | grep -Ev "^/proc"
+find / -mmin -10 ! -path "/sys/*" ! -path "/run/*" ! -path "/dev/*" ! -path "/var/lib/*" -type f -readable 2>/dev/null  | grep -Ev "^/proc"
 
 echo ""
 echo ""
@@ -113,7 +113,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-for u in $(cat /etc/passwd | cut -d: -f1 | grep -v root ); do if [ $(id -u $u) == 0 ] ; then echo $u; fi; done 
+cat /etc/passwd | grep ":0:" | grep -v root
 
 echo ""
 echo ""
@@ -145,6 +145,29 @@ echo ""
 
 #find /root -type f -readable 2> /dev/null 
 find / -user root -type f -readable ! -path "/proc/*" ! -path "/lib/*" ! -path "/boot/*" ! -path "/lib/*"  ! -path "/var/lib/*" ! -path "/bin/*" ! -path "/usr/*" ! -path "/run/*" ! -path "/sys/*" ! -path "/etc/*" ! -path "/sbin/*" ! -path "/var/*" 2> /dev/null
+
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Root /var/www files"
+echo "#####################################################"
+echo ""
+echo ""
+
+ 
+find /var/www -user root -type f 2> /dev/null
+
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Root /var/www readable files"
+echo "#####################################################"
+echo ""
+echo ""
+ 
+find /var/www -user root -type f  -readable 2> /dev/null
 
 echo ""
 echo ""
@@ -253,6 +276,13 @@ echo ""
 find -L /etc/cron* /etc/anacron* /var/spool/cron -readable -type f 2> /dev/null
 
 echo ""
+echo "Non default crontab content"
+echo ""
+
+cat /etc/crontab | grep -v "^#" | grep -iv "^SHELL" | grep -iv "^PATH" | grep -v "/etc/cron.hourly" | grep -v "/etc/cron.daily" | grep -v "/etc/cron.weekly" | grep -v "/etc/cron.monthly"
+
+echo ""
+echo "Crontab list for current user"
 echo ""
 
 crontab -l
@@ -398,7 +428,9 @@ echo "/bin/fusermount
 
 find / -perm /u=s -type f 2>/dev/null > /tmp/uncommon_suid_file
 
+echo ""
 echo "SUID files"
+echo ""
 
 for i in  $(cat /tmp/uncommon_suid_file)
 do 
@@ -407,7 +439,9 @@ do
         fi
 done
 
+echo ""
 echo "GUID files"
+echo ""
 
 find / -perm /g=s -type f 2>/dev/null > /tmp/uncommon_suid_file
 
@@ -566,7 +600,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-for i in $(grep -E "home" /etc/passwd | cut -d: -f1 ); do echo $i; su - $i -c id; done; 
+#for i in $(grep -E "home" /etc/passwd | cut -d: -f1 ); do echo $i; su - $i -c id; done; 
 
 echo ""
 echo ""

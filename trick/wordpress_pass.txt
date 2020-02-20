@@ -1,0 +1,6 @@
+wordpress (as pass) => "$P$BKRIWSZMzHkLnOoyMpuQv5e1sCb.7T1"
+
+generate wordpress pass
+
+php -a
+echo password_hash('thepassword', PASSWORD_DEFAULT);

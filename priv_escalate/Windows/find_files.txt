@@ -1,3 +1,10 @@
+#Dir all files (including hidden by Alternate Data Stream)
+dir /R .
+
+#Reading the stream (Here the file is hm.txt and the stream root.txt)
+​ powershell Get-Content -Path "hm.txt" -Stream "root.txt"
+
+
 #Search in current directory and its subdir
 
 cmd /c where /R . user.txt

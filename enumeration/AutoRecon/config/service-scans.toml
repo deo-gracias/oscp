@@ -52,6 +52,16 @@ service-names = [
     name = 'nmap-dns'
     command = 'nmap {nmap_extra} -sV -p {port} --script="banner,(dns* or ssl*) and not (brute or broadcast or dos or external or fuzzer)" -oN "{scandir}/{protocol}_{port}_dns_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_dns_nmap.xml" {address}'
 
+    [[dns.manual]]
+    description = 'fierce or dig'
+    commands = [
+        'fierce -dns domain.htb -dnsserver  {address} 2>&1 | tee "{scandir}/{protocol}_{port}_dns_fierce.txt"',
+
+        'dig axfr @{address} domain.htb  2>&1 | tee "{scandir}/{protocol}_{port}_dns_dig.txt"'
+    ]
+
+
+
 [finger]
 
 service-names = [
@@ -131,7 +141,14 @@ ignore-service-names = [
 
     [[http.scan]]
     name = 'gobuster'
-    command = 'if [[ `gobuster -h 2>&1 | grep -F "mode (dir)"` ]]; then gobuster -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -e -k -l -s "200,204,301,302,307,401" -x "txt,html,php,asp,aspx,jsp" -o "{scandir}/{protocol}_{port}_{scheme}_gobuster.txt"; else gobuster dir -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/common.txt -z -k -l -x "txt,html,php,asp,aspx,jsp" -o "{scandir}/{protocol}_{port}_{scheme}_gobuster.txt"; fi'
+    command = 'if [[ `gobuster -h 2>&1 | grep -F "mode (dir)"` ]]; then gobuster -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/big.txt -e -k -l -s "200,204,301,302,307,401" -x "txt,html,php,asp,aspx,jsp" -o "{scandir}/{protocol}_{port}_{scheme}_gobuster.txt"; else gobuster dir -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/big.txt -z -k -l -x "txt,html,php,asp,aspx,jsp" -o "{scandir}/{protocol}_{port}_{scheme}_gobuster.txt"; fi'
+
+    [[http.manual]]
+    description = 'filebuster (fast)'
+    commands = [
+        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/{fuzz} -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e aspx,asp,php,html,txt -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
+    ]
+
 
     [[http.manual]]
     description = '(dirsearch) Multi-threaded recursive directory/file enumeration for web servers using various wordlists:'
@@ -243,7 +260,7 @@ service-names = [
 
     [[ldap.scan]]
     name = 'enum4linux_short'
-    command = 'enum4linux -a -M -l -d {address} | egrep -ie "user name|Minimum password" 2>&1| sort -u  | tee "{scandir}/enum4linux_short.txt"'
+    command = 'enum4linux -a -M -l -d {address} | egrep -ie "user name|Minimum password|Local User|Disk" 2>&1| sort -u  | tee "{scandir}/enum4linux_short.txt"'
     run_once = true
     ports.tcp = [139, 389, 445]
     ports.udp = [137]

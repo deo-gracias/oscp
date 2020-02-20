@@ -1,0 +1,22 @@
+#Extract macro
+python /opt/officeparser/officeparser.py  --extract-macros Report.xlsm 
+
+
+#Excel xlsm 
+
+unzip Report.xlsm
+
+strings xl/vbaProject.bin => to view macro
+
+xlsx2csv book.xlsx > convert.csv => convert xlsx to csv
+
+
+#Access
+mdb-tables backup.mdb | grep --color=auto user
+mdb-export backup.mdb auth_user
+
+#Outlook (.pst)
+readpst thepstfile.pst
+readpst -tea -m Control.pst
+cat file.mbox
+

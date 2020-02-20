@@ -1,0 +1,8 @@
+#.jar files
+jd-gui (and open the jar file)
+
+#linux binary file 
+retdec 
+
+#python compiled
+uncompyle6 (from gthub)

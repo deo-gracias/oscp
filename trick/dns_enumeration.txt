@@ -1,0 +1,4 @@
+#sometimes the domain should be guessed to allow the scripts to work
+fierce -dns cronos.htb -dnsserver  10.10.10.13
+
+dig axfr @10.10.10.13 cronos.htb
