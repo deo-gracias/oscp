@@ -1,0 +1,3 @@
+nmap  10.10.10.74 -p 9255,9256 -T5 -Pn -n -A  --min-parallelism=50 --max-parallelism=150 -PN -T2
+
+nmap  10.10.10.74 -p 9255,9256 -T5 -Pn -n -vv -A  --min-parallelism=50 --max-parallelism=150 -PN -T2

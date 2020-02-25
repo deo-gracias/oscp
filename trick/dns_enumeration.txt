@@ -1,4 +1,7 @@
 #sometimes the domain should be guessed to allow the scripts to work
+dig axfr @10.10.10.13 cronos.htb
+
 fierce -dns cronos.htb -dnsserver  10.10.10.13
 
-dig axfr @10.10.10.13 cronos.htb
+#domain flyovers (targets.txt containts list of domain http/https to flyover)
+cat targets.txt | aquatone

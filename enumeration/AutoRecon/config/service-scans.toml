@@ -146,7 +146,7 @@ ignore-service-names = [
     [[http.manual]]
     description = 'filebuster (fast)'
     commands = [
-        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/{fuzz} -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e aspx,asp,php,html,txt -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
+        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e aspx,asp,php,html,txt -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
     ]
 
 

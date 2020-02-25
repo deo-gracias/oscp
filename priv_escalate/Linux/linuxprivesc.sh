@@ -499,6 +499,8 @@ echo ""
 
 cat /etc/passwd | grep docker
 
+cat /etc/group | grep -v ":$" | grep docker
+
 echo ""
 echo ""
 echo "#####################################################"
@@ -508,7 +510,7 @@ echo ""
 echo ""
 
 cat /etc/passwd | grep "lxc\|lxd"
-cat /etc/group | grep "lxc\|lxd"
+cat /etc/group | grep -v ":$" | grep "lxc\|lxd"
 
 echo ""
 echo ""
@@ -601,6 +603,19 @@ echo ""
 echo ""
 
 #for i in $(grep -E "home" /etc/passwd | cut -d: -f1 ); do echo $i; su - $i -c id; done; 
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Echo user with multiples groups"
+echo "#####################################################"
+echo ""
+echo ""
+
+cat /etc/group | grep -v  ":$" | awk -F ":" '{print $4}'   | tr "," "\n" | sort -u > /tmp/multiples_groups
+grep -f /tmp/multiples_groups /etc/passwd | grep "sh$" 
+rm /tmp/multiples_groups
+
 
 echo ""
 echo ""

