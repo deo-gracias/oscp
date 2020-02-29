@@ -1,0 +1,2 @@
+showmount -e 192.168.1.105
+mount -t nfs 192.168.1.105:/var/nfsshare /mnt/nfs

