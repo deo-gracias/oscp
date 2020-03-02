@@ -22,3 +22,19 @@ apt-get install -y kpcli
 #Zip file
 zip2john zipfile.zip > hash.txt
 john --wordlist=/usr/share/wordlists/rockyou.txt hash.txt
+
+#7-Zip (7z) file
+python 7z2john.py file.7z > crack.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt crack.txt
+	
+#PDF
+python pdf2john.py file.pdf > crack.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt crack.txt
+	
+#Putty (ppk)
+putty2john file.ppk > crack.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt crack.txt
+	
+#Password Safe (.safe3)
+pwsafe2john ignite.psafe3 > crack.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt crack.txt

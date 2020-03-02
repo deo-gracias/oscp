@@ -1,0 +1,14 @@
+403   307B   http://192.168.130.190:33447/Challenge/.php
+403   308B   http://192.168.130.190:33447/Challenge/.html
+200     1KB  http://192.168.130.190:33447/Challenge/index.php
+403   307B   http://192.168.130.190:33447/Challenge/css/
+403   312B   http://192.168.130.190:33447/Challenge/includes/
+403   306B   http://192.168.130.190:33447/Challenge/js/
+302     0B   http://192.168.130.190:33447/Challenge/include.php
+403   310B   http://192.168.130.190:33447/Challenge/styles/
+200     3KB  http://192.168.130.190:33447/Challenge/todo.txt
+200   309B   http://192.168.130.190:33447/Challenge/error.php
+200   496B   http://192.168.130.190:33447/Challenge/cake.php
+302     0B   http://192.168.130.190:33447/Challenge/hacked.php
+403   308B   http://192.168.130.190:33447/Challenge/less/
+200    20B   http://192.168.130.190:33447/Challenge/acid.txt

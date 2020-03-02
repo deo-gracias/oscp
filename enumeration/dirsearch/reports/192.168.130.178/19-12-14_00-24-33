@@ -1,0 +1,9 @@
+200     4KB  http://192.168.130.178:80/index.php
+403   570B   http://192.168.130.178:80/images/
+200     4KB  http://192.168.130.178:80/contact.php
+200     6KB  http://192.168.130.178:80/faq.php
+200     4KB  http://192.168.130.178:80/solutions.php
+200    17B   http://192.168.130.178:80/footer.php
+403   570B   http://192.168.130.178:80/css/
+200     4KB  http://192.168.130.178:80/about-us.php
+200   852B   http://192.168.130.178:80/thankyou.php

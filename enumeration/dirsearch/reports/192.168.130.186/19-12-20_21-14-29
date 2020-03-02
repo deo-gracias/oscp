@@ -1,0 +1,17 @@
+403   286B   http://192.168.130.186:80/.php
+403   287B   http://192.168.130.186:80/.html
+200   101B   http://192.168.130.186:80/index.html
+403   288B   http://192.168.130.186:80/icons/
+200     2KB  http://192.168.130.186:80/files/
+200     2KB  http://192.168.130.186:80/themes/
+200     2KB  http://192.168.130.186:80/modules/
+200     1KB  http://192.168.130.186:80/license.txt
+200   142B   http://192.168.130.186:80/system/
+200    11KB  http://192.168.130.186:80/blocks/
+200    36B   http://192.168.130.186:80/robots.txt
+200     2KB  http://192.168.130.186:80/finder.html
+403   296B   http://192.168.130.186:80/server-status/
+403   292B   http://192.168.130.186:80/icons/.php
+403   293B   http://192.168.130.186:80/icons/.html
+403   294B   http://192.168.130.186:80/icons/small/
+200    35KB  http://192.168.130.186:80/icons/README.html
