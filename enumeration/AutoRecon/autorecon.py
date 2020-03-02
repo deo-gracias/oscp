@@ -41,8 +41,8 @@ port_scan_profiles_config = None
 service_scans_config = None
 global_patterns = []
 
-username_wordlist = '/usr/share/seclists/Usernames/top-usernames-shortlist.txt'
-password_wordlist = '/usr/share/seclists/Passwords/darkweb2017-top100.txt'
+username_wordlist = '/usr/share/wordlists/metasploit/unix_users.txt'
+password_wordlist = '/usr/share/wordlists/metasploit/unix_passwords.txt'
 
 rootdir = os.path.dirname(os.path.realpath(__file__))
 

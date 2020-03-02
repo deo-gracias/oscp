@@ -1,6 +1,6 @@
 # Configurable Variables
-username_wordlist = '/usr/share/seclists/Usernames/top-usernames-shortlist.txt'
-password_wordlist = '/usr/share/seclists/Passwords/darkweb2017-top100.txt'
+username_wordlist = '/usr/share/wordlists/metasploit/unix_users.txt'
+password_wordlist = '/usr/share/wordlists/metasploit/unix_passwords.txt'
 
 [all-services] # Define scans here that you want to run against all services.
 
@@ -59,22 +59,6 @@ service-names = [
 
         'dig axfr @{address} domain.htb  2>&1 | tee "{scandir}/{protocol}_{port}_dns_dig.txt"'
     ]
-
-
-
-[finger]
-
-service-names = [
-    '^finger'
-]
-
-    [[finger.scan]]
-    nmap = 'nmap-finger'
-    command = 'nmap {nmap_extra} -sV -p {port} --script="banner,finger" -oN "{scandir}/{protocol}_{port}_finger_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_finger_nmap.xml" {address}'
-
-    [[finger.scan]]
-    nmap = 'finger-user-enum'
-    command = 'perl /opt/finger-user-enum-1.0/finger-user-enum.pl -U /usr/share/wordlists/metasploit/unix_users.txt -t {address} 2>&1 | tee "{scandir}/{protocol}_{port}_finger_user_enum.txt"'
 
 
 [ftp]
@@ -659,3 +643,17 @@ service-names = [
     [[vnc.scan]]
     name = 'nmap-vnc'
     command = 'nmap {nmap_extra} -sV -p {port} --script="banner,(vnc* or realvnc* or ssl*) and not (brute or broadcast or dos or external or fuzzer)" --script-args="unsafe=1" -oN "{scandir}/{protocol}_{port}_vnc_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_vnc_nmap.xml" {address}'
+
+[finger]
+
+service-names = [
+    '^finger'
+]
+
+    [[finger.scan]]
+    nmap = 'nmap-finger'
+    command = 'nmap {nmap_extra} -sV -p {port} --script="banner,finger" -oN "{scandir}/{protocol}_{port}_finger_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_finger_nmap.xml" {address}'
+
+    [[finger.scan]]
+    nmap = 'finger-user-enum'
+    command = 'perl /opt/finger-user-enum-1.0/finger-user-enum.pl -U /usr/share/wordlists/metasploit/unix_users.txt -t {address} 2>&1 | tee "{scandir}/{protocol}_{port}_finger_user_enum.txt"'
