@@ -129,13 +129,13 @@ ignore-service-names = [
     command = 'nikto -ask=no -h {scheme}://{address}:{port} 2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_nikto.txt"'
 
     [[http.scan]]
-    name = 'gobuster'
-    command = 'if [[ `gobuster -h 2>&1 | grep -F "mode (dir)"` ]]; then gobuster -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/big.txt -e -k -l -s "200,204,301,302,307,401" -x "txt,html,php,asp,aspx,jsp" -o "{scandir}/{protocol}_{port}_{scheme}_gobuster.txt"; else gobuster dir -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/big.txt -z -k -l -x "txt,html,php,asp,aspx,jsp" -o "{scandir}/{protocol}_{port}_{scheme}_gobuster.txt"; fi'
+    name = 'filebuster'
+    command = '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
 
     [[http.manual]]
     description = 'filebuster (fast)'
     commands = [
-        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e aspx,asp,php,html,txt -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
+        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e aspx,asp,php,html,txt -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_file-list-2.3-medium.txt"'
     ]
 
 
@@ -651,9 +651,13 @@ service-names = [
 ]
 
     [[finger.scan]]
-    nmap = 'nmap-finger'
+    name = 'nmap-finger'
     command = 'nmap {nmap_extra} -sV -p {port} --script="banner,finger" -oN "{scandir}/{protocol}_{port}_finger_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_finger_nmap.xml" {address}'
 
     [[finger.scan]]
-    nmap = 'finger-user-enum'
+    name = 'finger-user-enum'
     command = 'perl /opt/finger-user-enum-1.0/finger-user-enum.pl -U /usr/share/wordlists/metasploit/unix_users.txt -t {address} 2>&1 | tee "{scandir}/{protocol}_{port}_finger_user_enum.txt"'
+
+    [[finger.scan]]
+    name = 'finger-user-enum-short'
+    command = 'perl /opt/finger-user-enum-1.0/finger-user-enum.pl -U /usr/share/wordlists/metasploit/unix_users.txt -t {address} | grep "home\|root" 2>&1 | tee "{scandir}/{protocol}_{port}_finger_user_enum_short.txt"'

