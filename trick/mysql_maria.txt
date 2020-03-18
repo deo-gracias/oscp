@@ -1,0 +1,11 @@
+#to show user persmissions
+show grants;
+#interesting result: GRANT ALL
+#if user has file writing permission, this can be a good start point for a code exec.
+
+#to show variables
+show variables;
+
+#to set variable inside mysql console
+set @shell = 0x7f45;
+set @myvar = 'a text';

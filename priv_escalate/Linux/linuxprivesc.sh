@@ -1,6 +1,14 @@
 #!/bin/sh
 
 echo "#####################################################"
+echo "Network Interface configuration"
+echo "#####################################################"
+echo ""
+echo ""
+
+ifconfig | grep "flags\|inet"
+
+echo "#####################################################"
 echo "Trying to locate database config file"
 echo "#####################################################"
 echo ""
@@ -252,7 +260,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-cat /etc/passwd | grep -v  ":\*:" | grep "sh$" 
+awk -F ":" 'length($2) > 2 {print $0}' /etc/passwd | sort -u 
 
 echo ""
 echo ""
@@ -319,7 +327,7 @@ echo ""
 echo ""
 
 find / -name chkrootkit 2> /dev/null
-
+find /usr -name exim 2> /dev/null
 
 echo ""
 echo ""

@@ -1264,6 +1264,7 @@ Group/Apache/logs/error%00
 /proc/self/status%00
 ../../../../../../../../../../Program
 /Program
+c:\windows\system32\drivers\etc\hosts
 c:/boot.ini
 c:oot.ini
 C:/boot.ini
@@ -1334,6 +1335,8 @@ C:oot.ini
 /xampp/apache/bin/php.ini%00
 c:/wamp/logs/access.log
 c:/wamp/logs/access
+c:\xampp\apache\logs\access.log
+c:\xampp\apache\logs\error.log
 c:\wamp\logsccess.log
 c:\wamp\logsccess
 C:/wamp/logs/access.log
