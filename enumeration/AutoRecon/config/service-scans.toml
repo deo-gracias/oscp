@@ -683,7 +683,7 @@ service-names = [
 
     [[redis.scan]]
     name = 'nmap-redis'
-    command = 'nmap {nmap_extra} -sV -p {port} --script="*redid*" -oN "{scandir}/{protocol}_{port}_redis_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_redis_nmap.xml" {address}'
+    command = 'nmap {nmap_extra} -sV -p {port} --script="*redis*" -oN "{scandir}/{protocol}_{port}_redis_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_redis_nmap.xml" {address}'
 
     [[redis.scan]]
     name = 'redis-non-auth-check'
