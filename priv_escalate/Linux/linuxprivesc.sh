@@ -327,7 +327,7 @@ echo ""
 echo ""
 
 find / -name chkrootkit 2> /dev/null
-find /usr -name exim 2> /dev/null
+dpkg -l | grep exim 2> /dev/null
 
 echo ""
 echo ""

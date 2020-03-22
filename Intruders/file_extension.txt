@@ -2,6 +2,7 @@ asp
 aspx
 browser
 config
+zip
 gif
 jpeg
 jpg

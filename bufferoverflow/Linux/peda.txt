@@ -35,3 +35,7 @@ jmpcall esp libc
 
 #generate shellcode
 shellcode generate x86/linux exec
+
+#print register containt
+x/s $esp
+x/10s $esp (s => string)

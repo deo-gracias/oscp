@@ -1,0 +1,9 @@
+#enumeration with snmp
+#use enyx from github
+python /opt/enyx 1 public 10.10.10.20
+
+#ping 
+ping6 dead:beef:0000:0000:0250:56ff:feb9:dc54
+
+#ssh connect
+ssh -i  key.pem  -6 thrasivoulos@dead:beef:0000:0000:0250:56ff:feb9:dc54

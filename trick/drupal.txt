@@ -1,0 +1,13 @@
+#Exploit Drupal7
+https://github.com/dreadlocked/Drupalgeddon2
+
+#password file 
+sites/default/settings.php#here admin is the username for pass to be changed
+drush upwd --password="NewPassword" admin
+
+#Write php code
+-Downaload, install php extenstion
+Dowload link: https://www.drupal.org/project/php
+(the file is already downoaded and saved in exploitation folder)
+
+-Enable php extension
