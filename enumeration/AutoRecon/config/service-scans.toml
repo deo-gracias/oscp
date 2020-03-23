@@ -106,6 +106,10 @@ ignore-service-names = [
         pattern = 'WebDAV is ENABLED'
 
     [[http.scan]]
+    name = 'link-extractor'
+    command = '/usr/bin/python3.7 /root/Documents/Pentest/NewLabEnv/scripts/http_link_extractor.py {scheme}://{address}:{port}/ 2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_link_extracted.txt"'
+
+    [[http.scan]]
     name = 'curl-index'
     command = 'curl -sSik {scheme}://{address}:{port}/ -m 10 2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_index.html"'
 
