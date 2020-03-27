@@ -671,6 +671,16 @@ if [[ $(which netstat) ]]; then netstat -antep | grep -i listen; else ss -tulnp;
 echo ""
 echo ""
 echo "#####################################################"
+echo "Listening connexion short"
+echo "#####################################################"
+echo ""
+echo ""
+
+if [[ $(which netstat) ]]; then netstat -antep | grep -i listen | grep "127.0.0.1" ; else ss -tulnp | grep "127.0.0.1"; fi
+
+echo ""
+echo ""
+echo "#####################################################"
 echo "Established connexion"
 echo "#####################################################"
 echo ""

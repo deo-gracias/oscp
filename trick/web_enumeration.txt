@@ -1,3 +1,0 @@
-1-get / post / put method test
-2-dns enumeration 
-3-domain / subdomain enumeration 

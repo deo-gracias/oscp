@@ -105,6 +105,10 @@ ignore-service-names = [
         description = 'WebDAV is enabled'
         pattern = 'WebDAV is ENABLED'
 
+        [[http.scan.pattern]]
+        description = 'WinRM service is potentially enabled'
+        pattern = '5985'
+
     [[http.scan]]
     name = 'link-extractor'
     command = '/usr/bin/python3.7 /root/Documents/Pentest/NewLabEnv/scripts/http_link_extractor.py {scheme}://{address}:{port}/ 2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_link_extracted.txt"'

