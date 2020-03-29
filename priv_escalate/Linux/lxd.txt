@@ -5,6 +5,9 @@ git clone https://github.com/saghul/lxd-alpine-builder
 
 #on vulnerable lxd machine
 # import the image
+
+lxd init
+
 lxc image import ./alpine.tar.gz --alias myimage
 
 #check import by listing image list doing lxc image list
