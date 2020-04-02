@@ -1,0 +1,2 @@
+/home/user/.ssh/id_rsa
+/home/user/.ssh/authorized_keys

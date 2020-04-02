@@ -1,0 +1,1 @@
+ruby /opt/evil-winrm/evil-winrm.rb --ip 10.10.10.161 -u username -p password

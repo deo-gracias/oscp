@@ -1,5 +1,8 @@
 #!/bin/sh
 
+check_kernel_vuln="no"
+
+
 echo "#####################################################"
 echo "Network Interface configuration"
 echo "#####################################################"
@@ -716,11 +719,9 @@ echo "Activating ls in detail mode"
 
 alias ls="ls -la"
 
-read -p "Do you want to try kernel exploit ? (y/n) " answer
-if [[ $answer != 'n' && $answer != 'N' ]]
+if [ $check_kernel_vuln = "yes" ]
 	then
-		read -p "IP Address to download checker " ip_addr
-		wget $ip_addr/linux-exploit-suggester.sh
+		wget $1/linux-exploit-suggester.sh
 		chmod +x linux-exploit-suggester.sh
 		./linux-exploit-suggester.sh
 fi

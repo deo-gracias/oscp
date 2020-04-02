@@ -1,0 +1,6 @@
+#connection
+vncviewer 127.0.0.1::5901 
+vncviewer 127.0.0.1::5901 -passwd passwd_file
+
+#decrypt vnc file
+https://github.com/jeroennijhof/vncpwd

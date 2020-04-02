@@ -1,0 +1,16 @@
+#Enter in the folder conatinaint .git
+git log
+
+#Dump commit and analyze
+git log -p (dump all commit)
+
+git log -r
+
+git log -r | egrep -i "user|username|login|pass|pwd|password|key|credential|cred|secret|backup"
+
+git show (This show the last commit)
+git show d387abf63e05c9628a59195cec9311751bdb283f (this show file in the commit with id given)
+
+The commit id is given in `git log`
+
+git diff d387abf63e05c9628a59195cec9311751bdb283f​​ (this one show diff between last commit and given commit id)
