@@ -211,8 +211,6 @@ echo ""
 
 find /  -type f -readable ! -path "/proc/*" ! -path "/root/*" ! -path "/home/*" ! -path "/lib/*" ! -path "/boot/*" ! -path "/lib/*"  ! -path "/var/lib/*" ! -path "/bin/*" ! -path "/usr/*" ! -path "/run/*" ! -path "/sys/*" ! -path "/etc/*" ! -path "/sbin/*" ! -path "/var/*" 2> /dev/null
 
-echo "If /usr/ is writable, we can update the uname (startup program) of mod in called in /etc/update-motd.d/10-uname or edit any logon script found with psspy"
-
 echo ""
 echo ""
 echo "#####################################################"
@@ -223,6 +221,7 @@ echo ""
 
 find / -writable ! -path "/proc/*" !  -path "/tmp/*" ! -path "/root/*" ! -path "/home/*" ! -path "/lib/*" ! -path "/dev/*" ! -path "/boot/*" ! -path "/lib/*"  ! -path "/var/lib/*" ! -path "/run/*" ! -path "/sys/*" ! -path "/etc/*"  ! -path "/var/*" 2> /dev/null
 
+echo "If /usr/ is writable, we can update the uname (startup program) of mod in called in /etc/update-motd.d/10-uname or edit any logon script found with psspy"
 
 echo ""
 echo ""
