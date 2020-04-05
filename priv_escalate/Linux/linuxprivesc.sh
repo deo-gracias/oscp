@@ -33,6 +33,16 @@ for i in user username login pass pwd credential key cred secret note; do find /
 for i in user username login pass pwd credential key cred secret note; do find /home -type f  -name "*$i*" 2>/dev/null ; done
 
 
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking .htpasswd file"
+echo "#####################################################"
+echo ""
+echo ""
+
+find / -name ".htpasswd" 2> /dev/null
+
 echo "#####################################################"
 echo "Printing PATH from users "
 echo "#####################################################"
@@ -194,12 +204,24 @@ find /home -type f -readable 2> /dev/null
 echo ""
 echo ""
 echo "#####################################################"
-echo "/Others than home and root files readable"
+echo "Others than (home and root) files readable"
 echo "#####################################################"
 echo ""
 echo ""
 
 find /  -type f -readable ! -path "/proc/*" ! -path "/root/*" ! -path "/home/*" ! -path "/lib/*" ! -path "/boot/*" ! -path "/lib/*"  ! -path "/var/lib/*" ! -path "/bin/*" ! -path "/usr/*" ! -path "/run/*" ! -path "/sys/*" ! -path "/etc/*" ! -path "/sbin/*" ! -path "/var/*" 2> /dev/null
+
+echo "If /usr/ is writable, we can update the uname (startup program) of mod in called in /etc/update-motd.d/10-uname or edit any logon script found with psspy"
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Others than (home and root) files and directories writable"
+echo "#####################################################"
+echo ""
+echo ""
+
+find / -writable ! -path "/proc/*" !  -path "/tmp/*" ! -path "/root/*" ! -path "/home/*" ! -path "/lib/*" ! -path "/dev/*" ! -path "/boot/*" ! -path "/lib/*"  ! -path "/var/lib/*" ! -path "/run/*" ! -path "/sys/*" ! -path "/etc/*"  ! -path "/var/*" 2> /dev/null
 
 
 echo ""
@@ -627,8 +649,9 @@ echo ""
 echo ""
 
 cat /etc/group | grep -v  ":$" | awk -F ":" '{print $4}'   | tr "," "\n" | sort -u > /tmp/multiples_groups
-grep -f /tmp/multiples_groups /etc/passwd | grep "sh$" 
-rm /tmp/multiples_groups
+grep -f /tmp/multiples_groups /etc/passwd | grep "sh$" | awk -F ":" '{print $1 }' > /tmp/multiples_groups_users
+for i in $(cat /tmp/multiples_groups_users); do groups $i; done
+rm /tmp/multiples_groups*
 
 
 echo ""

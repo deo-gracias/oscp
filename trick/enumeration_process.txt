@@ -11,9 +11,15 @@
 #########################
 1-Hidden directory search (cgi-bin with dirbuster gui and sh,py,pl file extensions)
 2-Hidden files search21-get / post / put method test
-3-dns enumeration 
-4-domain / subdomain enumeration 
-5-burpsuite 
+3-cmseek or ​ wappalyzer​ to find cms 
+4-github cms name exploit (mostly sql injection)
+5-dns enumeration 
+6-domain / subdomain enumeration 
+7-burpsuite 
+
+##Brute -force
+-Get username or brute force using passwd reset feature
+-Get dic and brute force with username found
 
 
 #################################################
