@@ -29,3 +29,4 @@ i686-w64-mingw32-g++ exploit.c -o reverseShell.exe -lws2_32 -s -ffunction-sectio
 x86_64-w64-mingw32-gcc shell.c -o shell.exe
 ##for x86
 i686-w64-mingw32-gcc shell.c -o shell.exe
+i686-w64-mingw32-gcc MS11-046.c -o MS11-046.exe -lws2_32

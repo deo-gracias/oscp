@@ -10,7 +10,7 @@ strings $file |  tr  '[:upper:]' '[:lower:]' | awk  '{print $2" "$3" "$4" "$5" "
 cat tmpchartocompare1
 
 
-cat tmpchartocompare1 | xargs | sed "s/ /\\n/g" > tmpchartocompare
+cat tmpchartocompare1  |  grep -o "[0-9a-z][0-9a-z]" > tmpchartocompare
 #head tmpchartocompare
 rm tmpchartocompare1 
 

@@ -538,7 +538,7 @@ service-names = [
 
     [[smb.scan]]
     name = 'enum4linux_short'
-    command = 'enum4linux -a -M -l -d {address} | egrep -ie "user name|Minimum password" 2>&1| sort -u  | tee "{scandir}/enum4linux_short.txt"'
+    command = 'enum4linux -a -M -l -d {address} | egrep -ie "user name|Minimum password|Local User|Disk|Domain User" 2>&1| sort -u  | tee "{scandir}/enum4linux_short.txt"'
     run_once = true
     ports.tcp = [139, 389, 445]
     ports.udp = [137]

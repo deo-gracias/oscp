@@ -17,7 +17,8 @@ echo "#####################################################"
 echo ""
 echo ""
 
-find /var/www -type f -readable  2> /dev/null -exec egrep -lin "localhost|127.0.0.1" {} \;
+#find /var/www -type f -readable  2> /dev/null -exec egrep -lin "localhost|127.0.0.1" {} \;
+find /var/www  -readable  2> /dev/null -exec egrep -lin "localhost|127.0.0.1" {} \;
 
 echo "#####################################################"
 echo "Printing file containing password or secret or passwd"
@@ -114,7 +115,14 @@ echo "#####################################################"
 echo ""
 echo ""
 
-for i in $(cat /etc/passwd | grep "sh$" | awk -F ":" '{print $1}'); do echo "##############################"; echo " Process running by $i"; echo "##############################"; ps -aux | grep $i | grep -v "0:00 grep" | awk '$4 > 0.0 {print $0}' ;  echo;   done
+for i in $(cat /etc/passwd | grep "sh$" | awk -F ":" '{print $1}')
+do 
+	echo "##############################";
+	echo " Process running by $i ";
+	echo "##############################";
+	ps -aux | grep $i | grep -v "0:00 grep"  | awk '$4 > 0.0 {print $0}'  | grep "^$i"  ;
+	echo;
+done
 
 echo ""
 echo ""
@@ -603,7 +611,7 @@ echo "#####################################################"
 echo ""
 echo ""
 
-find / -path "/etc/mysql*" -name "*.cnf"  -type f -readable  2> /dev/null | xargs cat | grep -v "^#" | grep root
+find /etc -path "/etc/*" -name "*.cnf"  -type f -readable  2> /dev/null | xargs cat | grep -v "^#" | grep root
 
 echo ""
 echo ""

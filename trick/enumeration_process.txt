@@ -2,7 +2,9 @@
 #	Global Enumeration	#
 #################################
 1-Software version and searchsploit
-2-Brute force services enumeration
+2.0-Pattern 
+2.1-Services enumeration (Is dir writable or not)
+2.3-Services brute force 
 3-Extraction (nmap)
 4-Web enumeration
 
@@ -16,6 +18,7 @@
 5-dns enumeration 
 6-domain / subdomain enumeration 
 7-burpsuite 
+8-lfi/rfi,php wrapper
 
 ##Brute -force
 -Get username or brute force using passwd reset feature

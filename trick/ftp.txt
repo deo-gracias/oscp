@@ -1,1 +1,1 @@
-curlftpfs -o allow_other ftp-user:ftp-pass@10.10.10.10 /mnt/ftp/
+curlftpfs -o allow_other anonymous:ftp-pass@10.10.10.10 /mnt/ftp/

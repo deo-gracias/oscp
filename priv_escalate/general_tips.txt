@@ -1,0 +1,3 @@
+1-Windows XP => upnphost service priv escalation
+2-When a http service running as root allow LFI, we can write a reverse shell in the server file extension as low user and call for that file
+Ex: Webmin with perl as cgi file https://netosec.com/pwnos-vulnhub-walkthrough/

