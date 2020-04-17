@@ -1,0 +1,2 @@
+1-lfi (php) from mail (/var/mail/user)
+2-having a shell, write a reverse shell and all it from lfi

