@@ -1,0 +1,5 @@
+#for 32 bit
+gcc -m32 9545.c -o 9545
+
+#error while loading shared libraries: requires glibc 2.5 or later dynamic linker
+gcc -m32 9545.c -o 9545 -Wl,--hash-style=both

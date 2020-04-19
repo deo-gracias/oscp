@@ -1,0 +1,23 @@
+1-Identify wether the injection start by ' or not by running
+
+-500
+-500'
+
+2-Identify the comment of the injection (-- -, #, or nothing)
+
+-500 -- -
+-500 #
+-500' -- -
+-500' #
+
+3-Set Wfuzz encoder (-z file,query.txt,urlencode)
+
+4-Build the order_by wordlist and run wfuzz with encoder set (IMPORTANT) and filter (--hc)
+*Comment the line non useful
+*Decode the otput, the hightest id, is the number of columns
+
+5-Identify with column is string and witch one is string
+
+6-Build the union select wordlist and run wfuzz with encoder set
+Comment the line non useful
+

@@ -1,0 +1,1 @@
+wfuzz -u http://10.11.1.128:4167/Search.asp -d "artist=FUZZ" -b "QASPSESSIONIDACTSSDQD=MPKLEIBBIHDKNJEGMEKCIGFK"  -z file,00.txt,urlencode  
