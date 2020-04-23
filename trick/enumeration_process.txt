@@ -20,6 +20,10 @@
 7-burpsuite 
 8-lfi/rfi,php wrapper
 
+9- for i in {list of modules found }; do searchsploit $i; done | grep -v "No Result"
+
+
+
 ##Brute -force
 -Get username or brute force using passwd reset feature
 -Get dic and brute force with username found
@@ -44,3 +48,4 @@
 7-Software Vulnerabilities checking (C:/Programm File ProgramData etc..)
 8-process with ps
 9-user files checking
+10-Windows xp => upnhost 

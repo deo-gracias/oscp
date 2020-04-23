@@ -12,4 +12,9 @@ smbmap -R ShareName -H 10.10.10.100
 
 smbmap -d active.htb -u svc_tgs -p thepassword -H 10.10.10.100
 
-
+#facing error protocol negotiation failed: NT_STATUS_CONNECTION_DISCONNECTED
+##This mean smbserver is not supporting your smbserver is not supporting old version, to fix it do the following
+##add 
+client min protocol = LANMAN1
+##in [global config] of /etc/samba/smb.conf
+service smbd restart

