@@ -18,3 +18,10 @@ smbmap -d active.htb -u svc_tgs -p thepassword -H 10.10.10.100
 client min protocol = LANMAN1
 ##in [global config] of /etc/samba/smb.conf
 service smbd restart
+
+#Samba version enumeration with tcpdump
+-tcpdump -i tun1 host 10.11.1.115 -A -w host.pcap
+-smbclient -L 10.11.1.115
+
+-tcpdump -A -r host.pcap
+#The version appears just before share listing, example 10.11.1.111 or 10.11.1.101

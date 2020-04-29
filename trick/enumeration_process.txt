@@ -1,6 +1,7 @@
 #################################
 #	Global Enumeration	#
 #################################
+0-cat _full_tcp_nmap.txt | grep "/tcp" | grep open
 1-Software version and searchsploit
 2.0-Pattern 
 2.1-Services enumeration (Is dir writable or not)
