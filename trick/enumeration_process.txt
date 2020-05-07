@@ -6,12 +6,14 @@
 2.0-Pattern 
 2.1-Services enumeration (Is dir writable or not)
 2.3-Services brute force 
+2.4-UDP Checking (TFTP AND SNMP)
 3-Extraction (nmap)
 4-Web enumeration
 
 #########################
 #	Web Enumeration	#
 #########################
+0-nikto
 1-Hidden directory search (cgi-bin with dirbuster gui and sh,py,pl file extensions)
 2-Hidden files search21-get / post / put method test
 3-cmseek or ​ wappalyzer​ to find cms 

