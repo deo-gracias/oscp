@@ -1,0 +1,11 @@
+#pwnlab
+-php wrapper for index
+-lfi by lang cookie
+-add . for suid exec
+-full path after modifying the PATH
+
+#kioptrix 2014
+-/usr/local/etc/apache22/httpd.conf for freebsd
+SetEnvIf User-Agent ^Mozilla/4.0 Mozilla4_browser  
+-Allow from env=Mozilla4_browser
+to only allow some user agent (Ex: here only -Mozilla/4.0) will be accepted

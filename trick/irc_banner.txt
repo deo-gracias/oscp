@@ -1,0 +1,28 @@
+ncat 10.10.10.117 8067
+PASS none
+#wait for reply
+NICK sorandom29      
+USER blah blah blah blah
+
+Example
+root@kali:/tmp# ncat 10.10.10.117 8067
+:irked.htb NOTICE AUTH :*** Looking up your hostname...
+PASS hehe
+:irked.htb NOTICE AUTH :*** Couldn't resolve your hostname; using your IP address instead
+NICK hehe
+USER hehe hehe hehe hehe 
+:irked.htb 001 hehe :Welcome to the ROXnet IRC Network hehe!hehe@10.10.16.101
+:irked.htb 002 hehe :Your host is irked.htb, running version Unreal3.2.8.1
+:irked.htb 003 hehe :This server was created Mon May 14 2018 at 13:12:50 EDT
+:irked.htb 004 hehe irked.htb Unreal3.2.8.1 iowghraAsORTVSxNCWqBzvdHtGp lvhopsmntikrRcaqOALQbSeIKVfMCuzNTGj
+:irked.htb 005 hehe UHNAMES NAMESX SAFELIST HCN MAXCHANNELS=10 CHANLIMIT=#:10 MAXLIST=b:60,e:60,I:60 NICKLEN=30 CHANNELLEN=32 TOPICLEN=307 KICKLEN=307 AWAYLEN=307 MAXTARGETS=20 :are supported by this server
+:irked.htb 005 hehe WALLCHOPS WATCH=128 WATCHOPTS=A SILENCE=15 MODES=12 CHANTYPES=# PREFIX=(qaohv)~&@%+ CHANMODES=beI,kfL,lj,psmntirRcOAQKVCuzNSMTG NETWORK=ROXnet CASEMAPPING=ascii EXTBAN=~,cqnr ELIST=MNUCT STATUSMSG=~&@%+ :are supported by this server
+:irked.htb 005 hehe EXCEPTS INVEX CMDS=KNOCK,MAP,DCCALLOW,USERIP :are supported by this server
+:irked.htb 251 hehe :There are 1 users and 0 invisible on 1 servers
+:irked.htb 253 hehe 1 :unknown connection(s)
+:irked.htb 255 hehe :I have 1 clients and 0 servers
+:irked.htb 265 hehe :Current Local Users: 1  Max: 1
+:irked.htb 266 hehe :Current Global Users: 1  Max: 1
+:irked.htb 422 hehe :MOTD File is missing
+:hehe MODE hehe :+iwx
+

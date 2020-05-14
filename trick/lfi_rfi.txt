@@ -1,0 +1,10 @@
+#lfi files to check
+1-/etc/passwd and details
+2-/home/users id_rsa id_rsa.pub
+3-RFI
+4-Traversal (technology site available for .htpasswd or else information)
+5-wrapper inside the directory
+
+#lfi to rfi 
+1-lfi (php) from mail (/var/mail/user)
+2-having a shell, write a reverse shell and call it from lfi

