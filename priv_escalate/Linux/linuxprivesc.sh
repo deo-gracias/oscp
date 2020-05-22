@@ -732,6 +732,17 @@ echo "Linux $lse_linux"
 echo "Distibution $lse_distro"
 echo "Hostname $lse_hostname"
 
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking snap vulnerability"
+echo "#####################################################"
+echo ""
+echo ""
+
+snap version 2>/dev/null | grep -w snap  && echo -e "\nIf version is less than 2.37, it can lead to EOP" || echo ""
+
 echo ""
 echo ""
 echo "#####################################################"

@@ -6,6 +6,11 @@ mount -t cifs //192.168.130.132/folder /mnt/smb
 
 #if there is an error with version add -o vers=1.0
 
+#vhd
+apt-get install libguestfs-tools
+
+guestmount --add bastion/WindowsImageBackup/24351/9b9cfbc4–369e-11e9-a17c-806e6f6e6963.vhd --inspector --ro /mnt/vhd 
+
 guestmount --add bastion/WindowsImageBackup/24351/9b9cfbc4–369e-11e9-a17c-806e6f6e6963.vhd --inspector --ro /mnt/vhd -v
 
 smbmap -R ShareName -H 10.10.10.100

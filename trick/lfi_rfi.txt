@@ -3,7 +3,7 @@
 2-/home/users id_rsa id_rsa.pub
 3-RFI
 4-Traversal (technology site available for .htpasswd or else information)
-5-wrapper inside the directory
+5-wrapper inside the directory, wrapper advanced
 
 #lfi to rfi 
 1-lfi (php) from mail (/var/mail/user)

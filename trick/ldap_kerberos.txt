@@ -12,6 +12,8 @@ python /opt/impacket/examples/GetUserSPNs.py active.local/svc_user -dc-ip 10.10.
 #GetADUsers
 GetADUsers.py -all -dc-ip 10.10.10.161 htb.local/svc-alfresco
 
+nmap 192.168.130.169 -p 389 --script ldap-search --script-args 'ldap.username="cn=admin,dc=symfonos,dc=local", ldap.password="qMDdyZh3cT6eeAWD"'
+
 ###Some rights meaning 
 #ref: https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-acls-aces
 GenericAll - full rights to the object (add users to a group or reset user's password)

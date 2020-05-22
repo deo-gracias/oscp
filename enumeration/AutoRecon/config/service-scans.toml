@@ -663,11 +663,28 @@ service-names = [
     run_once = true
     ports.udp = [161]
 
+    [[snmp.scan]]
+    name = 'snmp-check'
+    command = 'snmp-check {address}  2>&1 | tee "{scandir}/{protocol}_{port}_snmp_check.txt"'
+    run_once = true
+    ports.udp = [161]
+
     [[snmp.manual]]
     description = 'Discover ipv6 IP address using enyx from github'
     commands = [
         'python /opt/enyx 1 public  {address}'
     ]
+
+[isakmp]
+
+service-names = [
+    '^isakmp'
+]
+
+    [[isakmp.scan]]
+    name = 'ike-scan'
+    command = 'ike-scan -M {address}  2>&1 | tee "{scandir}/{protocol}_{port}_ike_scan.txt"'
+
 
 [telnet]
 

