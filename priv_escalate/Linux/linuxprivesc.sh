@@ -510,6 +510,10 @@ echo ""
 
 getcap -r / 2> /dev/null
 
+
+echo "Absolute getcap path"
+find / -name getcap 2> /dev/null
+
 echo ""
 echo ""
 echo "#####################################################"

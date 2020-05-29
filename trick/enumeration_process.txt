@@ -50,8 +50,9 @@
 3-powerUp
 4-WinPEAS
 5-JawEnum
-6-windows-exploit-suggester
+6-windows-exploit-suggester 
 7-Software Vulnerabilities checking (C:/Programm File ProgramData etc..)
 8-process with ps
 9-user files checking
 10-Windows xp => upnhost 
+11-Privesc with os version search, if no hotfix in systeminfo, try MS15-051, MS11-046 for Win 2003/2008/7/XP

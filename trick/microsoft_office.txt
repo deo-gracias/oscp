@@ -14,8 +14,12 @@ xlsx2csv book.xlsx > convert.csv => convert xlsx to csv
 #Access
 mdb-tables backup.mdb | grep --color=auto user
 mdb-export backup.mdb auth_user
+#SQL queries
+mdb-sql -p backup.mdb 
+1 => select * from auth_user
+2 => go
 
-#Outlook (.pst)
+#Outlook (.prst)
 readpst thepstfile.pst
 readpst -tea -m Control.pst
 cat file.mbox
