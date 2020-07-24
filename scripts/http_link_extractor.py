@@ -35,6 +35,7 @@ try:
 				else:
 					intlist.add(a['href'])
 
+
 		for a in soup.findAll("form", attrs={"action":True}):
 			if len(a['action'].strip()) > 1 and a['action'][0] != '#' and 'javascript:' not in a['action'].strip() and 'mailto:' not in a['action'].strip() and 'tel:' not in a['action'].strip():
 				if 'http' in a['action'].strip() or 'https' in a['action'].strip():
@@ -45,6 +46,18 @@ try:
 				else:
 					intlist.add(a['action'])
 
+
+
+		for a in soup.findAll("iframe", attrs={"src":True}):
+			if len(a['src'].strip()) > 1 and a['src'][0] != '#':
+				if 'http' in a['src'].strip() or 'https' in a['src'].strip():
+					if urlparse(link).netloc.lower() in urlparse(a['src'].strip()).netloc.lower():
+						intlist.add(a['src'])
+					else:
+						extlist.add(a['src'])
+				else:
+					intlist.add(a['src'])			
+
 		for a in soup.findAll("script", attrs={"src":True}):
 			if len(a['src'].strip()) > 1 and a['src'][0] != '#' and 'mailto:' not in a['src'].strip():
 				if 'http' in a['src'].strip() or 'https' in a['src'].strip():
@@ -54,6 +67,7 @@ try:
 						js_ext_list.add(a['src'])
 				else:
 					js_int_list.add(a['src'])
+
 		
 		print('\n')
 		print(link)

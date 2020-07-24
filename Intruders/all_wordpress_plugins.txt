@@ -20,7 +20,6 @@
 /wp-content/plugins/ajax-category-dropdown
 /wp-content/plugins/ajaxgallery
 /wp-content/plugins/ajax-store-locator-wordpress_0
-/wp-content/plugins/akismet
 /wp-content/plugins/albo-pretorio-on-line
 /wp-content/plugins/alert-before-your-post
 /wp-content/plugins/all-in-one-event-calendar

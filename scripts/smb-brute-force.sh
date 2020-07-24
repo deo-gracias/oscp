@@ -1,10 +1,10 @@
 #!/bin/bash
 read -p "Enter IP address: " ip
 
-for user in $(cat usernames.txt)
+for pass in $(cat passwords.txt)
 do
 
-	for pass in $(cat passwords.txt)
+	for user in $(cat usernames.txt)
 	do
 		echo "Testing $user:$pass"
 		#smbmap -d active.htb -u svc_tgs -p thepassword -H $ip
