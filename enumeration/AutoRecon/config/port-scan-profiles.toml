@@ -43,3 +43,32 @@
         [udp.udp-top-20.service-detection]
         command = 'nmap {nmap_extra} -sU -A -p {ports} --version-all -oN "{scandir}/_top_20_udp_nmap.txt" -oX "{scandir}/xml/_top_20_udp_nmap.xml" {address}'
         pattern = '^(?P<port>\d+)\/(?P<protocol>(udp))(.*)open(\s*)(?P<service>[\w\-\/]+)(\s*)(.*)$'
+
+
+[full-only]
+
+    [full-only.nmap-full-tcp]
+
+        [full-only.nmap-full-tcp.service-detection]
+        command = 'nmap {nmap_extra} -A --osscan-guess --version-all -p- -oN "{scandir}/_full_tcp_nmap.txt" -oX "{scandir}/xml/_full_tcp_nmap.xml" {address}'
+        pattern = '^(?P<port>\d+)\/(?P<protocol>(tcp|udp))(.*)open(\s*)(?P<service>[\w\-\/]+)(\s*)(.*)$'
+
+
+[fast-full-only]
+
+    [fast-full-only.nmap-full-tcp]
+
+        [fast-full-only.nmap-full-tcp.service-detection]
+        command = 'nmap  -A -v -sV  -p- -oN "{scandir}/_full_tcp_nmap.txt" -oX "{scandir}/xml/_full_tcp_nmap.xml" {address}'
+        pattern = '^(?P<port>\d+)\/(?P<protocol>(tcp|udp))(.*)open(\s*)(?P<service>[\w\-\/]+)(\s*)(.*)$'
+
+    
+
+[full-custom-port]
+
+    [full-custom-port.nmap-full-tcp]
+
+        [full-custom-port.nmap-full-tcp.service-detection]
+        command = 'nmap {nmap_extra} -A --osscan-guess --version-all -p 22,80,111,139,445,2049  -oN "{scandir}/_full_tcp_nmap.txt"  -oX "{scandir}/xml/_full_tcp_nmap.xml" {address}'
+        pattern = '^(?P<port>\d+)\/(?P<protocol>(tcp|udp))(.*)open(\s*)(?P<service>[\w\-\/]+)(\s*)(.*)$'
+

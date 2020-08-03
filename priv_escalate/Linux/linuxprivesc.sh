@@ -637,19 +637,10 @@ echo "#####################################################"
 echo ""
 echo ""
 
-for i in $(cat /etc/passwd |grep "sh$" | cut -d: -f1 )
+for user in $(cat /etc/passwd |grep "sh$" | cut -d: -f1 )
 do
-cat << EOFN > /tmp/expect.sh
-#!/usr/bin/expect -f
-set timeout 5
-spawn su - $i -c id
-expect "Password: " {send "$i\r"}
-expect eof
-EOFN
-chmod +x /tmp/expect.sh && /tmp/./expect.sh | grep -vi "password\|spawn\|Authentication"
+        echo -e "$user\n" |  su -c 'whoami' $user 2> /dev/null
 done
-
-rm /tmp/expect.sh
 
 echo ""
 echo ""

