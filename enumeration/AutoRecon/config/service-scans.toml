@@ -138,18 +138,13 @@ ignore-service-names = [
 
     [[http.scan]]
     name = 'filebuster'
-    command = '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/seclists/Discovery/Web-Content/common.txt   --hc 500  -t 30  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
+    command = '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -e txt  --hc 500  -t 30  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
 
-    [[http.manual]]
-    description = 'filebuster (fast) for directory with dirbuster medium wordlist'
-    commands = [
-        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30  -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_file-list-2.3-medium.txt"'
-    ]
 
     [[http.manual]]
     description = 'filebuster (fast)'
     commands = [
-        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e jsp,py,aspx,asp,php,html,txt -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_file-list-2.3-medium.txt"'
+        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e jsp,py,aspx,asp,php,html -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_deep_file-list-2.3-medium.txt"'
     ]
 
 

