@@ -137,14 +137,14 @@ ignore-service-names = [
     command = 'nikto -ask=no -h {scheme}://{address}:{port} 2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_nikto.txt"'
 
     [[http.scan]]
-    name = 'filebuster'
-    command = '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -e txt  --hc 500  -t 30  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_filebuster_directory-list-2.3-medium.txt"'
+    name = 'ffuf'
+    command = '/opt/ffuf/ffuf -u {scheme}://{address}:{port}/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -e txt -ic  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_ffuf_directory-list-2.3-medium.txt"'
 
 
     [[http.manual]]
-    description = 'filebuster (fast)'
+    description = 'ffuf (fast)'
     commands = [
-        '/opt/filebuster/filebuster.pl -u {scheme}://{address}:{port}/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt   --hc 500  -t 30 -e jsp,py,aspx,asp,php,html -o "{scandir}/{protocol}_{port}_{scheme}_filebuster_deep_file-list-2.3-medium.txt"'
+        '/opt/ffuf/ffuf -u {scheme}://{address}:{port}/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -e jsp,py,aspx,asp,php,html -ic  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_ffuf_deep_file-list-2.3-medium.txt"'
     ]
 
 
