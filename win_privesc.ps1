@@ -18,76 +18,6 @@ Write-Output $str
 }
 
 
-function Is-ThisNumeric ($Value) {
-    return $Value -match "^[\d\.]+$"
-}
-
-function Get-NetworkStatistics($customparam1=" ", $customparam2=" ")
-{
-   $properties = 'Protocol','LocalAddress','LocalPort'
-   $properties += 'RemoteAddress','RemotePort','State','ProcessName','PID'
-
-   netstat -ano |Select-String -Pattern '\s+(TCP|UDP)'  | Select-String $customparam1 | Select-String $customparam2 | ForEach-Object {
-
-       $item = $_.line.split(" ",[System.StringSplitOptions]::RemoveEmptyEntries)
-
-       if($item[1] -notmatch '^\[::')
-       {
-           if (($la = $item[1] -as [ipaddress]).AddressFamily -eq 'InterNetworkV6')
-           {
-               $localAddress = $la.IPAddressToString
-               $localPort = $item[1].split('\]:')[-1]
-           }
-           else
-           {
-               $localAddress = $item[1].split(':')[0]
-               $localPort = $item[1].split(':')[-1]
-           }
-
-           if (($ra = $item[2] -as [ipaddress]).AddressFamily -eq 'InterNetworkV6')
-           {
-               $remoteAddress = $ra.IPAddressToString
-               $remotePort = $item[2].split('\]:')[-1]
-           }
-           else
-           {
-               $remoteAddress = $item[2].split(':')[0]
-               $remotePort = $item[2].split(':')[-1]
-           }
-
-           New-Object PSObject -Property @{
-               PID = $item[-1]
-               ProcessName = (Get-Process -Id $item[-1] -ErrorAction SilentlyContinue).Name
-               Protocol = $item[0]
-               LocalAddress = $localAddress
-               LocalPort = $localPort
-               RemoteAddress =$remoteAddress
-               RemotePort = $remotePort
-               State = if($item[0] -eq 'tcp') {$item[3]} else {$null}
-               } |Select-Object -Property $properties
-           }
-       }
-   }
-
-
-function Get-OthersProcessStatistics
-{
-   $properties = 'PID','ProcessName','ProcessPath', 'Status'
-
-    tasklist /v  /fi "username ne $env:UserName" /fi "imagename ne smss.exe" /fi "imagename ne csrss.exe" /fi "imagename ne wininit.exe" /fi "imagename ne services.exe" /fi "imagename ne lsass.exe" /fi "imagename ne svchost.exe" /fi "imagename ne lsm.exe" /fi "imagename ne winlogon.exe" /fi "imagename ne explorer.exe" /fi "imagename ne System Idle Process" |Select-String -Pattern '\d+(?!.*\d+)'  | ForEach-Object {
-
-       $item = $_.line.split(" ",[System.StringSplitOptions]::RemoveEmptyEntries)
-        $item_id  = if(Is-ThisNumeric($item[1])) {$item[1]} else {$item[2]}
-           New-Object PSObject -Property @{
-               PID = if(Is-ThisNumeric($item[1])) {$item[1]} else {$item[2]}
-               ProcessName = (Get-Process -Id $item_id -ErrorAction SilentlyContinue).Name
-               ProcessPath = (Get-Process -Id $item_id  -ErrorAction SilentlyContinue).Path
-               Status = if(Is-ThisNumeric($item_id) ) {$item_id} else {$item[7]}
-               } |Select-Object -Property $properties
-       }
-   }
-
-
 print_output("System detail")
 systeminfo | findstr /B /C:"OS Name" /C:"OS Version" /C:"System Type"
 
@@ -118,10 +48,10 @@ print_output("Network addresses")
 Get-NetIPConfiguration | ft InterfaceAlias,InterfaceDescription,IPv4Address
 
 print_output("Localhost listening connections")
-Get-NetworkStatistics -customparam1 "127.0.0.1" -customparam2 "LISTENING" | Format-Table
+netstat -ano | findstr /i LISTENING | findstr "127.0.0.1"
 
 print_output("Listening connections")
-Get-NetworkStatistics -customparam1 "LISTENING" | Format-Table
+netstat -ano | findstr /i LISTENING | findstr  /V "127.0.0.1"
 
 print_output("Share listening")
 net share
@@ -151,17 +81,37 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" 2> C:\win
 print_output("PowerShell history")
 cat (Get-PSReadlineOption).HistorySavePath
 
-print_output("Getting listening process localy")
-Get-NetworkStatistics -customparam1 "127.0.0.1" -customparam2 "LISTENING"  | Format-Table
+print_output("Getting process running only localy")
+$a=netstat -ano | findstr /i LISTENING | findstr "127.0.0.1"
+$b=$a[1..$a.count] | ConvertFrom-String | select p6
+$local_process_id = @()
+foreach ($proc in $b){
+    if ($local_process_id -notcontains $proc.p6) {$local_process_id += $proc.p6 }
+}
 
-print_output("Getting others listening process")
-Get-NetworkStatistics -customparam1 "127.0.0.1" -customparam2 "LISTENING"  | Format-Table
+foreach($proc in $local_process_id){
+    Get-WmiObject -Query "Select * from Win32_Process" | where {$_.Handle -eq $proc} | Select Name, Handle, @{Label="Owner";Expression={$_.GetOwner().User}},Path,CommandLine | ft -AutoSize -Wrap
+    #Get-Process -ID $proc | select Name, Id, Path
+}
+
+print_output("Getting others process running")
+$a=netstat -ano | findstr /i LISTENING | findstr /V "127.0.0.1"
+$b=$a[1..$a.count] | ConvertFrom-String | select p6
+$local_process_id = @()
+foreach ($proc in $b){
+    if ($local_process_id -notcontains $proc.p6) {$local_process_id += $proc.p6 }
+}
+
+foreach($proc in $local_process_id){
+    Get-WmiObject -Query "Select * from Win32_Process" | where {$_.Handle -eq $proc -and $_.Name -notlike "svchost.exe" -and $_.Name -notlike "lsass.exe" -and $_.Name -notlike "services.exe"} | Select Name, Handle, @{Label="Owner";Expression={$_.GetOwner().User}},Path,CommandLine | ft -AutoSize -Wrap
+    #Get-Process -ID $proc | select Name, Id, Path | where-Object {$_.Name -notlike "svchost" -and $_.Name -notlike "lsass" -and $_.Name -notlike "services"}
+}
 
 print_output("Process running as another user")
-Get-OthersProcessStatistics
+tasklist /v /fi "username ne N/A" /fi "username ne $env:UserName"
 
 print_output("Process running as current user")
-tasklist /v /fi "username eq $env:UserName" /fi "imagename ne smss.exe" /fi "imagename ne csrss.exe" /fi "imagename ne wininit.exe" /fi "imagename ne services.exe" /fi "imagename ne lsass.exe" /fi "imagename ne svchost.exe" /fi "imagename ne lsm.exe" /fi "imagename ne winlogon.exe" /fi "imagename ne explorer.exe" /fi "imagename ne System Idle Process"
+tasklist /v /fi "username eq $env:UserName"
 
 print_output("Software installed on the computer")
 $InstalledSoftware = Get-ChildItem "HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall"
