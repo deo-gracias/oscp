@@ -738,6 +738,18 @@ echo ""
 
 snap version 2>/dev/null | grep -w snap  && echo -e "\nIf version is less than 2.37, it can lead to EOP" || echo ""
 
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking sudo vulnerability"
+echo "#####################################################"
+echo ""
+echo ""
+
+sudo --version 2>/dev/null | grep -w version  && echo -e '\nIf version is less or equal 1.8.27, and user have (ALL, \!root) /bin/bash right it leads to EOP, by running sudo -u#-1 /bin/bash' || echo ""
+
+
 echo ""
 echo ""
 echo "#####################################################"
