@@ -9,7 +9,8 @@ echo "#####################################################"
 echo ""
 echo ""
 
-ifconfig | grep "flags\|inet"
+#ifconfig | grep "flags\|inet"
+ip a | grep "<\|inet"
 
 echo "#####################################################"
 echo "Trying to locate database config file"
