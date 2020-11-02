@@ -1,5 +1,17 @@
 # Digital forensic command line
 
+We can break down the question "Is the system compromized into 4 questions"
+1. Are there malicious hardware-related change ?
+2. Is there malicious user activity ?
++ Suspicious users accounts ? (Username, Right, Scope, Creation Date, Login Event)
++ Programm launched by user, flagged as malware, suspicious name, atypical location (Temp, AppData)
++ Data accessed by user (Data Access Artifact) based on File Explorer (ShellBags, RunMRU), Web artifacts, memory
++ RemoteExecution Artifact (Remote Login, Remote process)
++ Mass Data copied from host
++ Account creation, Logins, Activity during login
+3. Are there malicious program ?
+4. Are there malicious OS configuration change ? 
+
 ## Evidence acquisition 
 
 ### Collecting Network evidence
@@ -95,7 +107,7 @@ Prior to imaging, we have to :
 ### Analyzing Network evidence
 
 + DNS blacklists
-https:/​ / ​ bitbucket.​ org/​ ethanr/​ dns-​ blacklists/
+https://bitbucket.org/ethanr/dns-blacklists/
 
 This script takes a text file created by the log source or analyst and compares it to lists of IP addresses and domains that have been blacklisted
 
@@ -169,7 +181,7 @@ To acquire the log files from a local system and send them to a Skadi instance, 
 `CyLR.exe -s 192.168.207.130:22 -u skadi -p skadi`
 
 #### Analysis of suspicious Event Log
-**DeepBlueCLI:** https:/​/github.​com/sans-blue-​team/​DeepBlueCLI
+**DeepBlueCLI:** https://github.com/sans-blue-team/DeepBlueCLI
 `.\DeepBlue.ps1 Security.evtx`
 
 **Tools for triage**
@@ -183,3 +195,20 @@ CyLR.exe -s 192.168.49.132:22 -u skadi -p skadi
 cdqr in:alien-pc.zip out:Results -z -max_cpu
 cdqr in:Results/alien-pc.plaso -plaso_db -es_kb winevt
 ```
+
+### File analysis
+```
+https://www.clamav.net/downloads for file analysis
+
+ClamAV>.\clamav.exe -m D:\Malware Samples\2019-09-04-malware-from-Ursnif-and-Trickbot-infection
+
+PeStudio:  evaluate unknown executable and even malware with no risk.
+```	
+
+### Threat inelligence 
+#### MISP threat sharing
+Available at https://github.com/MISP/MISP/tree/2.4/INSTALL 
+or at https://www.circl.lu/assets/files/misp-training/MISP_v2.4.77.ova
+
+#### Yara and Loki
+Yara is a set of rule againt IOC https://github.com/Yara-Rules/rules/ while Loki https://github.com/Neo23x0/Loki is a IOC scanner that can inegrate Yara rules

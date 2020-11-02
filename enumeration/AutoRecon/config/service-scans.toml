@@ -138,7 +138,7 @@ ignore-service-names = [
 
     [[http.scan]]
     name = 'ffuf'
-    command = '/opt/ffuf/ffuf -u {scheme}://{address}:{port}/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt  -e txt -ic  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_ffuf_directory-list-2.3-medium.txt"'
+    command = '/opt/ffuf/ffuf -u {scheme}://{address}:{port}/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt  -e txt,html -ic  2>&1 | tee "{scandir}/{protocol}_{port}_{scheme}_ffuf_directory-list-2.3-medium.txt"'
 
 
     [[http.manual]]

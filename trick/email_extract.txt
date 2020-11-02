@@ -1,1 +1,1 @@
-grep -iE -o "\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b" index.html
+grep -iE -o "\b[a-zA-Z0-9.-_]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b" index.html

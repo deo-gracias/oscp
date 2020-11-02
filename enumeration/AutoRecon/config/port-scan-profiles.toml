@@ -69,6 +69,6 @@
     [full-custom-port.nmap-full-tcp]
 
         [full-custom-port.nmap-full-tcp.service-detection]
-        command = 'nmap {nmap_extra} -A --osscan-guess --version-all -p 22,80,111,139,445,2049  -oN "{scandir}/_full_tcp_nmap.txt"  -oX "{scandir}/xml/_full_tcp_nmap.xml" {address}'
+        command = 'nmap {nmap_extra} -A --osscan-guess --version-all -p 53,88,135,139,445,3268,9389 -oN "{scandir}/_full_tcp_nmap.txt"  -oX "{scandir}/xml/_full_tcp_nmap.xml" {address}'
         pattern = '^(?P<port>\d+)\/(?P<protocol>(tcp|udp))(.*)open(\s*)(?P<service>[\w\-\/]+)(\s*)(.*)$'
 

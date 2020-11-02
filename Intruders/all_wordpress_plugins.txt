@@ -20,6 +20,7 @@
 /wp-content/plugins/ajax-category-dropdown
 /wp-content/plugins/ajaxgallery
 /wp-content/plugins/ajax-store-locator-wordpress_0
+/wp-content/plugins/akismet
 /wp-content/plugins/albo-pretorio-on-line
 /wp-content/plugins/alert-before-your-post
 /wp-content/plugins/all-in-one-event-calendar
@@ -48,6 +49,7 @@
 /wp-content/plugins/booking-calendar-contact-form
 /wp-content/plugins/bookx
 /wp-content/plugins/brandfolder
+/wp-content/plugins/bug
 /wp-content/plugins/cac-featured-content
 /wp-content/plugins/calculated-fields-form
 /wp-content/plugins/Calendar
@@ -63,6 +65,7 @@
 /wp-content/plugins/cforms2
 /wp-content/plugins/changing
 /wp-content/plugins/chenpress
+/wp-content/plugins/chopslider
 /wp-content/plugins/church-admin
 /wp-content/plugins/cimy-counter
 /wp-content/plugins/clickdesk-live-support-chat
@@ -74,6 +77,7 @@
 /wp-content/plugins/comment-rating
 /wp-content/plugins/community-events
 /wp-content/plugins/complete-gallery-manager
+/wp-content/plugins/contact-form-7
 /wp-content/plugins/contact-form-generator
 /wp-content/plugins/contact-form-wordpress
 /wp-content/plugins/contus-hd-flv-player
@@ -94,6 +98,7 @@
 /wp-content/plugins/custom-tables
 /wp-content/plugins/cysteme-finder
 /wp-content/plugins/daily-maui-photo-widget
+/wp-content/plugins/dar
 /wp-content/plugins/db-backup
 /wp-content/plugins/dir
 /wp-content/plugins/disclosure-policy-plugin
@@ -216,6 +221,7 @@
 /wp-content/plugins/mailchimp-subscribe-sm
 /wp-content/plugins/mail-masta
 /wp-content/plugins/mailz
+/wp-content/plugins/media-library-assistant
 /wp-content/plugins/media-library-categories
 /wp-content/plugins/meenews
 /wp-content/plugins/membership-simplified-for-oap-members-only
@@ -225,6 +231,7 @@
 /wp-content/plugins/mm-forms-community
 /wp-content/plugins/monsters-editor-10-for-wp-super-edit
 /wp-content/plugins/mukioplayer-for-wordpress
+/wp-content/plugins/multi-scheduler
 /wp-content/plugins/my-calendar
 /wp-content/plugins/myflash
 /wp-content/plugins/mystat
@@ -256,6 +263,7 @@
 /wp-content/plugins/pica-photo-gallery
 /wp-content/plugins/pictpress
 /wp-content/plugins/picturesurf-gallery
+/wp-content/plugins/PicUploader
 /wp-content/plugins/pie-register
 /wp-content/plugins/placester
 /wp-content/plugins/player
@@ -327,6 +335,7 @@
 /wp-content/plugins/simple-backup
 /wp-content/plugins/simple-download-button-shortcode
 /wp-content/plugins/simple-fields
+/wp-content/plugins/simple-file-list
 /wp-content/plugins/simple-forum
 /wp-content/plugins/simply-poll
 /wp-content/plugins/site-editor
@@ -365,6 +374,7 @@
 /wp-content/plugins/track-that-stat
 /wp-content/plugins/trafficanalyzer
 /wp-content/plugins/tune-library
+/wp-content/plugins/tutor
 /wp-content/plugins/ucan-post
 /wp-content/plugins/ultimate-product-catalogue
 /wp-content/plugins/ultimate-profile-builder
@@ -393,12 +403,14 @@
 /wp-content/plugins/without
 /wp-content/plugins/woocommerce
 /wp-content/plugins/woopra
+/wp-content/plugins/wordfence
 /wp-content/plugins/wordpress-donation-plugin-with-goals-and-paypal-ipn-by-nonprofitcmsorg
 /wp-content/plugins/wordpress-member-private-conversation
 /wp-content/plugins/wordpress-processing-embed
 /wp-content/plugins/wordtube
 /wp-content/plugins/work
 /wp-content/plugins/work-the-flow-file-upload
+/wp-content/plugins/worprees
 /wp-content/plugins/wp-add-mime-types
 /wp-content/plugins/wp-audio-gallery-playlist
 /wp-content/plugins/wp-automatic
@@ -458,6 +470,7 @@
 /wp-content/plugins/wp-safe-search
 /wp-content/plugins/wp-shopping-cart
 /wp-content/plugins/wpsite-background-takeover
+/wp-content/plugins/wp-sitemap-page
 /wp-content/plugins/wp-source-control
 /wp-content/plugins/wp-spamfree
 /wp-content/plugins/wpSS
