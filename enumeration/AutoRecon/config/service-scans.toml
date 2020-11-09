@@ -249,8 +249,15 @@ service-names = [
     [[kerberos.manual]]
     description = 'Kerberoasting: check users SPN'
     commands = [
-        'python opt/impacket/examples/GetUserSPNs.py "domain.name/username" -dc-ip {address}  2>&1 | tee "{scandir}/{protocol}_{port}_kerberoasting.txt"',
-        'python opt/impacket/examples/GetUserSPNs.py "domain.name/username" -dc-ip {address} -request 2>&1 | tee "{scandir}/{protocol}_{port}_kerberoasting.txt"'
+        'python3 /opt/impacket/examples/GetUserSPNs.py "domain.name/username" -dc-ip {address}  2>&1 | tee "{scandir}/{protocol}_{port}_kerberoasting.txt"',
+        'python3 /opt/impacket/examples/GetUserSPNs.py "domain.name/username" -dc-ip {address} -request 2>&1 | tee "{scandir}/{protocol}_{port}_kerberoasting.txt"'
+    ]
+
+     [[kerberos.manual]]
+    description = 'Windapsearch'
+    commands = [
+        'python3 /opt/windapsearch/windapsearch.py  -dc-ip {address}  -d domain.name -U --full 2>&1 | tee "{scandir}/{protocol}_{port}_windapsearch_full.txt"',
+        'python3 /opt/windapsearch/windapsearch.py  -dc-ip {address}  -d domain.name -U --full | grep -i Password 2>&1 | tee "{scandir}/{protocol}_{port}_windapsearch_short.txt"'
     ]
 
 [ldap]
@@ -265,7 +272,7 @@ service-names = [
 
     [[ldap.scan]]
     name = 'rcp_enumdomusers'
-    command = 'rpcclient -U "" -N 10.10.10.161 -c enumdomusers {address} 2>&1 | tee "{scandir}/enumdomusers.txt"'
+    command = 'rpcclient -U "" -N {address} -c enumdomusers 2>&1 | tee "{scandir}/enumdomusers.txt"'
     run_once = true
     ports.tcp = [139, 389, 445]
     ports.udp = [137]
@@ -279,7 +286,7 @@ service-names = [
 
     [[ldap.scan]]
     name = 'enum4linux_short'
-    command = 'enum4linux -a -M -l -d {address} | grep -i "user name\|Minimum password\|Local User\|Disk\|Domain Users" | sort -u 2>&1 | sort -u  | tee "{scandir}/enum4linux_short.txt"'
+    command = 'enum4linux -a -M -l -d {address} | grep -i "user name\|Minimum password\|Local User\|Disk\|Domain Users\|Threshold" | sort -u 2>&1 | sort -u  | tee "{scandir}/enum4linux_short.txt"'
     run_once = true
     ports.tcp = [139, 389, 445]
     ports.udp = [137]

