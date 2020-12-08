@@ -20,6 +20,11 @@ pattern create 2000 pattern create 2000 input
 #find offset
 pattern offset $pc
 
+
+#for 64 bit after run the pattern do 
+x/xg $rsp
+pattern offset 0x4141464141304141 #while 0x4141464141304141 is the value showed in the previous command
+
 pattern search
 
 #check if the stack is executable
