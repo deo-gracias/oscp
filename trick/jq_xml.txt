@@ -1,0 +1,3 @@
+curl -XPOST -S --data-binary '{"name":""}' http://10.10.10.179/api/getColleagues -H 'Content-Type: application/json'  | jq '.'[].name
+
+curl -XPOST -S --data-binary '{"name":""}' http://10.10.10.179/api/getColleagues -H 'Content-Type: application/json'  | jq '.'[].email | tr  -d '"'

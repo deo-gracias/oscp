@@ -1,0 +1,6 @@
+hashcat --example-hashes 
+
+hashcat -a 0 -m 10800 hashes /usr/share/wordlists/rockyou.txt
+
+for i in `hashcat --example-hashes | grep "HASH:" --colour=no -B 2 | awk -F ":" 'length($2) ==96 {print $0}'  | cut -d " " -f2`; do hashcat --example-hashes | grep --colour=no -F $i -B 2; done                                      1 ⚙
+

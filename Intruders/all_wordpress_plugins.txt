@@ -28,6 +28,7 @@
 /wp-content/plugins/allow-php-in-posts-and-pages
 /wp-content/plugins/all-video-gallery
 /wp-content/plugins/allwebmenus-wordpress-menu-plugin
+/wp-content/plugins/angwp
 /wp-content/plugins/annonces
 /wp-content/plugins/answer-my-question
 /wp-content/plugins/appointment-booking-calendar
@@ -45,6 +46,7 @@
 /wp-content/plugins/bbpress
 /wp-content/plugins/bezahlcode-generator
 /wp-content/plugins/boarddir
+/wp-content/plugins/boldgrid-backup
 /wp-content/plugins/booking
 /wp-content/plugins/booking-calendar-contact-form
 /wp-content/plugins/bookx
@@ -55,6 +57,7 @@
 /wp-content/plugins/Calendar
 /wp-content/plugins/Calendar-Script
 /wp-content/plugins/candidate-application-form
+/wp-content/plugins/canto
 /wp-content/plugins/cart66
 /wp-content/plugins/cart66-lite
 /wp-content/plugins/catalog
@@ -214,6 +217,7 @@
 /wp-content/plugins/like-dislike-counter-for-posts-pages-and-comments
 /wp-content/plugins/link-library
 /wp-content/plugins/lisl-last-image-slider
+/wp-content/plugins/litespeed-cache
 /wp-content/plugins/livesig
 /wp-content/plugins/localize-my-post
 /wp-content/plugins/lt
@@ -357,6 +361,7 @@
 /wp-content/plugins/spiffy
 /wp-content/plugins/st_newsletter
 /wp-content/plugins/store-locator-le
+/wp-content/plugins/super-forms
 /wp-content/plugins/taggator
 /wp-content/plugins/taggedalbums
 /wp-content/plugins/tagninja
@@ -422,6 +427,7 @@
 /wp-content/plugins/wp-business-intelligence
 /wp-content/plugins/wp-business-intelligence-lite
 /wp-content/plugins/wp-cal
+/wp-content/plugins/wp-colorbox
 /wp-content/plugins/wp-content
 /wp-content/plugins/wp-copysafe-pdf
 /wp-content/plugins/wp-cumulus
@@ -437,10 +443,12 @@
 /wp-content/plugins/wp-events-calendar
 /wp-content/plugins/wp-featured-post-with-thumbnail
 /wp-content/plugins/wp-filebase
+/wp-content/plugins/wp-file-manager
 /wp-content/plugins/wp-filemanager
 /wp-content/plugins/wp-file-upload
 /wp-content/plugins/wp-footnotes
 /wp-content/plugins/wp_footnotes_current_settings
+/wp-content/plugins/wpforms-lite
 /wp-content/plugins/wp-forum
 /wp-content/plugins/wpforum
 /wp-content/plugins/wp-glossary
