@@ -16,7 +16,7 @@ def format_text(title,item):
     return text
 
 
-pattern = re.compile("\$_(GET|POST|get|post)\[[\'\"](\w+)[\'\"]\]")
+pattern = re.compile("\$_(GET|POST|REQUEST|SESSION|COOKIE|get|post|request|session|cookie)\[[\'\"](\w+)[\'\"]\]")
 # strings = re.
 
 mysql_log_file = "/tmp/hello/log.txt"

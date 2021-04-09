@@ -299,26 +299,26 @@ for current_file in files_to_check.splitlines():
 
             if (parameter_method.upper() == 'GET'):
                 if not (parameter_var in get_var.keys()):
-                    get_var.update({parameter_var:parameter_var+"_"+complement+"_lfi.php"})
+                    get_var.update({parameter_var:parameter_var+"_"+complement+"'"})
                     file_object = open('/tmp/payload_req.txt', 'a')
                     file_object.write(parameter_var+"_"+complement+"'\n")
                     file_object.close()
 
             elif (parameter_method.upper() == 'POST'):
                 if not (parameter_var in post_var.keys()):
-                    post_var.update({parameter_var:parameter_var+"_"+complement+"_lfi.php"})
+                    post_var.update({parameter_var:parameter_var+"_"+complement+"'"})
                     file_object = open('/tmp/payload_req.txt', 'a')
                     file_object.write(parameter_var+"_"+complement+"'\n")
                     file_object.close()
 
             elif (parameter_method.upper() == 'SERVER' or parameter_method.upper() == 'SESSION' or parameter_method.upper() == 'COOKIE'):
                 if not (parameter_var in post_var.keys()):
-                    post_var.update({parameter_var:parameter_var+"_"+complement+"_lfi.php"})
+                    post_var.update({parameter_var:parameter_var+"_"+complement+"'"})
                     file_object = open('/tmp/payload_req.txt', 'a')
                     file_object.write(parameter_var+"_"+complement+"'\n")
                     file_object.close()
                 if not (parameter_var in get_var.keys()):
-                    get_var.update({parameter_var:parameter_var+"_"+complement+"_lfi.php"})
+                    get_var.update({parameter_var:parameter_var+"_"+complement+"'"})
                     file_object = open('/tmp/payload_req.txt', 'a')
                     file_object.write(parameter_var+"_"+complement+"'\n")
                     file_object.close()
@@ -367,4 +367,3 @@ for i, line in enumerate(open(mysql_log_file)):
         print('Found on line %s: %s' % (i+1, match.group()))
 
 
-#cat /usr/local/apache2/logs/error_log | grep -i "Failed opening" | grep -i lfi
