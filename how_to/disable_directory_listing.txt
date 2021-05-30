@@ -1,0 +1,22 @@
+#in /etc/site-availables/000default.conf
+<Directory /var/www/html>
+                Options Indexes FollowSymLinks
+                AllowOverride All
+                Require all granted
+
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+</Directory>
+
+
+#in the web directory
+# Disable index view
+Options -Indexes
+
+<Files "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
