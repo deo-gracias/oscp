@@ -107,7 +107,7 @@ function Get-OthersProcessStatistics
     $myuser = $env:UserName;
     $value_to_return = $false;
 
-    if ((Get-Acl $path_to_check).access -ErrorAction SilentlyContinue | ft | Out-String | findStr $myuser | Select-String -Pattern "Allow" |Select-String "(FullControl)|(Modify)|(Write)") {return $true;}
+    if ((Get-Acl $path_to_check).access | ft | Out-String | findStr $myuser | Select-String -Pattern "Allow" |Select-String "(FullControl)|(Modify)|(Write)") {return $true;}
 
     $groups = ([System.Security.Principal.WindowsIdentity]::GetCurrent().Groups).Value | foreach-Object{
       $objSID = New-Object System.Security.Principal.SecurityIdentifier ($_); 
