@@ -32,51 +32,51 @@ function Is-ThisNumeric ($Value) {
 
 function Get-NetworkStatistics($customparam1=" ", $customparam2=" ")
 {
-   $properties = 'Protocol','LocalAddress','LocalPort'
-   $properties += 'RemoteAddress','RemotePort','State','ProcessName','PID'
+ $properties = 'Protocol','LocalAddress','LocalPort'
+ $properties += 'RemoteAddress','RemotePort','State','ProcessName','PID'
 
-   netstat -ano |Select-String -Pattern '\s+(TCP|UDP)'  | Select-String $customparam1 | Select-String $customparam2 | ForEach-Object {
+ netstat -ano |Select-String -Pattern '\s+(TCP|UDP)'  | Select-String $customparam1 | Select-String $customparam2 | ForEach-Object {
 
-     $item = $_.line.split(" ",[System.StringSplitOptions]::RemoveEmptyEntries)
+   $item = $_.line.split(" ",[System.StringSplitOptions]::RemoveEmptyEntries)
 
-     if($item[1] -notmatch '^\[::')
+   if($item[1] -notmatch '^\[::')
+   {
+     if (($la = $item[1] -as [ipaddress]).AddressFamily -eq 'InterNetworkV6')
      {
-       if (($la = $item[1] -as [ipaddress]).AddressFamily -eq 'InterNetworkV6')
-       {
-         $localAddress = $la.IPAddressToString
-         $localPort = $item[1].split('\]:')[-1]
-     }
-     else
-     {
-         $localAddress = $item[1].split(':')[0]
-         $localPort = $item[1].split(':')[-1]
-     }
-
-     if (($ra = $item[2] -as [ipaddress]).AddressFamily -eq 'InterNetworkV6')
-     {
-         $remoteAddress = $ra.IPAddressToString
-         $remotePort = $item[2].split('\]:')[-1]
-     }
-     else
-     {
-         $remoteAddress = $item[2].split(':')[0]
-         $remotePort = $item[2].split(':')[-1]
-     }
-     $pn = (Get-Process -Id $item[-1] -ErrorAction SilentlyContinue).Name;
-     if ($pn |  Select-String -Pattern "svchost","System","lsass","wininit","services" -Notmatch){
-         New-Object PSObject -Property @{
-           PID = $item[-1]
-           ProcessName = (Get-Process -Id $item[-1] -ErrorAction SilentlyContinue).Name
-           Protocol = $item[0]
-           LocalAddress = $localAddress
-           LocalPort = $localPort
-           RemoteAddress =$remoteAddress
-           RemotePort = $remotePort
-           State = if($item[0] -eq 'tcp') {$item[3]} else {$null}
-           } |Select-Object -Property $properties
-       }
-
+       $localAddress = $la.IPAddressToString
+       $localPort = $item[1].split('\]:')[-1]
    }
+   else
+   {
+       $localAddress = $item[1].split(':')[0]
+       $localPort = $item[1].split(':')[-1]
+   }
+
+   if (($ra = $item[2] -as [ipaddress]).AddressFamily -eq 'InterNetworkV6')
+   {
+       $remoteAddress = $ra.IPAddressToString
+       $remotePort = $item[2].split('\]:')[-1]
+   }
+   else
+   {
+       $remoteAddress = $item[2].split(':')[0]
+       $remotePort = $item[2].split(':')[-1]
+   }
+   $pn = (Get-Process -Id $item[-1] -ErrorAction SilentlyContinue).Name;
+   if ($pn |  Select-String -Pattern "svchost","System","lsass","wininit","services" -Notmatch){
+       New-Object PSObject -Property @{
+         PID = $item[-1]
+         ProcessName = (Get-Process -Id $item[-1] -ErrorAction SilentlyContinue).Name
+         Protocol = $item[0]
+         LocalAddress = $localAddress
+         LocalPort = $localPort
+         RemoteAddress =$remoteAddress
+         RemotePort = $remotePort
+         State = if($item[0] -eq 'tcp') {$item[3]} else {$null}
+         } |Select-Object -Property $properties
+     }
+
+ }
 }
 }
 
@@ -339,19 +339,19 @@ function GetInsecuredPermissionInRegistry{
 
     print_output("Checking editabled item in HKLM:\SYSTEM\CurrentControlset")
     get-childitem HKLM:\SYSTEM\CurrentControlset | Select PSChildName | foreach-Object {
-       $current_path=Write-Output ("HKLM:\SYSTEM\CurrentControlset\"+$_.PSChildName);
-       if (IsWritable($current_path)) { Write-Output $current_path}
-   }
+     $current_path=Write-Output ("HKLM:\SYSTEM\CurrentControlset\"+$_.PSChildName);
+     if (IsWritable($current_path)) { Write-Output $current_path}
+ }
 
-   print_output("Checking editabled item in HKLM:\SYSTEM\CurrentControlset\Services")
-   get-childitem HKLM:\SYSTEM\CurrentControlset\Services | Select PSChildName | foreach-Object {
-       $current_path=Write-Output ("HKLM:\SYSTEM\CurrentControlset\Services\"+$_.PSChildName);
-       if (IsWritable($current_path)) { Write-Output $current_path}
-   }
+ print_output("Checking editabled item in HKLM:\SYSTEM\CurrentControlset\Services")
+ get-childitem HKLM:\SYSTEM\CurrentControlset\Services | Select PSChildName | foreach-Object {
+     $current_path=Write-Output ("HKLM:\SYSTEM\CurrentControlset\Services\"+$_.PSChildName);
+     if (IsWritable($current_path)) { Write-Output $current_path}
+ }
 
 
-   print_output("Services where executable is editable")
-   Get-WmiObject -Class win32_service -Property PathName  -ErrorAction SilentlyContinue | Where-Object {$_} | Select-Object PathName  | foreach-object {Write-output ($_.pathname.Substring(0, $_.pathname.IndexOf(".exe") + 4)) } | Select-Object -Unique | ForEach-Object{
+ print_output("Services where executable is editable")
+ Get-WmiObject -Class win32_service -Property PathName  -ErrorAction SilentlyContinue | Where-Object {$_} | Select-Object PathName  | foreach-object {Write-output ($_.pathname.Substring(0, $_.pathname.IndexOf(".exe") + 4)) } | Select-Object -Unique | ForEach-Object{
     $path = $_.replace('"','');
     if(IsWritable($path)) {Write-Output $path}
 }
@@ -369,17 +369,27 @@ function GetUnusualCDirectory{
   print_output("Listing unusual directory in C drive")
   Get-ChildItem "C:\" -Force| Where-Object {$_.Name -notmatch "Recycle" -and $_.Name -notmatch "Config.msi" -and $_.Name -notmatch "Documents and Settings" -and $_.Name -notmatch "Program files" -and $_.Name -notmatch "ProgramData" -and $_.Name -notmatch "Recovery" -and $_.Name -notmatch "System Volume Information" -and $_.Name -notmatch "Users" -and $_.Name -notmatch "Windows" -and $_.Name -notmatch "pagefile.sys" -and $_.Name -notmatch "swapfile.sys" -and $_.Name -notmatch "PerfLogs" -and $_.Name -notmatch "inetpub" -and $_.Name -notmatch "bootmgr"} -ErrorAction SilentlyContinue
 
+  print_output("Editable executable in unusual directory in C drive")
+  $unusual = Get-ChildItem "C:\" -Force| Where-Object {$_.Name -notmatch "Recycle" -and $_.Name -notmatch "Config.msi" -and $_.Name -notmatch "Documents and Settings" -and $_.Name -notmatch "Program files" -and $_.Name -notmatch "ProgramData" -and $_.Name -notmatch "Recovery" -and $_.Name -notmatch "System Volume Information" -and $_.Name -notmatch "Users" -and $_.Name -notmatch "Windows" -and $_.Name -notmatch "pagefile.sys" -and $_.Name -notmatch "swapfile.sys" -and $_.Name -notmatch "PerfLogs" -and $_.Name -notmatch "inetpub" -and $_.Name -notmatch "bootmgr"} -ErrorAction SilentlyContinue
+  $unusual | foreach-Object{
+   get-childitem ("C:\"+$_.Name) -recurse | where {$_.extension -eq ".exe" -or $_.extension -eq ".ps1" -or $_.extension -eq ".bat"} | Select-Object -Property FullName | foreach-Object {
+       #Write-Output ($_.FullName);
+       $current_path = $_.FullName
+       #Write-Output "Checking if $current_path is writable"
+       if (IsWritable($current_path)) { Write-Output ("$current_path is writable")}
+   }
+}
 }
 
 
 function GetExcutableFileInCProgram{
- print_output("Checking editabled item in C:\Program ")
-    get-childitem C:\Program* -recurse | where {$_.extension -eq ".exe"} | Select-Object -Property FullName | foreach-Object {
-     #Write-Output ($_.FullName);
-     $current_path = $_.FullName
-     #Write-Output "Checking if $current_path is writable"
-     if (IsWritable($current_path)) { Write-Output ("$current_path is writable")}
- }
+   print_output("Checking editabled item in C:\Program ")
+   get-childitem C:\Program* -recurse | where {$_.extension -eq ".exe" -or $_.extension -eq ".ps1" -or $_.extension -eq ".bat"} | Select-Object -Property FullName | foreach-Object {
+       #Write-Output ($_.FullName);
+       $current_path = $_.FullName
+       #Write-Output "Checking if $current_path is writable"
+       if (IsWritable($current_path)) { Write-Output ("$current_path is writable")}
+   }
 }
 
 function GetPotentialExploitableUserGroup {
@@ -405,26 +415,26 @@ function GetKernelExploits{
 }
 
 function GetInsecureServices{
-   print_output("Insecure services permissions")
-   $Services = Get-WmiObject -Class win32_service -ErrorAction SilentlyContinue | Where-Object {$_}
+ print_output("Insecure services permissions")
+ $Services = Get-WmiObject -Class win32_service -ErrorAction SilentlyContinue | Where-Object {$_}
 
-   if ($Services) {
-      ForEach ($Service in $Services){
+ if ($Services) {
+  ForEach ($Service in $Services){
 
-        # try to change error control of a service to its existing value
+    # try to change error control of a service to its existing value
 
-        $Result = sc.exe config $($Service.Name) error= $($Service.ErrorControl)
+    $Result = sc.exe config $($Service.Name) error= $($Service.ErrorControl)
 
-        # means the change was successful
-        if ($Result -contains "[SC] ChangeServiceConfig SUCCESS"){
-          $Out = New-Object PSObject 
-          $Out | Add-Member Noteproperty 'ServiceName' $Service.name
-          $Out | Add-Member Noteproperty 'Path' $Service.pathname
-          $Out | Add-Member Noteproperty 'StartName' $Service.startname
-          #$Out | Add-Member Noteproperty 'AbuseFunction' "Invoke-ServiceAbuse -ServiceName '$($Service.name)'"
-          $Out
-      }
+    # means the change was successful
+    if ($Result -contains "[SC] ChangeServiceConfig SUCCESS"){
+      $Out = New-Object PSObject 
+      $Out | Add-Member Noteproperty 'ServiceName' $Service.name
+      $Out | Add-Member Noteproperty 'Path' $Service.pathname
+      $Out | Add-Member Noteproperty 'StartName' $Service.startname
+      #$Out | Add-Member Noteproperty 'AbuseFunction' "Invoke-ServiceAbuse -ServiceName '$($Service.name)'"
+      $Out
   }
+}
 }
 }
 
