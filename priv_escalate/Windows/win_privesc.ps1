@@ -107,7 +107,7 @@ function Get-OthersProcessStatistics
     $myuser = $env:UserName;
     $value_to_return = $false;
 
-    if ((Get-Acl $path_to_check).access | ft | Out-String | findStr $myuser | Select-String -Pattern "Allow" |Select-String "(FullControl)|(Modify)|(Write)") {return $true;}
+    if ((Get-Acl $path_to_check).access -ErrorAction SilentlyContinue | ft | Out-String | findStr $myuser | Select-String -Pattern "Allow" |Select-String "(FullControl)|(Modify)|(Write)") {return $true;}
 
     $groups = ([System.Security.Principal.WindowsIdentity]::GetCurrent().Groups).Value | foreach-Object{
       $objSID = New-Object System.Security.Principal.SecurityIdentifier ($_); 
@@ -363,6 +363,11 @@ function GetInsecuredPermissionInRegistry{
 function GetWritableAutoStart{
     print_output("Editable Auto-Start program")
     wmic startup get command | where-Object {$_} | where {Test-Path ($_.Replace('"',''))} | where {IsWritable(($_.Replace('"','')))}
+
+    print_output("Check if C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp is writable")
+    if(IsWritable("C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp")){
+        write-output("Startup Program can be added in C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp as current user");
+    }    
 }
 
 function GetRunAs{
@@ -503,9 +508,10 @@ function GetAlternateDataStream{
   GetInstalledSoftwareInfo
   SearchSoftwareExploit
   GetTasksInfo
+  GetWritableAutoStart
   GetUnquotedServices
   GetInsecureServices
-  GetWritableAutoStart
+  
   GetExcutableFileInCProgram
   GetWSLINfo
   GetInsecuredPermissionInRegistry
