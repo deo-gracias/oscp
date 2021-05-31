@@ -360,6 +360,11 @@ function GetInsecuredPermissionInRegistry{
 }
 
 
+function GetWritableAutoStart{
+    print_output("Editable Auto-Start program")
+    wmic startup get command | where-Object {$_} | where {Test-Path ($_.Replace('"',''))} | where {IsWritable(($_.Replace('"','')))}
+}
+
 function GetRunAs{
   print_output("Checking Runas")
   cmdkey /list
@@ -500,6 +505,7 @@ function GetAlternateDataStream{
   GetTasksInfo
   GetUnquotedServices
   GetInsecureServices
+  GetWritableAutoStart
   GetExcutableFileInCProgram
   GetWSLINfo
   GetInsecuredPermissionInRegistry
