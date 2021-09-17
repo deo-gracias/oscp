@@ -1,0 +1,7 @@
+sshfs student@192.168.129.112:/home/student /mnt/sshmount
+
+sshfs -o allow_other student@192.168.129.112:/home/student /mnt/sshmount
+
+sshfs -o IdentityFile=~/.ssh/id_rsa student@192.168.129.112:/home/student /mnt/sshmount
+
+sudo sshfs -o allow_other,IdentityFile=~/.ssh/id_rsa student@192.168.129.112:/home/student /mnt/sshmount

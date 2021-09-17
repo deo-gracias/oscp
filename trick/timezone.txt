@@ -1,0 +1,15 @@
+#show current timezone (set timezone with the host one)
+
+timedatectl
+
+timedatectl list-timezones
+
+sudo timedatectl set-timezone <your_time_zone>
+
+sudo timedatectl set-local-rtc 0
+
+sudo timedatectl set-local-rtc 1
+
+sudo apt install systemd-timesyncd 
+
+sudo timedatectl set-ntp true

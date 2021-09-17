@@ -1,0 +1,3 @@
+echo "awae" | tr -d "\n" | od -An -t dC
+
+echo "aw;ae" | tr -d "\n" | od -An -t dC | tr " " "\n" | awk '{print "CHR(" $0 ")" }' | grep -v "CHR()" | tr "\n" '|' | sed "s/|/||/g"
