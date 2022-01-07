@@ -1,0 +1,17 @@
+#######TheDoc should be added (insert) as quick part #######
+
+
+
+Sub Document_Open()
+SubstitutePage
+End Sub
+
+Sub AutoOpen()
+SubstitutePage
+End Sub
+
+Sub SubstitutePage()
+ActiveDocument.Content.Select
+Selection.Delete
+ActiveDocument.AttachedTemplate.AutoTextEntries("TheDoc").Insert Where:=Selection.Range, RichText:=True
+End Sub
