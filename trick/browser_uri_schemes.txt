@@ -1,0 +1,6 @@
+file://
+chrome://
+ftp://
+mailto: 
+smb://
+irc://
