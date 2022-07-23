@@ -215,23 +215,25 @@ function GetNetworkInfo{
 }
 
 function LootingForInterrestingFile{
-    $c_dir = $ENV:UserProfile;
-    print_output("Looting for passwords in $c_dir")
-    try {
-      Set-Location -Path $c_dir  -ErrorAction SilentlyContinue
-  }
-  catch {}
-  findstr /SI /M 'user login pass pwd password key credential cred secret key'   *.xml *.ini *.txt | findStr /VI "^AppData"
-  cmd /c "dir /S /B *user* == *login* == *pass* == *pwd* == *key* == *secret* == *cred* == *vnc* == *.config*" | findStr /V "AppData"
+    
+  print_output("Looting for passwords in C Directory")
+    
+  Get-ChildItem -Path C:\ -File -Recurse -Exclude C:\Windows\* -Include '*.txt','*.xml','*.py','*.php','*.ps1','*.bat','*.config','*.aspx','*.asp','*.csv','*.htm','*.html','*.hta','*.vbs','*.vba','*.java' -ErrorAction SilentlyContinue |  Select-String -Pattern 'user*', 'login', 'pass*', 'pwd', 'key*', 'secret', 'cred*', 'vnc', 'config*'  -AllMatches -ErrorAction SilentlyContinue
+
+   
 
   print_output("Searching Password in   *unattended.xml *unattend.xml *unattend.txt *groups.xml, *confcons.xml")
-  Get-Childitem -Path C:\  -Force -Include *unattended.xml,*unattend.xml,*groups.xml,*unattend.txt*,conf*.xml -File -Recurse -ErrorAction SilentlyContinue |ForEach-Object { Get-Content  $_   |  Select-String -Pattern 'Password'  }
+  Get-Childitem -Path C:\  -Force -Include *unattended.xml,*unattend.xml,*groups.xml,*unattend.txt*,conf*.xml -File -Recurse -ErrorAction SilentlyContinue |  Select-String -Pattern 'Password'  
+
+  print_output("Checking for ssh key")
+  Get-ChildItem -Path C:\ -File -Include 'id_rsa','known_hosts' -Exclude 'C:\Windows\*' -Force -ErrorAction SilentlyContinue 
 
   #print_output("Checking IIS Web config")
   #Get-Childitem -Path C:\inetpub\ -Include web.config -File -Recurse -ErrorAction SilentlyContinue
 
-  #print_output("Checking content of C:\inetpub\wwwroot")
-  #Get-Childitem -Path C:\inetpub\wwwroot -ErrorAction SilentlyContinue
+  print_output("Checking content of C:\inetpub\wwwroot")
+  Get-Childitem -Path C:\inetpub\wwwroot -ErrorAction SilentlyContinue
+  
   #print_output("SNMP config")
   #Get-ChildItem -path HKLM:\SYSTEM\CurrentControlSet\Services\SNMP -Recurse -ErrorAction SilentlyContinue
 

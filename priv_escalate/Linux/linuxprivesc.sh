@@ -667,6 +667,44 @@ echo ""
 
 grep "PermitRootLogin " /etc/ssh/sshd_config 2>/dev/null | grep -v "#"
 
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking control master file of ssh"
+echo "#####################################################"
+echo ""
+echo ""
+
+find /home -name config -type f 2> /dev/null
+find /root -name config -type f 2> /dev/null
+
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking id_rsa and known_hosts"
+echo "#####################################################"
+echo ""
+echo ""
+
+find /home -name id_rsa -type f 2> /dev/null
+find /root -name id_rsa -type f 2> /dev/null
+
+find /home -name known_hosts -type f 2> /dev/null
+find /root -name known_hosts -type f 2> /dev/null
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking ansible installation"
+echo "#####################################################"
+echo ""
+echo ""
+
+cat /etc/ansible/hosts 2> /dev/null | grep -v "^#" | grep  -v -e '^$'
+
+
 echo ""
 echo ""
 echo "#####################################################"
