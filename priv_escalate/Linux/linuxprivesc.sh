@@ -697,10 +697,34 @@ find /root -name known_hosts -type f 2> /dev/null
 echo ""
 echo ""
 echo "#####################################################"
+echo "Checking Kerberos configuration"
+echo "#####################################################"
+echo ""
+echo ""
+
+find /etc -name "krb5.conf" 2> /dev/null
+find / -name "*.keytab" 2> /dev/null
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking CC cache file "
+echo "#####################################################"
+echo ""
+echo ""
+
+find /tmp -name "krb5cc*" 2> /dev/null
+
+
+echo ""
+echo ""
+echo "#####################################################"
 echo "Checking ansible installation"
 echo "#####################################################"
 echo ""
 echo ""
+
+ansible -h 2> /dev/null && echo "Ansible is installed" || echo "Ansible is not installed" 
 
 cat /etc/ansible/hosts 2> /dev/null | grep -v "^#" | grep  -v -e '^$'
 

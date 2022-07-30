@@ -150,6 +150,9 @@ function GetSystemInfo{
       print_output("Checking computer information")
       net accounts
 
+      print_output("Checking Integrity Level")
+      whoami /groups | findstr 'Label'
+
   }
 
 
@@ -218,7 +221,9 @@ function LootingForInterrestingFile{
     
   print_output("Looting for passwords in C Directory")
     
-  Get-ChildItem -Path C:\ -File -Recurse -Exclude C:\Windows\* -Include '*.txt','*.xml','*.py','*.php','*.ps1','*.bat','*.config','*.aspx','*.asp','*.csv','*.htm','*.html','*.hta','*.vbs','*.vba','*.java' -ErrorAction SilentlyContinue |  Select-String -Pattern 'user*', 'login', 'pass*', 'pwd', 'key*', 'secret', 'cred*', 'vnc', 'config*'  -AllMatches -ErrorAction SilentlyContinue
+  Get-ChildItem -Path C:\ | Where-Object{$_.Name -ne "Windows" -and  $_.Name -ne "Program Files" -and $_.Name -ne "Program Files (x86)"} | ForEach-Object{ Get-ChildItem -Path $_.FullName -Recurse -File  -Include '*.txt','*.py','*.php','*.ps1','*.bat','*.config','*.aspx','*.asp','*.csv','*.hta','*.vbs','*.vba','*.java' -ErrorAction SilentlyContinue  | Select-String -Pattern 'user', 'login', 'pass', 'pwd', 'psw', 'database', 'secret', 'password', 'vnc'  -AllMatches -ErrorAction SilentlyContinue | Select-Object -Unique Path }
+  Get-ChildItem -Path "C:\Program Files" | Where-Object{$_.Name -ne "Common Files" -and  $_.Name -ne "internet explorer" -and $_.Name -NotLike "Microsoft*" -and $_.Name -ne "VMware" -and $_.Name -NotLike "Windows*"} | ForEach-Object{ Get-ChildItem -Path $_.FullName -Recurse -File  -Include '*.txt','*.py','*.php','*.ps1','*.bat','*.config','*.aspx','*.asp','*.csv','*.hta','*.vbs','*.vba','*.java' -ErrorAction SilentlyContinue  | Select-String -Pattern 'user', 'login', 'pass', 'pwd', 'psw', 'database', 'secret', 'password', 'vnc'  -AllMatches -ErrorAction SilentlyContinue | Select-Object -Unique Path }
+  Get-ChildItem -Path "C:\Program Files (x86)" | Where-Object{$_.Name -ne "Common Files" -and  $_.Name -ne "internet explorer" -and $_.Name -NotLike "Microsoft*" -and $_.Name -ne "VMware" -and $_.Name -NotLike "Windows*"} | ForEach-Object{ Get-ChildItem -Path $_.FullName -Recurse -File  -Include '*.txt','*.py','*.php','*.ps1','*.bat','*.config','*.aspx','*.asp','*.csv','*.hta','*.vbs','*.vba','*.java' -ErrorAction SilentlyContinue  | Select-String -Pattern 'user', 'login', 'pass', 'pwd', 'psw', 'database', 'secret', 'password', 'vnc'  -AllMatches -ErrorAction SilentlyContinue | Select-Object -Unique Path }
 
    
 
@@ -226,8 +231,8 @@ function LootingForInterrestingFile{
   Get-Childitem -Path C:\  -Force -Include *unattended.xml,*unattend.xml,*groups.xml,*unattend.txt*,conf*.xml -File -Recurse -ErrorAction SilentlyContinue |  Select-String -Pattern 'Password'  
 
   print_output("Checking for ssh key")
-  Get-ChildItem -Path C:\ -File -Include 'id_rsa','known_hosts' -Exclude 'C:\Windows\*' -Force -ErrorAction SilentlyContinue 
-
+  Get-ChildItem -Path C:\ | Where-Object{$_.Name -ne "Windows" } | ForEach-Object{ Get-ChildItem -Path $_.FullName -Recurse -File  -Include 'id_rsa','known_hosts'  -Force -ErrorAction SilentlyContinue }
+  
   #print_output("Checking IIS Web config")
   #Get-Childitem -Path C:\inetpub\ -Include web.config -File -Recurse -ErrorAction SilentlyContinue
 
@@ -303,7 +308,8 @@ function SearchSoftwareExploit{
 
 function GetTasksInfo{
     print_output("Scheduled tasks")
-    Get-ScheduledTask -ErrorAction SilentlyContinue | where {$_.TaskPath -notlike "\Microsoft*"} | ft TaskName,TaskPath,State 
+    Get-ScheduledTask -ErrorAction SilentlyContinue | where {$_.TaskPath -notlike "\Microsoft*"} | ForEach-Object{  ls  ("C:\Windows\system32\Tasks\"+$_.TaskName) ;  }
+
 
     print_output("Startup tasks")
     cmd /c wmic startup get caption,command
