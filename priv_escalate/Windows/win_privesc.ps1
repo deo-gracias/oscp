@@ -340,6 +340,15 @@ function GetWSLINfo{
 
 }
 
+function GetWSUS{
+    print_output("Checking WSUS (WindowsUpdate should use http instead of https and UseWUServer should be 1 is vulnerable) ")
+     
+    Get-ItemProperty -Path HKLM:Software\Policies\Microsoft\Windows\WindowsUpdate  -Name  WUServer -ErrorAction SilentlyContinue  | select WUServer 
+
+    Get-ItemProperty -Path  "HKLM:Software\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name UseWUServer -ErrorAction SilentlyContinue  | select UseWUServer
+
+}
+
 function GetInsecuredPermissionInRegistry{
     print_output("Checking AlwaysInstallElevated in registry")
     Get-ItemProperty -Path "HKLM:SOFTWARE\Policies\Microsoft\Windows\Installer" -Name AlwaysInstallElevated -ErrorAction SilentlyContinue
@@ -528,6 +537,7 @@ function GetAlternateDataStream{
   
   GetExcutableFileInCProgram
   GetWSLINfo
+  GetWSUS
   GetInsecuredPermissionInRegistry
   CheckPathDLLHijack
   GetRunAs

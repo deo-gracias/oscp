@@ -4,6 +4,13 @@ redis-cli -h 10.10.10.160 -p 6379 info
 
 redis-cli -h 10.10.10.160 -p 6379 config get dir
 
+==================
+= Authentication =
+==================
+redis-cli -h 10.10.11.172 -p 6380 
+AUTH F2WHqJUz2WEz=Gqq 
+
+
 ================
 = Get-Webshell =
 ================

