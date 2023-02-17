@@ -11,7 +11,7 @@ rm /tmp/test/*
 
 apt install exploitdb
 
-searchsploit --color Wordpress | grep -i plugin | awk -F "webapps/" '{print $2}' | cut -d "." -f1 > /tmp/test/ids.txt
+searchsploit --disable-colour Wordpress | grep -i plugin | awk -F "webapps/" '{print $2}' | cut -d "." -f1 > /tmp/test/ids.txt
 
 for i in $(cat /tmp/test/ids.txt)
 do 

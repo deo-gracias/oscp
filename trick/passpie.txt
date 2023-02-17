@@ -1,0 +1,2 @@
+passpie
+passpie copy root@ssh --to stdout

@@ -10,6 +10,10 @@
 (ssh2john located in /usr/share/john/ssh2john.py)
 /usr/share/john/ssh2john.py ~/.ssh/id_rsa > id_rsa.hash
 
+##gpg key
+gpg2john gpg_private_keys.txt > john_hash.txt 
+john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa.hash
+
 #Keepass2 database
 apt-get install -y kpcli
 /usr/sbin/keepass2john newdb.kdb > newdb.kdb.hash
