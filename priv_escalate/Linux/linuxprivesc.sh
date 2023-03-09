@@ -643,6 +643,18 @@ do
         echo -e "$user\n" |  su -c 'whoami' $user 2> /dev/null
 done
 
+
+echo ""
+echo ""
+echo "#####################################################"
+echo "Checking snmp config file"
+echo "#####################################################"
+echo ""
+echo ""
+
+find / -name "snmpd.conf" -type f 2> /dev/null
+
+
 echo ""
 echo ""
 echo "#####################################################"

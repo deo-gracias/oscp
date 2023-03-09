@@ -294,6 +294,13 @@ service-names = [
     ports.tcp = [139, 389, 445]
     ports.udp = [137]
 
+    [[ldap.scan]]
+    name = 'crackmapexec_ldap'
+    command = 'crackmapexec ldap {address} | tee "{scandir}/crackmapexec_ldap.txt"'
+    run_once = true
+    ports.tcp = [139, 389, 445]
+    ports.udp = [137]
+
     [[ldap.manual]]
     description = 'Get AD Users (should be edited first)'
     commands = [
@@ -616,8 +623,20 @@ service-names = [
     ports.udp = [161]
 
     [[snmp.scan]]
+    name = 'snmp-brute'
+    command = 'python2.7 /home/deo-gracias/Documents/Pentest/enumeration/SNMP-Brute/snmpbrute2.7.py -f /usr/share/seclists/Discovery/SNMP/common-snmp-community-strings-onesixtyone.txt -b  -t  {address} 2>&1 | tee "{scandir}/{protocol}_{port}_snmp_brute.txt"'
+    run_once = true
+    ports.udp = [161]
+
+    [[snmp.scan]]
     name = 'snmpwalk'
     command = 'snmpwalk -c public -v 1 {address} 2>&1 | tee "{scandir}/{protocol}_{port}_snmp_snmpwalk.txt"'
+    run_once = true
+    ports.udp = [161]
+
+    [[snmp.scan]]
+    name = 'snmpwalk_v2'
+    command = 'snmpwalk -c public -v 2c {address} 2>&1 | tee "{scandir}/{protocol}_{port}_snmp_v2_snmpwalk.txt"'
     run_once = true
     ports.udp = [161]
 

