@@ -1,4 +1,8 @@
 # OSDA 
+
+## ToDo
+- https://portal.offsec.com/courses/soc-200/books-and-videos/modal/modules/windows-server-side-attacks/web-application-attacks/extra-mile
+
 ## Example of .bat file
 ```
 @ECHO OFF
@@ -192,14 +196,28 @@ Get-SysmonEvent $null "05/10/2021 16:02:00" "5/10/2021 16:03:00"
 ```
 
 ### File upload
-Extract from Sysmon the name of the Rule (index 0), the Image (index 4) and Process ID (index 3) of the process that performed the creation, and the destination of the newly-created file (index 5):
+Extract from Sysmon (File create) the name of the Rule (index 0), the Image (index 4) and Process ID (index 3) of the process that performed the creation, and the destination of the newly-created file (index 5):
 ```
 Get-SysmonEvent 11 "05/12/2021 12:48:50" "05/12/2021 12:48:52" | Format-List @{Label = "Rule"; Expression = {$_.properties[0].value}}, @{Label = "PID"; Expression = {$_.properties[3].value}},@{Label = "Image"; Expression = {$_.properties[4].value}}, @{Label = "TargetFile"; Expression = {$_.properties[5].value}}
 ```
-## Dectection method to implement
+Extract from Sysmon (ProcessCreate events), the Process ID (PID) and the Parent Process ID (PPID).
+```
+Get-SysmonEvent 1 "5/13/2021 14:26:17" "5/13/2021 14:26:19" | Format-List TimeCreated, @{Label = "PID"; Expression = {$_.properties[3].value}}, @{Label = "PPID"; Expression = {$_.properties[19].value}}, @{Label = "CommandLine"; Expression = {$_.properties[10].value}}, @{Label = "User"; Expression = {$_.properties[12].value}}, @{Label = "ParentImage"; Expression = {$_.properties[20].value}}
+```
+Extract from Sysmon, NetworkConnect with PID, Image, User, Source and Destination IPs, along with the Source and Destination Ports of our network traffic.
+```
+Get-SysmonEvent 3 "5/13/2021 2:26:18" "5/13/2021 2:26:20" | Format-List @{Label = "PID"; Expression = {$_.properties[3].value}}, @{Label = "Image"; Expression = {$_.properties[4].value}}, @{Label = "User"; Expression = {$_.properties[5].value}}, @{Label = "Source IP"; Expression = {$_.properties[9].value}}, @{Label = "Source Port"; Expression = {$_.properties[11].value}}, @{Label = "Destination IP"; Expression = {$_.properties[14].value}}, @{Label = "Destination Port"; Expression = {$_.properties[16].value}}
+```
+
+## Binary exploitation
+
+
+# Dectection method to implement
 - filter every ip address 
 - check number of event per ip
 - Build a list of event ID and description 
 - Same for Sysmon ID and Description (already integrated)
 - Matching process ID and parent process ID
 - Connect from sysmon ; do the stats of all remote ip address (number of connexion per IP address) 
+- Check where ParentImage is C:\Windows\SysWOW64\cmd.exe or ends with cmd.exe (1) with NT AUTHORITY\IUSR user (2)
+
