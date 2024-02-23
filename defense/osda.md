@@ -210,8 +210,65 @@ Get-SysmonEvent 3 "5/13/2021 2:26:18" "5/13/2021 2:26:20" | Format-List @{Label 
 ```
 
 ## Binary exploitation
+Within 10 sec of the exploit
+```
+Get-SysmonEvent $null "05/21/2021 14:50:34" "05/21/2021 14:50:44"
+
+#Process create
+Get-SysmonEvent 1 "05/21/2021 14:50:39" "05/21/2021 14:50:41" | Format-List TimeCreated, @{Label = "PID"; Expression = {$_.properties[3].value}}, @{Label = "PPID"; Expression = {$_.properties[19].value}}, @{Label = "CommandLine"; Expression = {$_.properties[10].value}}, @{Label = "User"; Expression = {$_.properties[12].value}}, @{Label = "ParentImage"; Expression = {$_.properties[20].value}}
+
+#Network
+Get-SysmonEvent 3 "05/21/2021 14:50:38" "5/21/2021 14:50:44" | Format-List TimeCreated, @{Label = "Image"; Expression = {$_.properties[4].value}}, @{Label = "Source IP"; Expression = {$_.properties[9].value}}, @{Label = "Source Port"; Expression = {$_.properties[11].value}}, @{Label = "Destination IP"; Expression = {$_.properties[14].value}}, @{Label = "Destination Port"; Expression = {$_.properties[16].value}}
+```
+
+### Windows Defender Exploit Guard (WDEG)
+Event regarding blocking due to WDEG
+```
+Get-WinEvent -FilterHashTable @{LogName = 'Microsoft-Windows-Security-Mitigations/UserMode'; StartTime = '5/25/2021 13:42:28'; EndTime = '5/25/2021 13:42:30'} | Format-List -Property Id, TimeCreated, LevelDisplayName, Message
+
+#Remove remove SyncBreeze configuration
+Remove-Item -Path 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\syncbrs.exe'
+```
+
+## Windows client-side attacks
+to be implemented 
+- Get-SysmonEvent 1 where Image contains powershell.exe; CommandLine contains powershell.exe; ParentImage contains Microsoft Office (or office365)
+- process where CommandLine: starts with "powershell.exe"
+
+for IOC
+- FileCreate (11) event that follows the ProcessCreate event using the same timeframe where TargetFilename is like C:\Users\*\AppData\Local\Temp\*.ps1
+
+DNS (Event ID "22") 
+- filter on QueryName, QueryResults # QueryName: kali ;  QueryResults: ::ffff:192.168.*.*;
+
+Next filter on IP found in the DNS event above
+```
+Get-SysmonEvent 3 "6/17/2021 15:10:41" "6/17/2021 15:11:00" | Where-Object { $_.properties[14].value -eq "192.168.51.50" } | Format-List
+```
+
+## Monitoring Windows PowerShell
+To configure different parts of PowerShell logging, launch the Local Group Policy Editor, gpedit.msc, and navigate to Local Computer Policy > Computer Configuration > Administrative Templates > Windows Components > Windows PowerShell.
+
+### PowerShell Module Logging
+```
+Get-WinEvent -FilterHashtable @{Logname='Microsoft-Windows-PowerShell/Operational'; StartTime="6/14/2021 13:25:52"; EndTime="6/14/2021 13:25:54"; ID=4103}
+
+Get-WinEvent -FilterHashtable @{Logname='Microsoft-Windows-PowerShell/Operational'; StartTime="6/14/2021 13:25:52"; EndTime="6/14/2021 13:25:54"; ID=4103} | Format-List
+```
+
+### PowerShell Script Block Logging
+```
+Get-WinEvent -FilterHashtable @{Logname='Microsoft-Windows-PowerShell/Operational'; StartTime="06/15/2021 14:49:42"; EndTime="06/15/2021 14:49:44"; ID=4104} | Format-List
+```
+
+### PowerShell Transcription
+```
+Get-CimInstance Win32_ComputerSystem | Select-Object -Property Name, PrimaryOwnerName, Domain, TotalPhysicalMemory, Model, Manufacturer
+```
 
 
+
+Log are stored in C:\Users\offsec\Documents\YYYYMMDD using PowerShell_transcript.HOSTNAME.UNIQUEID.YYYYMMDDHHMMSS.txt format
 # Dectection method to implement
 - filter every ip address 
 - check number of event per ip
@@ -220,4 +277,7 @@ Get-SysmonEvent 3 "5/13/2021 2:26:18" "5/13/2021 2:26:20" | Format-List @{Label 
 - Matching process ID and parent process ID
 - Connect from sysmon ; do the stats of all remote ip address (number of connexion per IP address) 
 - Check where ParentImage is C:\Windows\SysWOW64\cmd.exe or ends with cmd.exe (1) with NT AUTHORITY\IUSR user (2)
+- Process: Where CommandLine is cmd and ParentImage between "C:\Program Files" (and optional) user is NT AUTHORITY\SYSTEM
+- Process: C:\Windows\SysWOW64\cmd.exe or powershell run by NT AUTHORITY\SYSTEM; get the PID and search for all process having its PID as PPID
+- Network: source - dest where image is in "C:\Program Files (x86)\Sync" or not in C:\Windows
 
