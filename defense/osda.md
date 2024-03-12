@@ -10,6 +10,7 @@
 - https://portal.offsec.com/courses/soc-200/books-and-videos/modal/modules/linux-server-side-attacks/web-application-attacks/extra-mile-iv
 - https://portal.offsec.com/courses/soc-200/books-and-videos/modal/modules/linux-privilege-escalation/attacking-the-system/extra-mile-i
 - https://portal.offsec.com/courses/soc-200/books-and-videos/modal/modules/linux-privilege-escalation/attacking-the-system/extra-mile-ii
+- Grab all ps1 script
 
 ## Example of .bat file
 ```
@@ -81,6 +82,7 @@ Below is a mapping of the first nine array indices for the tags and values of Ev
 **LogonType**
 03 => Network-Level Authentication (NLA)
 10 => Remote Desktop Services (RDP)
+09 => NewCredentials (when a new session is established with the same local identity as the initiator, but uses a different identity for network connections)
 ```
 Get-WinEvent -FilterHashTable @{LogName='Security'; StartTime="4/23/2021 00:00:00"; EndTime="4/26/2021 07:00:00"; ID=4624 } | Where-Object { $_.properties[8].value -eq 10 } | Format-List
 ```
@@ -184,9 +186,23 @@ Get-Module
 4625 => Fail Logon 
 4634 => Log OFF
 4697 => Service was installed
+7045 => A new service was created on the local Windows machine
+7036 => A service starts successfully
 4104 => PowerShell script block
 1116 => MALWAREPROTECTION_STATE_MALWARE_DETECTED
 1117 => MALWAREPROTECTION_STATE_MALWARE_ACTION_TAKEN
+4662 => An operation was performed on an object
+4740 => A lockout is triggered
+4625 => Failled operation due to lockout 
+4768 => KDC issues TGT
+4769 => KDC issues TG4728 => A member was added to a security-enabled global group
+#Account management
+4729 => A member was removed from a security-enabled global group
+4732 => A member was added to a security-enabled local group
+4733 => A member was removed from a security-enabled local group
+4756 => A member was added to a security-enabled universal group
+4757 => A member was removed from a security-enabled universal group
+
 ## Status & SubStatus code
 C000006D (Status) => bad username or authentication information
 C000006A (SubStatus) => bad username or authentication information
@@ -196,6 +212,7 @@ C000006A (SubStatus) => bad username or authentication information
 3 =>  Network connection
 11 => File created
 13 => RegistryEvent 
+10 => ProcessAccess
 
 ## Brute Force detection
 ```
@@ -480,7 +497,7 @@ sudo ausearch -k root_cmds -i -x bash
 sudo auditctl -w /home/offsec/SOC-200/Linux_Privilege_Escalation/cron_scripts/ -p wa -k cron_scripts
 sudo ausearch -k cron_scripts -i
 
-sudo auditctl -w /etc/shadow -p war -k etc_shadow
+sudo auditctl -w /etc/shadow -p  war -k etc_shadow
 sudo ausearch -k etc_shadow -c cat -i
 ```
 
@@ -521,13 +538,514 @@ Get-WDLogEvent 1117 "12/2/2021 11:08:07" "12/2/2021 11:08:09" | Format-List
 Local Computer Policy > Computer Configuration then Administrative Templates > Windows Components > Microsoft Defender Antivirus > Real-time Protection
 
 Disable *Turn off real-time protection* setting
+**This will generate a configuration change with Event ID 5007. The HKLM\SOFTWARE\Microsoft\Windows Defender\Features\TamperProtection key in the Windows Registry will change from 0x0 to 0x1.**
 
 - Detect AMSI byspass
 ```
 Get-PSLogEvent 4104 "12/22/2021 8:41:24" "12/22/2021 8:41:26" | Where-Object { $_.LevelDisplayName -eq "Warning" } | Format-List
 ```
 
-**This will generate a configuration change with Event ID 5007. The HKLM\SOFTWARE\Microsoft\Windows Defender\Features\TamperProtection key in the Windows Registry will change from 0x0 to 0x1.**
+## Port forwarding 
+```
+netsh interface portproxy add v4tov4 listenport=21 listenaddress=172.16.50.11 connectport=3306 connectaddress=172.16.50.12
+netsh advfirewall firewall add rule name="forward_port_rule" protocol=TCP dir=in localip=172.16.50.11 localport=21 action=allow
+
+netsh interface portproxy show v4tov4
+
+#Get WinEvent
+Get-WinEvent -FilterHashtable @{LogName = 'Microsoft-Windows-Windows Firewall With Advanced Security/Firewall'} -MaxEvents 20
+Get-NetFirewallRule -Direction Inbound | Select-Object -Property DisplayName,Profile,Enabled | Where { $_.Enabled -eq 'True'}
+Get-NetFirewallRule -DisplayName "forward_port_rule"
+Get-NetFirewallRule -DisplayName "forward_port_rule" | Get-NetFirewallPortFilter
+
+echo y | plink.exe -ssh -N -l kali -pw toor -R 192.168.48.2:1234:127.0.0.1:445 192.168.48.2 
+Get-SysmonEvent | Where-Object { $_.Message -like "*plink*" }
+Get-SysmonEvent 1 "1/31/2022 11:46:12" "2/1/2022 12:02:39" | Where-Object { $_.Message -like "*plink*" } | Format-List
+```
+
+## Active Directory Enumeration 
+- Interacting with LDAP
+```
+$Searcher = New-Object System.DirectoryServices.DirectorySearcher
+$Searcher.Filter = '(distinguishedName=CN=DC-2,OU=Domain Controllers,DC=corp,DC=com)'
+$Searcher.FindOne()
+
+$Searcher = New-Object System.DirectoryServices.DirectorySearcher
+$Searcher.Filter = '(distinguishedName=CN=DC-2,OU=Domain Controllers,DC=corp,DC=com)'
+$Searcher.FindAll()
+
+$Searcher = New-Object System.DirectoryServices.DirectorySearcher
+$Searcher.SearchRoot = New-Object System.DirectoryServices.DirectoryEntry("LDAP://DC=corp,DC=com", 'corp\jdoe','Qwerty09!')
+$Searcher.Filter = '(&(objectClass=computer)(cn=*dc*))'
+$Searcher.FindAll()
+```
+- Detecting Active Directory Enumeration
+```
+auditpol /list /category
+auditpol /list /subcategory:*
+auditpol /get /category:"Logon/Logoff"
+auditpol /get /subcategory:"Directory Service Access"
+```
+- Configure the audit settings for individual objects:
+Open Active Directory Users and Computers (ADUC) with `dsa.msc`, expand the domain root, navigate to Domain Controllers and right click DC-2 to select Properties.
+With the Properties window open, select Security and click Advanced on the bottom left.
+Finally, with the Advanced Security Settings window open, click on the Auditing tab.
+
+Click on Add to create a new auditing policy
+Use the Everyone security principal, which is all encompassing. Clicking Select a principal and entering "Everyone".
+
+Event related to this ("An operation was performed on an object") will be accessible via event ID 4662 under the security log.
+
+### Baseline Monitoring with XPath filters
+If we want to enumerate access to Domain Admins group performed by offsec user:
+```
+Function Get-GuidName ($Guid) {
+    Begin {
+        $ObjectTable = @{
+            '%{0ca1d341-b9ee-4d46-ab3b-3a2732aa4b51}' = 'Domain Admins'
+        }
+    }
+    Process {
+        $Value = $ObjectTable[$Guid]
+        If (!$Value) {
+            $Value = $Guid
+        }
+    }
+    End {
+        return $Value
+    }
+}
+
+Function Get-AccessName ($AccessMask) {
+    Begin {
+        $AccessTable = @{
+            '0x10' = 'Read Property'
+            '0x20000' = 'READ_CONTROL'
+        }
+    }
+    Process {
+        $Value = $AccessTable[$AccessMask]
+        If (!$Value) {
+            $Value = $AccessMask
+        }
+    }
+    End {
+        return $Value
+    }
+}
+
+$FilterXML = @'
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+     *[System[(EventID=4662)]] and *[EventData[(Data[@Name='SubjectUserSid']='S-1-5-21-2154860315-1826001137-329834519-1107')]] and *[EventData[(Data[@Name='ObjectName']='%{0ca1d341-b9ee-4d46-ab3b-3a2732aa4b51}')]] and *[EventData[(Data[@Name='OperationType']='Object Access')]]
+   </Select>
+  </Query>
+</QueryList>
+'@
+
+$Logs = Get-WinEvent -LogName Security -FilterXPath $FilterXML
+ForEach ($L in $Logs) {
+   [xml]$XML = $L.toXml()
+   $TimeStamp = $XML.Event.System.TimeCreated.SystemTime
+   $SubjectUserName = $XML.Event.EventData.Data[1].'#text'
+   $ObjectName = $XML.Event.EventData.Data[6].'#text'
+   $AccessMask = $XML.Event.EventData.Data[10].'#text'
+   [PSCustomObject]@{'TimeStamp' = $TimeStamp; 'SubjectUserName' = $SubjectUserName; 'ObjectName' = $ObjectName; 'AccessMask' = $AccessMask }
+}
+```
+This filter will query the security log for all 4662 event IDs and only return results in which the SubjectUserSid value is that of  offsec account, the ObjectName is the ObjectGUID of  Domain Admins group, and the OperationType is Object Access.
+
+The following XPATH query list can be used to enumerate access to Domain Admins group **performed by user different of offsec**:
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+     *[System[(EventID=4662)]] and 
+     *[EventData[(Data[@Name='ObjectName']='%{0ca1d341-b9ee-4d46-ab3b-3a2732aa4b51}')]] and
+     *[EventData[(Data[@Name='OperationType']='Object Access')]]
+     </Select>
+   <Suppress Path="Security">
+    *[EventData[(Data[@Name='SubjectUserSid']='S-1-5-21-2154860315-1826001137-329834519-1107')]]
+   </Suppress>
+  </Query>
+</QueryList>
+```
+
+Another example can be the following where the expected guid is listed
+```
+$FilterXML = @'
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+     *[System[(EventID=4662)]] and 
+     *[EventData[(Data[@Name='OperationType']='Object Access')]] and
+     *[EventData[Data[@Name='ObjectName'] and 
+     (Data='%{a11236c4-e6ae-4dc7-ad58-92b6b6b5f83d}' or 
+     Data='%{a1a88fa6-e570-4520-9b21-6bad8483979b}' or 
+     Data='%{6e1648e7-b100-4bdf-b497-7061e8d7a068}' or 
+     Data='%{74215987-5fa5-4e36-b4d2-c9fdc5fca747}' or 
+     Data='%{c2e86461-de97-4ef5-881c-e6ccfb97df5d}' or    
+     Data='%{02f71039-cf2c-47a8-aeeb-ff257851f149}')]]
+   </Select>
+  </Query>
+</QueryList>
+'@
+```
+Login with NTLM
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[(EventID=4624)]]
+    and 
+    *[EventData[Data[@Name='LogonType'] and (Data='3')]]
+    and
+ *[EventData[Data[@Name='AuthenticationPackageName'] and (Data='NTLM')]]
+    </Select>
+  </Query>
+</QueryList>
+```
+## Windows Lateral movement
+PTH : (EventID=4624) where LogonType is equal 9
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[(EventID=4624)]]
+    and 
+    *[EventData[Data[@Name='LogonType'] and (Data='9')]]
+    </Select>
+  </Query>
+</QueryList>
+```
+PTH with service creation and startup
+```
+<QueryList>
+  <Query Id="0" Path="System">
+    <Select Path="System">
+    *[System[(EventID=7045)]]
+    and
+    *[EventData[Data[@Name='ServiceName'] and (Data='PSEXESVC')]]
+    or
+    *[System[(EventID=7036)]]
+    and
+    *[EventData[Data[@Name='param1'] and (Data='PSEXESVC')]]
+    </Select>
+  </Query>
+</QueryList>
+```
+### Enumerating brute force domain credentials
+```
+Get-BadPwdCount -List | Sort BadPwdCount -Descending
+```
+- Get lockout threshold
+```
+net accounts
+```
+- Extract lockout events
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+    *[System[(EventID=4740)]]
+    </Select>
+  </Query>
+</QueryList>
+```
+- Configure domain controller to generate faillure events after lockout 
+```
+auditpol /set /subcategory:"Other Account Logon Events" /success:enable /failure:enable
+
+.\Audit-TargetedFailedLogons.ps1 | Group-Object WorkstationName | Select Name,Count
+
+. .\Get-BadPwdCount.ps1
+Get-BadPwdCount -Expected 10
+
+.\Audit-FailedLogons.ps1 | Group-Object WorkstationName | Select Name,Count
+.\Audit-FailedLogons.ps1 | Select TargetUserName, WorkstationName
+```
+### Terminal services 
+```
+<QueryList>
+  <Query Id="0" Path="Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational">
+    <Select Path="Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational">
+      *[System[(EventID=1149)]]
+   </Select>
+  </Query>
+</QueryList>
+
+
+.\Audit-TerminalServices.ps1
+```
+
+## Detect abuse of Kerberos Ticket (DC method)
+```
+auditpol /get /category:"Account Logon"
+```
+ 
+```
+# XPath XML for TGT kerberos events
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+     *[System[band(Keywords,9007199254740992) and (EventID=4768)]]
+    </Select>
+  </Query>
+</QueryList>
+
+# Extract username and ip from 4768 events
+$TimeStamp = $XML.Event.System.TimeCreated.SystemTime
+$TargetUserName = $XML.Event.EventData.Data[0].'#text'
+$IPAddress = $($XML.Event.EventData.Data[9].'#text')
+If ($IPAddress -eq '::1') {
+	$IPAddress = $(Test-Connection -ComputerName $env:COMPUTERNAME -Count 1 | Select -ExpandProperty IPv4Address).IPAddressToString
+}
+else {
+	$IPAddress = $IPAddress.split('::ffff:')[-1]
+}
+
+# XPath XML for TGS kerberos events
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+     *[System[band(Keywords,9007199254740992) and (EventID=4769)]]
+   </Select>
+  </Query>
+</QueryList>
+
+# Extract username and ip from 4769 events
+$TimeStamp = $XML.Event.System.TimeCreated.SystemTime
+$TargetUserName = $($XML.Event.EventData.Data[0].'#text' -split '@')[0]
+$IPAddress = $($XML.Event.EventData.Data[6].'#text')
+If ($IPAddress -eq '::1') {
+    $IPAddress = $(Test-Connection -ComputerName $env:COMPUTERNAME -Count 1 | Select -ExpandProperty IPv4Address).IPAddressToString
+}
+else {
+    $IPAddress = $IPAddress.split('::ffff:')[-1]
+}
+
+# Ticket stealing detection logic
+$TGT = Get-TGT
+$TGS = Get-TGS
+ForEach ($T in $TGS) {
+    $Valid = $TGT | Where-Object {$_.TargetUserName -eq $($T.TargetUserName) -and $_.IPAddress -eq $($T.IPAddress)}
+    If (!$Valid) {
+        $T
+    }
+}
+```
+### Detect abuse of Kerberos Ticket (Endpoint method)
+- Get-SessionUsers function
+```
+Function Get-SessionUsers {
+    Begin {
+        $Sessions = @()
+        $Klist = klist sessions
+    }
+    Process {
+        $Sessions = $Klist | Where-Object { $_ -like "*Session*$env:USERDOMAIN*" } | ForEach-Object { 
+            [PSCustomObject]@{'LogonId' = $(($_ -split ' ')[3]).substring(2); 'User' = $($_ -split ' ')[4]}
+        }
+    }
+    End {
+        return $Sessions
+    }
+}
+```
+- Grab . .\Invoke-PTTSweep.ps1
+- Detection 
+```
+Get-SessionUsers | Invoke-PTTSweep
+```
+## Kerberoasting: request and detect 
+- Request TGS
+```
+$Searcher = New-Object System.DirectoryServices.DirectorySearcher
+$Searcher.PropertiesToLoad.Add("sAMAccountName") | Out-Null
+$Searcher.PropertiesToLoad.Add("servicePrincipalName") | Out-Null
+$Searcher.PageSize = 1000
+
+$Searcher.Filter = "(&(objectCategory=person)(objectClass=user)(!userAccountControl:1.2.840.113556.1.4.803:=2)(ServicePrincipalName=*))"
+
+$SPN = $Searcher.FindAll() | Select Path, @{l='SPN'; e={$_.Properties.serviceprincipalname}}
+
+foreach($spn in $SPN)
+{
+    Add-Type -AssemblyName System.IdentityModel
+    New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList $spn.SPN
+}
+```
+- Detect
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+     *[System[(EventID=4769)]] 
+     and
+     *[EventData[Data[@Name='TicketEncryptionType'] and (Data='0x17' or Data='0x18')]]
+   </Select>
+  </Query>
+</QueryList>
+```
+
+## AD persisyence detection
+- Check if account management audit is enabled 
+```
+auditpol /get /category:"Account Management"
+```
+- Detect persistence **Get Get-SecurityGroupChanges.ps1**
+```
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[(EventID=4728 or EventID=4729 or EventID=4732 or EventID=4733 or EventID=4756 or EventID=4757)]]</Select>
+  </Query>
+</QueryList>
+
+# from common security group 
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[(EventID=4728 or EventID=4729 or EventID=4732 or EventID=4733 or EventID=4756 or EventID=4757)]]</Select>
+  </Query>
+</QueryList>
+
+
+# full xpath filter
+$FilterXML = @'
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">*[System[(EventID=4728 or EventID=4729 or EventID=4732 or EventID=4733 or EventID=4756 or EventID=4757)]]
+    and
+ *[EventData[Data[@Name='TargetUserName'] and (Data='Administrators' or Data='Domain Admins' or Data='Enterprise Admins')]]
+    </Select>
+  </Query>
+</QueryList>
+'@
+$Logs = Get-WinEvent -FilterXml $FilterXML
+ForEach ($L in $Logs) {
+   [xml]$XML = $L.toXml()
+   $TimeStamp = $XML.Event.System.TimeCreated.SystemTime
+   $MemberName = $XML.Event.EventData.Data[0].'#text'
+   $GroupName = $XML.Event.EventData.Data[2].'#text'
+   $SubjectUserName = $XML.Event.EventData.Data[6].'#text'
+ [PSCustomObject]@{'TimeStamp' = $TimeStamp; 'MemberName' = $MemberName; 'GroupName' = $GroupName; 'SubjectUserName' = $SubjectUserName; 'ChangeType' = "($EventID) $ChangeType" }
+}
+```
+### User modification (Get Get-UserChanges.ps1)
+```
+# XPath filter for user account management events performed by damin user
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select
+Path="Security">*[System[Provider[@Name='Microsoft-Windows-Security-Auditing'] and Task = 13824]]
+    and 
+    *[EventData[Data[@Name='SubjectUserName'] and
+(Data='dadmin')]]
+    </Select>
+  </Query>
+</QueryList>
+```
+### Golden ticket detection (Get Get-KerberosSettings.ps1, Get-LogonIds.ps1, Get-Tickets.ps1, Invoke-GoldenSweep.ps1)
+```
+Get-LogonIds | Get-Tickets | Select LogonId,StartTime,EndTime | Sort EndTime
+Get-LogonIds | Get-Tickets | Invoke-GoldenSweep
+```
+## ELK 
+- KQL Query for Sysmon ProcessCreate Events
+```
+host.hostname: "appsrv01" and data_stream.dataset : "windows.sysmon_operational" and process.name : "svchost.exe" and event.code: "1"
+```
+- KQL Query for Apache access log
+```
+"apache-access" and host.hostname: "web01" and not source.ip: 127.0.0.1
+```
+- KQL Query for Snort logs
+```
+tags : "snort.log" and network.type : "ipv4"
+```
+- OSQuery for text files on every Windows user's Desktop
+```
+select directory, filename from file where path like 'C:\Users\%\Desktop\%' and filename like '%.txt';
+```
+- OSQuery for processes listening on network ports
+```
+select distinct processes.name, listening_ports.port, listening_ports.address, processes.pid from processes join listening_ports on processes.pid = listening_ports.pid;
+```
+- OSQuery for all processes with outbound connections to nonstandard ports
+```
+select pos.pid, p.name, pos.local_address, pos.remote_address, pos.local_port, pos.remote_port from process_open_sockets pos join processes p on pos.pid = p.pid where pos.remote_port not in (80, 443) and pos.family = 2 and pos.local_address not in ("0.0.0.0", "127.0.0.1");
+```
+
+## Case 1 ELK
+- KQL query to filter on Windows XP and suspect attacking IP
+```
+user_agent.os.full : "Windows XP" and source.address : "192.168.51.54"
+```
+- KQL query to filter out HTTP Not Found and HTTP Forbidden responses
+```
+user_agent.os.full : "Windows XP" and source.address : "192.168.51.54" and not http.response.status_code : (404 or 403)
+```
+### Phase One Detection Rules
+- Enumeration
+Threshold => "apache-access" and http.response.status_code: (404 or 403)
+- Web command injection
+Custom query => "apache-access" and (url.query : \*+\* or url.query : \*%20\* ) and http.response.status_code: 200
+
+## Case 2 ELK
+- Filtering on network activity from two suspect sources (either attacker or tunneled one)
+```
+source.ip : 192.168.51.54 or source.ip: 172.16.51.33
+```
+- KQL query to find logon failure and success from web01
+```
+source.ip: 172.16.51.33 and event.code: (4625 or 4624)
+```
+### Detection rule
+- Define rule for SSH using root account
+#Custom query
+process.name : "sshd" and  user.name : "root" and system.auth.ssh.event : "Accepted"
+- Rule to identify brute forcing authentication against  Windows machines.
+#Threshold
+event.code : "4625", group by source.ip >= 100
+@Securuty Overide
+if source.ip = "172.16.51.254" (snort machine) severity low
+
+## Case 3 ELK (Persistence and Privilege Escalation)
+- Filtering on all Sysmon events matching user offsec activity
+```
+agent.name: "appsrv01" and user.name: "offsec" and event.dataset : "windows.sysmon_operational"
+```
+- Filtering on all Sysmon events matching user adm1n activity
+```
+agent.name: "appsrv01" and user.name: "adm1n" and event.dataset : "windows.sysmon_operational"
+```
+- SQL query to get all logged in users from appsrv01
+```
+select user, strftime('%Y-%m-%d %H:%M:%S', time, 'unixepoch') as time, tty, type from logged_in_users;
+```
+### Detection rules
+- Define rule for DLL Creation by PowerShell
+#CustomQuery
+event.code : 11 and process.name : "powershell.exe" and rule.name : DLL
+- Detect PowerShell's access of lsass.exe
+event.code: 10 and winlog.event_data.TargetImage : "C:\\Windows\\system32\\lsass.exe" and process.name: "powershell.exe"
+
+## Case 4 ELK (Phase Four: Perform Actions on Domain Controller)
+- Querying for any traffic from endpoints compromised by attacker
+```
+source.ip: 172.16.51.32 or source.ip: 172.16.51.33 or source.ip: 192.168.51.54
+```
+- Updated endpoint traffic query including string for suspicious PowerShell script
+```
+source.ip: 172.16.51.32 or source.ip: 172.16.51.33 or source.ip: 192.168.51.54 or "iw.ps1"
+```
+- ProcessCreate event of ntdsutil.exe on dc01
+```
+user.name: "adm1n" with process.name: "ntdsutil.exe" 
+```
+### Detection rules
+- Custom query to detect execution of ntdsutil.exe
+event.code: "1" and process.name: "ntdsutil.exe"
+
+
 ## Some commands 
 ```
 #Search for processes by their names
@@ -597,3 +1115,12 @@ grep Uid /proc/2078/status
 - *Get-SysmonEvent 11* where *Image* contains 'csc.exe' and *TargetFilename* ends with *.dll* or *.cmdline*  (AMSI bypass c# running)
 - *Get-SysmonEvent 1* where *CommandLine* contains with *csc.exe* and (*.dll* or *.cmdline*) (AMSI bypass c# running)
 - *Get-PSLogEvent 4104* where *LevelDisplayName* is warning
+- PTH : (EventID=4624) where LogonType is equal 9
+- PTH : EventID 7045, 7036
+- PTH : Successful login (4026), where LogonType is 3 and include NTLM as an authentication package name. (check xpath filter)
+- Brute force domain: . .\Get-BadPwdCount.ps1, event id 4740, 
+- Check Domain Admin connecting to standard users machine
+- Implement XPath XML for terminal services
+- Implement dectection of access to lsass.exe
+- Command run with High integrity level or System
+
