@@ -985,9 +985,9 @@ user_agent.os.full : "Windows XP" and source.address : "192.168.51.54" and not h
 ```
 ### Phase One Detection Rules
 - Enumeration
-Threshold => "apache-access" and http.response.status_code: (404 or 403)
+Threshold => data_stream.dataset : "apache.access"  and http.response.status_code: (404 or 403)
 - Web command injection
-Custom query => "apache-access" and (url.query : \*+\* or url.query : \*%20\* ) and http.response.status_code: 200
+Custom query => data_stream.dataset : "apache.access"  and (url.query : \*+\* or url.query : \*%20\* ) and http.response.status_code: 200
 
 ## Case 2 ELK
 - Filtering on network activity from two suspect sources (either attacker or tunneled one)
@@ -1041,7 +1041,7 @@ source.ip: 172.16.51.32 or source.ip: 172.16.51.33 or source.ip: 192.168.51.54 o
 ```
 user.name: "adm1n" with process.name: "ntdsutil.exe" 
 ```
-### Detection rules
+### Detection rules 
 - Custom query to detect execution of ntdsutil.exe
 event.code: "1" and process.name: "ntdsutil.exe"
 
@@ -1123,4 +1123,5 @@ grep Uid /proc/2078/status
 - Implement XPath XML for terminal services
 - Implement dectection of access to lsass.exe
 - Command run with High integrity level or System
+- All hacker command line tool 
 
