@@ -9,7 +9,8 @@ function Get-EventsDetails($events_list){
         $eventDetails | Add-Member -MemberType NoteProperty -Name 'Id' -Value $events.Id
 
         $events.Message -split [Environment]::NewLine | ForEach-Object {
-            if ($_ -match '^\s*(\w+)\s*:\s*(.+)') {
+            #if ($_ -match '^\s*(\w+)\s*:\s*(.+)') {
+            if ($_ -match '(^[\s\w]+):(.*)[^\n]$') {
                 $propertyName = $Matches[1].Trim()
                 $propertyValue = $Matches[2].Trim()
                 $eventDetails | Add-Member -MemberType NoteProperty -Name $propertyName -Value $propertyValue
@@ -64,8 +65,8 @@ function Get-SecurityEvent {
         $filters.EndTime = $end
     }
     $events_list = Get-WinEvent -FilterHashtable $filters -ErrorAction SilentlyContinue
-    
-    Get-EventsDetails($events_list)
+    $events_list
+    #Get-EventsDetails($events_list)
 }
 
 function Get-PSLogEvent {
@@ -88,6 +89,6 @@ function Get-PSLogEvent {
     }
 
     $events_list = Get-WinEvent -FilterHashtable $filters -ErrorAction SilentlyContinue
-    
-    Get-EventsDetails($events_list)
+    $events_list 
+    #Get-EventsDetails($events_list)
 }
